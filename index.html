@@ -13,25 +13,30 @@
       background: #f5f5f5;
       color: #333;
     }
+
+    /* BANNER SUPERIOR FIJO */
     .banner {
-      width: 100%;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
       height: 250px;
       background: url('imagenes/banner.jpg') no-repeat center center/cover;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      transition: top 0.4s ease;
+      z-index: 1000;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      will-change: transform, opacity;
     }
+
+    /* BANNERS LATERALES FIJOS DETRÁS DEL SUPERIOR */
     .banner-lateral {
       position: fixed;
       top: 0;
       width: 120px;
-      height: calc(100vh - 250px);
+      height: 250px; /* igual altura que banner superior */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      z-index: 1;
       pointer-events: none;
+      z-index: 900;
     }
     .banner-lateral.izquierda {
       left: 0;
@@ -41,15 +46,20 @@
       right: 0;
       background-image: url('imagenes/banner-lateral-der.jpg');
     }
+
+    /* CONTENIDO PRINCIPAL: separa del banner para que no quede tapado */
     .contenido-principal {
       position: relative;
-      z-index: 2;
-      padding: 0 130px;
+      z-index: 1100;
+      padding: 260px 130px 2rem; /* top padding = banner height + pequeño margen, laterales para que no tapen banners */
+      max-width: 1000px;
+      margin: 0 auto;
     }
+
+    /* PERFIL */
     .perfil {
       text-align: center;
-      margin-top: -60px;
-      padding: 0 1rem;
+      margin-bottom: 1rem;
     }
     .perfil img {
       width: 120px;
@@ -66,27 +76,38 @@
       color: #555;
       font-size: 1rem;
     }
+
+    /* REDES CON ICONOS SVG */
     .redes {
       text-align: center;
-      margin-top: 1rem;
+      margin-bottom: 2rem;
     }
     .redes a {
       color: #333;
       text-decoration: none;
       font-weight: bold;
-      margin: 0 0.5rem;
+      margin: 0 1rem;
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
+      gap: 6px;
+      font-size: 1rem;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+    .redes a:hover {
+      color: #1da1f2; /* azul suave al hover */
     }
     .redes svg {
       width: 20px;
       height: 20px;
-      fill: #333;
+      fill: currentColor;
+      flex-shrink: 0;
     }
+
+    /* SERVICIOS CON ICONOS PNG en esquina superior izquierda */
     .servicios {
       max-width: 1000px;
-      margin: 3rem auto;
+      margin: 0 auto 3rem;
       display: flex;
       flex-wrap: wrap;
       gap: 1.5rem;
@@ -101,17 +122,30 @@
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       width: 280px;
       position: relative;
+      user-select: none;
     }
-    .servicio img.icono-servicio {
-      width: 40px;
-      height: 40px;
+    .servicio img.icono {
       position: absolute;
-      top: 10px;
-      left: 10px;
+      top: 12px;
+      left: 12px;
+      width: 48px;  /* tamaño aumentado */
+      height: 48px;
+      pointer-events: none;
     }
+    .servicio h3 {
+      margin-top: 60px; /* para que no quede debajo del icono */
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .servicio p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    /* CARRUSEL */
     .carrusel-container {
       max-width: 1000px;
-      margin: 3rem auto;
+      margin: 0 auto 3rem;
       overflow: hidden;
       padding: 0 1rem;
     }
@@ -130,7 +164,12 @@
       scroll-behavior: auto;
     }
     .carrusel::-webkit-scrollbar {
-      display: none;
+      height: 8px;
+      background: transparent;
+    }
+    .carrusel::-webkit-scrollbar-thumb {
+      background-color: red;
+      border-radius: 10px;
     }
     .miniatura {
       flex: 0 0 70%;
@@ -159,6 +198,8 @@
       user-select: none;
       pointer-events: none;
     }
+
+    /* FOOTER */
     footer {
       text-align: center;
       padding: 2rem 1rem;
@@ -166,7 +207,10 @@
       color: #666;
       border-top: 1px solid #ddd;
       margin-top: 3rem;
+      user-select: none;
     }
+
+    /* CONTACTO FLOTANTE WHATSAPP */
     .contacto-flotante {
       position: fixed;
       bottom: 1rem;
@@ -178,17 +222,25 @@
       text-decoration: none;
       font-weight: bold;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      z-index: 999;
+      z-index: 2000;
       display: flex;
       align-items: center;
       gap: 0.6rem;
       font-size: 1rem;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .contacto-flotante:hover {
+      background: #1ebe57;
     }
     .contacto-flotante svg {
       width: 20px;
       height: 20px;
       fill: white;
+      flex-shrink: 0;
     }
+
+    /* MEDIA QUERY para móviles */
     @media (max-width: 768px) {
       .perfil img {
         width: 90px;
@@ -207,18 +259,22 @@
         display: none;
       }
       .contenido-principal {
-        padding: 0 1rem;
+        padding: 260px 1rem 2rem;
       }
     }
   </style>
 </head>
 <body>
+
+  <!-- Banners laterales detrás -->
   <div class="banner-lateral izquierda"></div>
   <div class="banner-lateral derecha"></div>
 
-  <div class="contenido-principal">
-    <div class="banner"></div>
+  <!-- Banner superior fijo -->
+  <div class="banner"></div>
 
+  <!-- Contenido principal -->
+  <div class="contenido-principal">
     <div class="perfil">
       <img src="imagenes/logo.jpg" alt="Logo de Roberto Rodriguez" />
       <h1>Roberto Aaron Rodriguez Rodriguez</h1>
@@ -226,40 +282,40 @@
     </div>
 
     <div class="redes">
-      <a href="https://www.instagram.com/shilouettt/" target="_blank">
-        <svg viewBox="0 0 24 24"><path d="M7.75 2A5.75 5.75 0 0 0 2 7.75v8.5A5.75 5.75 0 0 0 7.75 22h8.5A5.75 5.75 0 0 0 22 16.25v-8.5A5.75 5.75 0 0 0 16.25 2h-8.5zM12 7.25A4.75 4.75 0 1 1 7.25 12 4.75 4.75 0 0 1 12 7.25zM18 6.5a1 1 0 1 1-1-1 1 1 0 0 1 1 1zM12 9a3 3 0 1 0 3 3 3 3 0 0 0-3-3z"/></svg>
+      <a href="https://www.instagram.com/shilouettt/" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm8.9 3.3a1.1 1.1 0 11-2.2 0 1.1 1.1 0 012.2 0zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/></svg>
         Instagram
       </a>
-      <a href="https://www.tiktok.com/@shilouet_" target="_blank">
-        <svg viewBox="0 0 24 24"><path d="M12 2v14.15a3.35 3.35 0 1 1-3.35-3.35 3.3 3.3 0 0 1 1.5.36V11a5.85 5.85 0 1 0 5.85 5.85V9.94a8.4 8.4 0 0 0 3.5.81V7.7a5.55 5.55 0 0 1-3.5-1.18V2Z"/></svg>
+      <a href="https://www.tiktok.com/@shilouet_" target="_blank" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.7 6.18a4.75 4.75 0 01-2.24-.56v9.96a3.5 3.5 0 01-4.1-3.44 3.46 3.46 0 01.06-.62 5.7 5.7 0 01-2.62-.17v7.3a8.77 8.77 0 0011.46-7.3v-6.1z"/></svg>
         TikTok
       </a>
-      <a href="mailto:robertossjdos6@gmail.com">
-        <svg viewBox="0 0 24 24"><path d="M2 4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm2 0v.01L12 13 20 4.01V4H4z"/></svg>
+      <a href="mailto:robertossjdos6@gmail.com" aria-label="Correo">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 2l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
         Correo
       </a>
     </div>
 
     <section class="servicios">
       <div class="servicio">
-        <img src="imagenes/icono-miniaturas.png" class="icono-servicio" alt="Icono Miniaturas">
+        <img class="icono" src="imagenes/icono-miniaturas.png" alt="Icono Miniaturas" />
         <h3>Diseño de Miniaturas</h3>
         <p>Miniaturas que destacan y generan clics.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icono-identidad.png" class="icono-servicio" alt="Icono Identidad">
+        <img class="icono" src="imagenes/icono-identidad.png" alt="Icono Identidad Visual" />
         <h3>Identidad Visual</h3>
         <p>Logos, paletas de color y estética completa para marcas.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icono-redes.png" class="icono-servicio" alt="Icono Redes">
+        <img class="icono" src="imagenes/icono-redes.png" alt="Icono Diseño para Redes" />
         <h3>Diseño para Redes</h3>
         <p>Posts, banners e historias visuales de alto impacto.</p>
       </div>
     </section>
 
     <div class="carrusel-container">
-      <div class="carrusel" id="carrusel1">
+      <div class="carrusel" id="carrusel1" tabindex="0">
         <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
         <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
         <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
@@ -269,7 +325,7 @@
     </div>
 
     <div class="carrusel-container">
-      <div class="carrusel" id="carrusel2">
+      <div class="carrusel" id="carrusel2" tabindex="0">
         <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
         <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
         <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8"></div>
@@ -283,13 +339,27 @@
     </footer>
   </div>
 
-  <a href="https://wa.me/529213058163" target="_blank" rel="noopener" class="contacto-flotante">
-    <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.94 11.94 0 0012.02.03C6.13.03 1.25 4.9 1.25 10.8c0 1.91.55 3.68 1.6 5.22L.02 23.3l7.5-2.4a10.89 10.89 0 005.57 1.46h.01c5.71 0 10.34-4.63 10.34-10.34 0-2.77-1.12-5.38-3.1-7.29z"/></svg>
-    Contactame +52 1 921 305 8163
+  <a href="https://wa.me/5211234567890" class="contacto-flotante" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.52 3.48A11.88 11.88 0 0012 0C5.373 0 0 5.372 0 12a11.94 11.94 0 001.692 6.165L0 24l5.945-1.56A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12a11.88 11.88 0 00-3.48-8.52zM12 21.818c-2.15 0-4.15-.688-5.8-1.857l-.416-.252-3.535.927.927-3.535-.252-.416A8.775 8.775 0 013.636 12c0-4.853 3.942-8.796 8.764-8.796 4.824 0 8.764 3.942 8.764 8.764 0 4.823-3.94 8.764-8.764 8.764zM16.616 14.964c-.38-.19-2.237-1.105-2.583-1.232-.345-.13-.6-.19-.853.19s-.977 1.232-1.197 1.484c-.218.254-.44.285-.82.095-.38-.19-1.6-.59-3.045-1.882-1.125-1.005-1.882-2.246-2.103-2.624-.218-.38-.023-.59.166-.78.17-.17.38-.44.57-.66.19-.21.254-.35.38-.585.13-.19.06-.38-.03-.57-.094-.19-.853-2.05-1.17-2.81-.31-.74-.625-.64-.854-.65l-.73-.012c-.254 0-.665.095-1.012.48-.35.38-1.33 1.3-1.33 3.165 0 1.864 1.36 3.67 1.55 3.92.19.254 2.68 4.04 6.49 5.66.91.394 1.62.63 2.17.81 3.63 1.474 4.35 1.235 5.12 1.15.765-.093 2.35-.957 2.68-1.88.32-.93.32-1.73.224-1.88-.095-.13-.345-.19-.725-.38z"/></svg>
+    WhatsApp
   </a>
 
   <script>
-    function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 4000) {
+    // Banner superior ocultable con scroll
+    const banner = document.querySelector('.banner');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      if(scrollY > 100){
+        banner.style.transform = 'translateY(-100%)';
+        banner.style.opacity = '0';
+      } else {
+        banner.style.transform = 'translateY(0)';
+        banner.style.opacity = '1';
+      }
+    });
+
+    // Función para autoplay y drag carrusel
+    function setupCarruselAutoplay(carruselId, interval = 4000, cooldown = 2000) {
       const carrusel = document.getElementById(carruselId);
       if (!carrusel) return;
 
@@ -299,6 +369,7 @@
       let startX = 0;
       let scrollLeftStart = 0;
 
+      // Scroll step: 40% del ancho visible + gap aproximado
       const scrollStep = carrusel.clientWidth * 0.4 + 16;
 
       function avanzarScroll() {
@@ -323,8 +394,6 @@
           cooldownTimer = null;
         }
       }
-
-      carrusel.scrollLeft = 0;
 
       carrusel.addEventListener('mousedown', e => {
         isDragging = true;
@@ -380,12 +449,16 @@
       });
 
       iniciarAutoplay();
+
+      // Inicialmente aseguramos que el scroll esté en el inicio
+      carrusel.scrollLeft = 0;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      setupCarruselAutoplay('carrusel1', 7000, 4000);
-      setupCarruselAutoplay('carrusel2', 7000, 4000);
+      setupCarruselAutoplay('carrusel1', 4000, 2000);
+      setupCarruselAutoplay('carrusel2', 4000, 2000);
     });
   </script>
+
 </body>
 </html>
