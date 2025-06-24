@@ -238,13 +238,14 @@
 
 .banner-lateral {
   position: fixed;
-  top: 100px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 160px;
-  height: auto;
-  z-index: 999;
+  max-height: 90vh;
+  object-fit: cover;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   border-radius: 10px;
-  transition: transform 0.3s;
+  z-index: 999;
 }
 
 .banner-lateral.izquierdo {
