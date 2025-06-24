@@ -20,6 +20,23 @@
       position: relative;
       z-index: 0;
     }
+    .banner-lateral {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 80px;
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+    .banner-lateral.izquierda {
+      left: 0;
+      background-image: url('imagenes/banner-lateral-izq.jpg');
+    }
+    .banner-lateral.derecha {
+      right: 0;
+      background-image: url('imagenes/banner-lateral-der.jpg');
+    }
     .perfil {
       text-align: center;
       margin-top: -60px;
@@ -71,28 +88,23 @@
     }
     .carrusel-container {
       max-width: 1000px;
-      margin: 3rem auto 1rem;
-      overflow-x: auto;
+      margin: 3rem auto;
+      overflow: hidden;
       padding: 0 1rem;
-      scrollbar-color: #d50000 transparent;
-      scrollbar-width: thin;
-    }
-    .carrusel-container::-webkit-scrollbar {
-      height: 6px;
-    }
-    .carrusel-container::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .carrusel-container::-webkit-scrollbar-thumb {
-      background-color: #d50000;
-      border-radius: 10px;
     }
     .carrusel {
       display: flex;
       gap: 1rem;
+      overflow-x: auto;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       padding-bottom: 1rem;
+      scrollbar-width: none;
+      cursor: grab;
+    }
+    .carrusel.dragging {
+      cursor: grabbing;
+      scroll-behavior: auto;
     }
     .carrusel::-webkit-scrollbar {
       display: none;
@@ -100,12 +112,29 @@
     .miniatura {
       flex: 0 0 70%;
       scroll-snap-align: center;
+      position: relative;
       transition: transform 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
+      opacity: 0.8;
+      transform: scale(0.95);
+      user-select: none;
+    }
+    .miniatura:nth-child(odd) {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .miniatura:hover {
+      transform: scale(1.05) !important;
+      opacity: 1 !important;
+      z-index: 2;
     }
     .miniatura img {
       width: 100%;
+      height: auto;
       border-radius: 12px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      user-select: none;
+      pointer-events: none;
     }
     footer {
       text-align: center;
@@ -114,6 +143,35 @@
       color: #666;
       border-top: 1px solid #ddd;
       margin-top: 3rem;
+      user-select: none;
+    }
+    .contacto-flotante {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background: #25d366;
+      color: white;
+      padding: 0.6rem 1.4rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .contacto-flotante:hover {
+      background: #1ebe57;
+    }
+    .contacto-flotante svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+      flex-shrink: 0;
     }
     @media (max-width: 768px) {
       .perfil img {
@@ -132,22 +190,28 @@
       .miniatura {
         flex: 0 0 85%;
       }
+      .banner-lateral {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="banner-lateral izquierda"></div>
+  <div class="banner-lateral derecha"></div>
+
   <div class="banner"></div>
 
   <div class="perfil">
-    <img src="imagenes/logo.jpg" alt="Logo" />
+    <img src="imagenes/logo.jpg" alt="Logo de Roberto Rodriguez" />
     <h1>Roberto Aaron Rodriguez Rodriguez</h1>
     <p>Diseñador gráfico apasionado por comunicar con impacto visual.</p>
   </div>
 
   <div class="redes">
-    <a href="https://www.instagram.com/shilouettt/" target="_blank">Instagram</a>
-    <a href="https://www.tiktok.com/@shilouet_" target="_blank">TikTok</a>
-    <a href="mailto:robertossjdos6@gmail.com">Correo</a>
+    <a href="https://www.instagram.com/shilouettt/" target="_blank" aria-label="Instagram de Roberto">Instagram</a>
+    <a href="https://www.tiktok.com/@shilouet_" target="_blank" aria-label="TikTok de Roberto">TikTok</a>
+    <a href="mailto:robertossjdos6@gmail.com" aria-label="Correo de Roberto">Correo</a>
   </div>
 
   <section class="servicios">
@@ -166,27 +230,136 @@
   </section>
 
   <div class="carrusel-container">
-    <div class="carrusel">
-      <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
-      <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
-      <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
-      <div class="miniatura"><img src="imagenes/thumb4.jpg" alt="Miniatura 4"></div>
-      <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura 5"></div>
+    <div class="carrusel" id="carrusel1" tabindex="0">
+      <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura de diseño 1 de video de YouTube"></div>
+      <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura de diseño 2 de video de YouTube"></div>
+      <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura de diseño 3 de video de YouTube"></div>
+      <div class="miniatura"><img src="imagenes/thumb4.jpg" alt="Miniatura de diseño 4 de video de YouTube"></div>
+      <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura de diseño 5 de video de YouTube"></div>
     </div>
   </div>
 
   <div class="carrusel-container">
-    <div class="carrusel">
-      <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
-      <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
-      <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8"></div>
-      <div class="miniatura"><img src="imagenes/thumb9.jpg" alt="Miniatura 9"></div>
-      <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10"></div>
+    <div class="carrusel" id="carrusel2" tabindex="0">
+      <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura de diseño 6 de video de YouTube"></div>
+      <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura de diseño 7 de video de YouTube"></div>
+      <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura de diseño 8 de video de YouTube"></div>
+      <div class="miniatura"><img src="imagenes/thumb9.jpg" alt="Miniatura de diseño 9 de video de YouTube"></div>
+      <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura de diseño 10 de video de YouTube"></div>
     </div>
   </div>
 
   <footer>
-    Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados &copy; 2025
+    Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
   </footer>
+
+  <a href="https://wa.me/529213058163" target="_blank" rel="noopener" class="contacto-flotante" aria-label="Enviar mensaje de WhatsApp a Roberto">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M20.52 3.48A11.94 11.94 0 0012.02.03C6.13.03 1.25 4.9 1.25 10.8c0 1.91.55 3.68 1.6 5.22L.02 23.3l7.5-2.4a10.89 10.89 0 005.57 1.46h.01c5.71 0 10.34-4.63 10.34-10.34 0-2.77-1.12-5.38-3.1-7.29zm-8.5 15.25a8.15 8.15 0 01-4.15-1.17l-.3-.18-4.41 1.42 1.47-4.28-.19-.31a8.13 8.13 0 0114-8.82 8.1 8.1 0 01-9.67 13.14zm4.04-5.54c-.22-.11-1.28-.63-1.48-.7-.2-.07-.34-.11-.48.11-.14.22-.54.7-.66.85-.12.14-.24.16-.45.05-.22-.11-.93-.34-1.77-1.1-.65-.57-1.09-1.27-1.22-1.5-.13-.22-.01-.34.1-.45.11-.11.22-.28.33-.43.11-.14.15-.24.22-.36.07-.11.04-.2-.02-.32-.07-.11-.48-1.16-.66-1.58-.17-.42-.34-.36-.48-.37-.13 0-.28 0-.43 0-.14 0-.36.05-.55.27-.19.22-.73.71-.73 1.73 0 1.02.75 2 0 2.79-.75.8-1.36.89-1.8.99-.44.11-.63.08-.97-.05-.34-.14-1.32-.54-1.92-1.19-.6-.65-1.14-1.44-1.14-3.5 0-2.06 1.05-3.5 1.2-3.75.14-.25 2.08-3.17 5.05-4.43a17.19 17.19 0 015.33-.7c1.62 0 3.14.62 4.28 1.55a10.92 10.92 0 013.68 5.29c.31 1.06.06 1.98-.43 2.7-.48.72-1.12 1.14-1.87 1.43-.76.3-1.5.3-1.97.18z"/>
+    </svg>
+    Contactame +52 1 921 305 8163
+  </a>
+
+  <script>
+    function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 4000) {
+      const carrusel = document.getElementById(carruselId);
+      if (!carrusel) return;
+
+      let autoplayTimer = null;
+      let cooldownTimer = null;
+      let isDragging = false;
+      let startX = 0;
+      let scrollLeftStart = 0;
+
+      const scrollStep = carrusel.clientWidth * 0.4 + 16; // Desplazamiento por paso (40% ancho + gap)
+
+      function avanzarScroll() {
+        const maxScroll = carrusel.scrollWidth - carrusel.clientWidth;
+        let nextScroll = carrusel.scrollLeft + scrollStep;
+        if (nextScroll > maxScroll) nextScroll = 0;
+        carrusel.scrollTo({ left: nextScroll, behavior: 'smooth' });
+      }
+
+      function iniciarAutoplay() {
+        if (autoplayTimer) return; // evitar duplicar timers
+        autoplayTimer = setInterval(avanzarScroll, interval);
+      }
+
+      function pararAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+        if (cooldownTimer) {
+          clearTimeout(cooldownTimer);
+          cooldownTimer = null;
+        }
+      }
+
+      // Eventos mouse
+      carrusel.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.pageX - carrusel.offsetLeft;
+        scrollLeftStart = carrusel.scrollLeft;
+        pararAutoplay();
+        carrusel.classList.add('dragging');
+      });
+
+      carrusel.addEventListener('mouseleave', e => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
+      });
+
+      carrusel.addEventListener('mouseup', e => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
+      });
+
+      carrusel.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - carrusel.offsetLeft;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
+      });
+
+      // Eventos táctiles
+      carrusel.addEventListener('touchstart', e => {
+        isDragging = true;
+        startX = e.touches[0].pageX - carrusel.offsetLeft;
+        scrollLeftStart = carrusel.scrollLeft;
+        pararAutoplay();
+      });
+
+      carrusel.addEventListener('touchend', e => {
+        if (isDragging) {
+          isDragging = false;
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
+      });
+
+      carrusel.addEventListener('touchmove', e => {
+        if (!isDragging) return;
+        const x = e.touches[0].pageX - carrusel.offsetLeft;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
+      });
+
+      // Iniciar autoplay al cargar la página
+      iniciarAutoplay();
+    }
+
+    // Inicializar ambos carruseles
+    document.addEventListener('DOMContentLoaded', () => {
+      setupCarruselAutoplay('carrusel1', 7000, 4000);
+      setupCarruselAutoplay('carrusel2', 7000, 6000);
+    });
+  </script>
 </body>
 </html>
