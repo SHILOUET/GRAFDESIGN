@@ -17,8 +17,10 @@
       width: 100%;
       height: 250px;
       background: url('imagenes/banner.jpg') no-repeat center center/cover;
-      position: relative;
-      z-index: 2;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      transition: top 0.4s ease;
     }
     .banner-lateral {
       position: fixed;
@@ -41,7 +43,7 @@
     }
     .contenido-principal {
       position: relative;
-      z-index: 3;
+      z-index: 2;
       padding: 0 130px;
     }
     .perfil {
@@ -73,7 +75,14 @@
       text-decoration: none;
       font-weight: bold;
       margin: 0 0.5rem;
-      font-family: 'Segoe UI', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .redes svg {
+      width: 20px;
+      height: 20px;
+      fill: #333;
     }
     .servicios {
       max-width: 1000px;
@@ -93,24 +102,12 @@
       width: 280px;
       position: relative;
     }
-    .servicio::before {
-      content: '';
+    .servicio img.icono-servicio {
+      width: 40px;
+      height: 40px;
       position: absolute;
       top: 10px;
       left: 10px;
-      width: 48px;
-      height: 48px;
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-    .servicio:nth-child(1)::before {
-      background-image: url('imagenes/icono-miniaturas.png');
-    }
-    .servicio:nth-child(2)::before {
-      background-image: url('imagenes/icono-identidad.png');
-    }
-    .servicio:nth-child(3)::before {
-      background-image: url('imagenes/icono-redes.png');
     }
     .carrusel-container {
       max-width: 1000px;
@@ -133,7 +130,7 @@
       scroll-behavior: auto;
     }
     .carrusel::-webkit-scrollbar {
-      height: 0;
+      display: none;
     }
     .miniatura {
       flex: 0 0 70%;
@@ -144,6 +141,10 @@
       opacity: 0.8;
       transform: scale(0.95);
       user-select: none;
+    }
+    .miniatura:nth-child(odd) {
+      opacity: 1;
+      transform: scale(1);
     }
     .miniatura:hover {
       transform: scale(1.05) !important;
@@ -164,6 +165,29 @@
       font-size: 0.9rem;
       color: #666;
       border-top: 1px solid #ddd;
+      margin-top: 3rem;
+    }
+    .contacto-flotante {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background: #25d366;
+      color: white;
+      padding: 0.6rem 1.4rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1rem;
+    }
+    .contacto-flotante svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
     }
     @media (max-width: 768px) {
       .perfil img {
@@ -191,32 +215,49 @@
 <body>
   <div class="banner-lateral izquierda"></div>
   <div class="banner-lateral derecha"></div>
+
   <div class="contenido-principal">
     <div class="banner"></div>
+
     <div class="perfil">
       <img src="imagenes/logo.jpg" alt="Logo de Roberto Rodriguez" />
       <h1>Roberto Aaron Rodriguez Rodriguez</h1>
       <p>Diseñador gráfico apasionado por comunicar con impacto visual.</p>
     </div>
+
     <div class="redes">
-      <a href="https://www.instagram.com/shilouettt/" target="_blank">Instagram</a>
-      <a href="https://www.tiktok.com/@shilouet_" target="_blank">TikTok</a>
-      <a href="mailto:robertossjdos6@gmail.com">Correo</a>
+      <a href="https://www.instagram.com/shilouettt/" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M7.75 2A5.75 5.75 0 0 0 2 7.75v8.5A5.75 5.75 0 0 0 7.75 22h8.5A5.75 5.75 0 0 0 22 16.25v-8.5A5.75 5.75 0 0 0 16.25 2h-8.5zM12 7.25A4.75 4.75 0 1 1 7.25 12 4.75 4.75 0 0 1 12 7.25zM18 6.5a1 1 0 1 1-1-1 1 1 0 0 1 1 1zM12 9a3 3 0 1 0 3 3 3 3 0 0 0-3-3z"/></svg>
+        Instagram
+      </a>
+      <a href="https://www.tiktok.com/@shilouet_" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2v14.15a3.35 3.35 0 1 1-3.35-3.35 3.3 3.3 0 0 1 1.5.36V11a5.85 5.85 0 1 0 5.85 5.85V9.94a8.4 8.4 0 0 0 3.5.81V7.7a5.55 5.55 0 0 1-3.5-1.18V2Z"/></svg>
+        TikTok
+      </a>
+      <a href="mailto:robertossjdos6@gmail.com">
+        <svg viewBox="0 0 24 24"><path d="M2 4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm2 0v.01L12 13 20 4.01V4H4z"/></svg>
+        Correo
+      </a>
     </div>
+
     <section class="servicios">
       <div class="servicio">
+        <img src="imagenes/icono-miniaturas.png" class="icono-servicio" alt="Icono Miniaturas">
         <h3>Diseño de Miniaturas</h3>
         <p>Miniaturas que destacan y generan clics.</p>
       </div>
       <div class="servicio">
+        <img src="imagenes/icono-identidad.png" class="icono-servicio" alt="Icono Identidad">
         <h3>Identidad Visual</h3>
         <p>Logos, paletas de color y estética completa para marcas.</p>
       </div>
       <div class="servicio">
+        <img src="imagenes/icono-redes.png" class="icono-servicio" alt="Icono Redes">
         <h3>Diseño para Redes</h3>
         <p>Posts, banners e historias visuales de alto impacto.</p>
       </div>
     </section>
+
     <div class="carrusel-container">
       <div class="carrusel" id="carrusel1">
         <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
@@ -226,6 +267,7 @@
         <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura 5"></div>
       </div>
     </div>
+
     <div class="carrusel-container">
       <div class="carrusel" id="carrusel2">
         <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
@@ -235,10 +277,17 @@
         <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10"></div>
       </div>
     </div>
+
     <footer>
       Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
     </footer>
   </div>
+
+  <a href="https://wa.me/529213058163" target="_blank" rel="noopener" class="contacto-flotante">
+    <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.94 11.94 0 0012.02.03C6.13.03 1.25 4.9 1.25 10.8c0 1.91.55 3.68 1.6 5.22L.02 23.3l7.5-2.4a10.89 10.89 0 005.57 1.46h.01c5.71 0 10.34-4.63 10.34-10.34 0-2.77-1.12-5.38-3.1-7.29z"/></svg>
+    Contactame +52 1 921 305 8163
+  </a>
+
   <script>
     function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 4000) {
       const carrusel = document.getElementById(carruselId);
@@ -274,6 +323,8 @@
           cooldownTimer = null;
         }
       }
+
+      carrusel.scrollLeft = 0;
 
       carrusel.addEventListener('mousedown', e => {
         isDragging = true;
