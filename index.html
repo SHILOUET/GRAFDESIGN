@@ -50,28 +50,15 @@
     .redes {
       text-align: center;
       margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      font-weight: bold;
     }
     .redes a {
       color: #333;
       text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-size: 1rem;
-    }
-    .redes svg {
-      width: 20px;
-      height: 20px;
-      fill: #333;
-      flex-shrink: 0;
+      font-weight: bold;
+      margin: 0 0.5rem;
     }
     .servicios {
-      max-width: 1000px;
-      margin: 3rem auto;
+      margin: 3rem 0;
       display: flex;
       flex-wrap: wrap;
       gap: 1.5rem;
@@ -87,19 +74,16 @@
       width: 280px;
       position: relative;
     }
-    /* Iconos PNG posicionados top-left */
-    .servicio .icono {
+    .servicio .icono-servicio {
       position: absolute;
       top: 12px;
       left: 12px;
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       pointer-events: none;
-      user-select: none;
     }
     .carrusel-container {
-      max-width: 1000px;
-      margin: 3rem auto;
+      margin: 3rem 0;
       overflow: hidden;
       padding: 0 1rem;
     }
@@ -118,12 +102,7 @@
       scroll-behavior: auto;
     }
     .carrusel::-webkit-scrollbar {
-      height: 8px;
-      background: transparent;
-    }
-    .carrusel::-webkit-scrollbar-thumb {
-      background-color: red;
-      border-radius: 10px;
+      display: none;
     }
     .miniatura {
       flex: 0 0 70%;
@@ -131,18 +110,19 @@
       position: relative;
       transition: transform 0.3s ease, opacity 0.3s ease;
       cursor: pointer;
-      opacity: 0.8;
-      transform: scale(0.95);
       user-select: none;
+      opacity: 0.6;
+      transform: scale(0.9);
     }
-    .miniatura:nth-child(odd) {
-      opacity: 1;
-      transform: scale(1);
+    .miniatura.active {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+      z-index: 2;
     }
     .miniatura:hover {
-      transform: scale(1.05) !important;
-      opacity: 1 !important;
-      z-index: 2;
+      transform: scale(1.05);
+      opacity: 1;
+      z-index: 3;
     }
     .miniatura img {
       width: 100%;
@@ -159,6 +139,7 @@
       color: #666;
       border-top: 1px solid #ddd;
       margin-top: 3rem;
+      user-select: none;
     }
     @media (max-width: 768px) {
       .perfil img {
@@ -174,13 +155,15 @@
       .servicio {
         width: 100%;
       }
+      .contenido-principal {
+        padding: 0 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="banner"></div>
-
   <div class="contenido-principal">
+    <div class="banner"></div>
 
     <div class="perfil">
       <img src="imagenes/logo.jpg" alt="Logo de Roberto Rodriguez" />
@@ -188,46 +171,28 @@
       <p>Diseñador gráfico apasionado por comunicar con impacto visual.</p>
     </div>
 
-    <div class="redes" aria-label="Redes sociales de Roberto">
-      <a href="https://www.instagram.com/shilouettt/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Roberto">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm8.75 2.75a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zm-4.25 1.75a4.25 4.25 0 110 8.5 4.25 4.25 0 010-8.5zm0 1.5a2.75 2.75 0 100 5.5 2.75 2.75 0 000-5.5z"/>
-        </svg>
-        Instagram
-      </a>
-      <a href="https://www.tiktok.com/@shilouet_" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Roberto">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path d="M9 3v9.5A4.5 4.5 0 0113.5 17h3.5v3a6.5 6.5 0 01-6.5-6.5V3h-1z"/>
-        </svg>
-        TikTok
-      </a>
-      <a href="mailto:robertossjdos6@gmail.com" aria-label="Correo de Roberto">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path d="M2 6v12h20V6H2zm18 2l-8 5-8-5V8l8 5 8-5v0z"/>
-        </svg>
-        Correo
-      </a>
+    <div class="redes">
+      <a href="https://www.instagram.com/shilouettt/" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@shilouet_" target="_blank">TikTok</a>
+      <a href="mailto:robertossjdos6@gmail.com">Correo</a>
     </div>
 
-    <section class="servicios" aria-label="Servicios de Roberto">
+    <section class="servicios">
       <div class="servicio">
-        <img src="imagenes/icono-miniaturas.png" alt="Icono Diseño Miniaturas" class="icono" />
         <h3>Diseño de Miniaturas</h3>
         <p>Miniaturas que destacan y generan clics.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icono-identidad.png" alt="Icono Identidad Visual" class="icono" />
         <h3>Identidad Visual</h3>
         <p>Logos, paletas de color y estética completa para marcas.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icono-redes.png" alt="Icono Diseño para Redes" class="icono" />
         <h3>Diseño para Redes</h3>
         <p>Posts, banners e historias visuales de alto impacto.</p>
       </div>
     </section>
 
-    <div class="carrusel-container" aria-label="Carrusel de miniaturas 1">
+    <div class="carrusel-container">
       <div class="carrusel" id="carrusel1" tabindex="0">
         <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
         <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
@@ -237,7 +202,7 @@
       </div>
     </div>
 
-    <div class="carrusel-container" aria-label="Carrusel de miniaturas 2">
+    <div class="carrusel-container">
       <div class="carrusel" id="carrusel2" tabindex="0">
         <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
         <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
@@ -272,9 +237,33 @@
         carrusel.scrollTo({ left: nextScroll, behavior: 'smooth' });
       }
 
+      // Función para actualizar qué miniatura está activa (centrada)
+      function actualizarActive() {
+        const miniaturas = carrusel.querySelectorAll('.miniatura');
+        let center = carrusel.scrollLeft + carrusel.clientWidth / 2;
+        let activeIndex = 0;
+        let closestDistance = Infinity;
+
+        miniaturas.forEach((mini, i) => {
+          const miniCenter = mini.offsetLeft + mini.clientWidth / 2;
+          const distance = Math.abs(center - miniCenter);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            activeIndex = i;
+          }
+        });
+
+        miniaturas.forEach((mini, i) => {
+          if (i === activeIndex) mini.classList.add('active');
+          else mini.classList.remove('active');
+        });
+      }
+
       function iniciarAutoplay() {
         if (autoplayTimer) return;
-        autoplayTimer = setInterval(avanzarScroll, interval);
+        autoplayTimer = setInterval(() => {
+          avanzarScroll();
+        }, interval);
       }
 
       function pararAutoplay() {
@@ -287,6 +276,11 @@
           cooldownTimer = null;
         }
       }
+
+      // Evento para actualizar active cuando el usuario scrollea
+      carrusel.addEventListener('scroll', () => {
+        actualizarActive();
+      });
 
       carrusel.addEventListener('mousedown', e => {
         isDragging = true;
@@ -301,6 +295,7 @@
           isDragging = false;
           carrusel.classList.remove('dragging');
           cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+          actualizarActive();
         }
       });
 
@@ -309,6 +304,7 @@
           isDragging = false;
           carrusel.classList.remove('dragging');
           cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+          actualizarActive();
         }
       });
 
@@ -318,6 +314,7 @@
         const x = e.pageX - carrusel.offsetLeft;
         const walk = startX - x;
         carrusel.scrollLeft = scrollLeftStart + walk;
+        actualizarActive();
       });
 
       carrusel.addEventListener('touchstart', e => {
@@ -331,6 +328,7 @@
         if (isDragging) {
           isDragging = false;
           cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+          actualizarActive();
         }
       });
 
@@ -339,7 +337,11 @@
         const x = e.touches[0].pageX - carrusel.offsetLeft;
         const walk = startX - x;
         carrusel.scrollLeft = scrollLeftStart + walk;
+        actualizarActive();
       });
+
+      // Inicializamos clase active para la miniatura visible al cargar
+      actualizarActive();
 
       iniciarAutoplay();
     }
