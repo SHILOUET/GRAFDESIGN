@@ -8,47 +8,25 @@
     * {
       margin: 0; padding: 0; box-sizing: border-box;
     }
-    html, body {
-      width: 100%;
-      overflow-x: hidden; /* Evita scroll horizontal */
-    }
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #f5f5f5;
       color: #333;
+      overflow-x: hidden;
     }
     .banner {
-      width: 100vw; /* ancho total de la ventana */
+      width: 100%;
       height: 250px;
       background: url('imagenes/banner.jpg') no-repeat center center/cover;
       position: relative;
       z-index: 0;
     }
-    /* Banners laterales fijos que empiezan debajo del banner superior */
-    .banner-lateral {
-      position: fixed;
-      top: 250px; /* justo debajo del banner superior */
-      bottom: 0;
-      width: 120px;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: 1;
-      pointer-events: none;
-    }
-    .banner-lateral.izquierda {
-      left: 0;
-      background-image: url('imagenes/banner-lateral-izq.jpg');
-    }
-    .banner-lateral.derecha {
-      right: 0;
-      background-image: url('imagenes/banner-lateral-der.jpg');
-    }
     .contenido-principal {
       position: relative;
       z-index: 2;
-      padding-left: 123px;  /* 120px ancho banner + 3px separación */
-      padding-right: 123px; /* igual a la izquierda */
+      padding: 0 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
     }
     .perfil {
       text-align: center;
@@ -80,8 +58,6 @@
       font-weight: bold;
       margin: 0 0.5rem;
     }
-
-    /* Servicios con iconos PNG en esquina superior izquierda */
     .servicios {
       max-width: 1000px;
       margin: 3rem auto;
@@ -91,7 +67,6 @@
       justify-content: center;
       text-align: center;
       padding: 0 1rem;
-      position: relative;
     }
     .servicio {
       background: white;
@@ -101,25 +76,14 @@
       width: 280px;
       position: relative;
     }
-    .servicio img.icono-servicio {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      width: 56px;
-      height: 56px;
-      pointer-events: none;
-      user-select: none;
-    }
     .servicio h3 {
-      margin-top: 2.5rem;
-      font-weight: 700;
+      margin-bottom: 0.5rem;
     }
-    
     .carrusel-container {
       max-width: 1000px;
       margin: 3rem auto;
       overflow: hidden;
-      padding: 0 0; /* quitamos padding horizontal para que casi pegue con banners */
+      padding: 0 1rem;
     }
     .carrusel {
       display: flex;
@@ -130,8 +94,6 @@
       padding-bottom: 1rem;
       scrollbar-width: none;
       cursor: grab;
-      margin-left: 3px; /* separación mínima con banner izquierdo */
-      margin-right: 3px; /* separación mínima con banner derecho */
     }
     .carrusel.dragging {
       cursor: grabbing;
@@ -194,34 +156,14 @@
       .servicio {
         width: 100%;
       }
-      .banner-lateral {
-        display: none;
-      }
-      .contenido-principal {
-        padding: 0 1rem;
-      }
-      .servicio img.icono-servicio {
-        width: 40px;
-        height: 40px;
-        top: 8px;
-        left: 8px;
-      }
-      .servicio h3 {
-        margin-top: 2rem;
-      }
-      .carrusel {
-        margin-left: 0;
-        margin-right: 0;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="banner-lateral izquierda"></div>
-  <div class="banner-lateral derecha"></div>
+
+  <div class="banner"></div>
 
   <div class="contenido-principal">
-    <div class="banner"></div>
 
     <div class="perfil">
       <img src="imagenes/logo.jpg" alt="Logo de Roberto Rodriguez" />
@@ -230,31 +172,28 @@
     </div>
 
     <div class="redes">
-      <a href="https://www.instagram.com/shilouettt/" target="_blank" aria-label="Instagram de Roberto">Instagram</a>
-      <a href="https://www.tiktok.com/@shilouet_" target="_blank" aria-label="TikTok de Roberto">TikTok</a>
-      <a href="mailto:robertossjdos6@gmail.com" aria-label="Correo de Roberto">Correo</a>
+      <a href="https://www.instagram.com/shilouettt/" target="_blank" aria-label="Instagram">Instagram</a>
+      <a href="https://www.tiktok.com/@shilouet_" target="_blank" aria-label="TikTok">TikTok</a>
+      <a href="mailto:robertossjdos6@gmail.com" aria-label="Correo">Correo</a>
     </div>
 
     <section class="servicios">
       <div class="servicio">
-        <img src="imagenes/icono-miniaturas.png" alt="Icono Diseño de Miniaturas" class="icono-servicio" />
         <h3>Diseño de Miniaturas</h3>
         <p>Miniaturas que destacan y generan clics.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icono-identidad.png" alt="Icono Identidad Visual" class="icono-servicio" />
         <h3>Identidad Visual</h3>
         <p>Logos, paletas de color y estética completa para marcas.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icono-redes.png" alt="Icono Diseño para Redes" class="icono-servicio" />
         <h3>Diseño para Redes</h3>
         <p>Posts, banners e historias visuales de alto impacto.</p>
       </div>
     </section>
 
     <div class="carrusel-container">
-      <div class="carrusel" id="carrusel1" tabindex="0">
+      <div class="carrusel" id="carrusel1">
         <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
         <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
         <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
@@ -264,7 +203,7 @@
     </div>
 
     <div class="carrusel-container">
-      <div class="carrusel" id="carrusel2" tabindex="0">
+      <div class="carrusel" id="carrusel2">
         <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
         <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
         <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8"></div>
@@ -276,6 +215,7 @@
     <footer>
       Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
     </footer>
+
   </div>
 
   <script>
@@ -375,5 +315,6 @@
       setupCarruselAutoplay('carrusel2', 7000, 6000);
     });
   </script>
+
 </body>
 </html>
