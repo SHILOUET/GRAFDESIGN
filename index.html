@@ -69,6 +69,10 @@
       font-weight: bold;
       margin: 0 0.5rem;
     }
+    .redes a svg {
+      margin-right: 6px;
+      vertical-align: middle;
+    }
     .servicios {
       max-width: 1000px;
       margin: 3rem auto;
@@ -85,6 +89,14 @@
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       width: 280px;
+      position: relative; /* para posicionar el icono */
+    }
+    .icono-servicio {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
     }
     .carrusel-container {
       max-width: 1000px;
@@ -208,32 +220,34 @@
     <p>Diseñador gráfico apasionado por comunicar con impacto visual.</p>
   </div>
 
-<div class="redes">
-  <a href="https://www.instagram.com/shilouettt/" target="_blank" aria-label="Instagram">
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align: middle;"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zm9.5 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm-5.75 2.5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg>
-    Instagram
-  </a>
-  <a href="https://www.tiktok.com/@shilouet_" target="_blank" aria-label="TikTok">
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align: middle;"><path d="M12 2h3.1a5.8 5.8 0 0 0 5.9 5.9v3.1a8.9 8.9 0 0 1-5.9-2.1v6.2a6 6 0 1 1-6-6 5.9 5.9 0 0 1 1.9.3V9.1a7.5 7.5 0 0 0-1.9-.3 6.2 6.2 0 1 0 6.1 6.1V2z"/></svg>
-    TikTok
-  </a>
-  <a href="mailto:robertossjdos6@gmail.com" aria-label="Correo electrónico">
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align: middle;"><path d="M4 4h16c1.1 0 2 .9 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 2.2v9.8h16V8.2l-8 7L4 8.2z"/></svg>
-    Correo
-  </a>
-</div>
-
+  <div class="redes">
+    <a href="https://www.instagram.com/shilouettt/" target="_blank" aria-label="Instagram de Roberto">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align: middle;"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zm9.5 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm-5.75 2.5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg>
+      Instagram
+    </a>
+    <a href="https://www.tiktok.com/@shilouet_" target="_blank" aria-label="TikTok de Roberto">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align: middle;"><path d="M12 2h3.1a5.8 5.8 0 0 0 5.9 5.9v3.1a8.9 8.9 0 0 1-5.9-2.1v6.2a6 6 0 1 1-6-6 5.9 5.9 0 0 1 1.9.3V9.1a7.5 7.5 0 0 0-1.9-.3 6.2 6.2 0 1 0 6.1 6.1V2z"/></svg>
+      TikTok
+    </a>
+    <a href="mailto:robertossjdos6@gmail.com" aria-label="Correo de Roberto">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align: middle;"><path d="M4 4h16c1.1 0 2 .9 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 2.2v9.8h16V8.2l-8 7L4 8.2z"/></svg>
+      Correo
+    </a>
+  </div>
 
   <section class="servicios">
     <div class="servicio">
+      <img src="imagenes/icono-miniaturas.png" alt="Ícono de miniaturas" class="icono-servicio" />
       <h3>Diseño de Miniaturas</h3>
       <p>Miniaturas que destacan y generan clics.</p>
     </div>
     <div class="servicio">
+      <img src="imagenes/icono-identidad.png" alt="Ícono de identidad visual" class="icono-servicio" />
       <h3>Identidad Visual</h3>
       <p>Logos, paletas de color y estética completa para marcas.</p>
     </div>
     <div class="servicio">
+      <img src="imagenes/icono-redes.png" alt="Ícono de diseño para redes" class="icono-servicio" />
       <h3>Diseño para Redes</h3>
       <p>Posts, banners e historias visuales de alto impacto.</p>
     </div>
@@ -299,77 +313,3 @@
         if (autoplayTimer) {
           clearInterval(autoplayTimer);
           autoplayTimer = null;
-        }
-        if (cooldownTimer) {
-          clearTimeout(cooldownTimer);
-          cooldownTimer = null;
-        }
-      }
-
-      // Eventos mouse
-      carrusel.addEventListener('mousedown', e => {
-        isDragging = true;
-        startX = e.pageX - carrusel.offsetLeft;
-        scrollLeftStart = carrusel.scrollLeft;
-        pararAutoplay();
-        carrusel.classList.add('dragging');
-      });
-
-      carrusel.addEventListener('mouseleave', e => {
-        if (isDragging) {
-          isDragging = false;
-          carrusel.classList.remove('dragging');
-          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
-        }
-      });
-
-      carrusel.addEventListener('mouseup', e => {
-        if (isDragging) {
-          isDragging = false;
-          carrusel.classList.remove('dragging');
-          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
-        }
-      });
-
-      carrusel.addEventListener('mousemove', e => {
-        if (!isDragging) return;
-        e.preventDefault();
-        const x = e.pageX - carrusel.offsetLeft;
-        const walk = startX - x;
-        carrusel.scrollLeft = scrollLeftStart + walk;
-      });
-
-      // Eventos táctiles
-      carrusel.addEventListener('touchstart', e => {
-        isDragging = true;
-        startX = e.touches[0].pageX - carrusel.offsetLeft;
-        scrollLeftStart = carrusel.scrollLeft;
-        pararAutoplay();
-      });
-
-      carrusel.addEventListener('touchend', e => {
-        if (isDragging) {
-          isDragging = false;
-          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
-        }
-      });
-
-      carrusel.addEventListener('touchmove', e => {
-        if (!isDragging) return;
-        const x = e.touches[0].pageX - carrusel.offsetLeft;
-        const walk = startX - x;
-        carrusel.scrollLeft = scrollLeftStart + walk;
-      });
-
-      // Iniciar autoplay al cargar la página
-      iniciarAutoplay();
-    }
-
-    // Inicializar ambos carruseles
-    document.addEventListener('DOMContentLoaded', () => {
-      setupCarruselAutoplay('carrusel1', 7000, 4000);
-      setupCarruselAutoplay('carrusel2', 7000, 6000);
-    });
-  </script>
-</body>
-</html>
