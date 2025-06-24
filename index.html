@@ -14,18 +14,17 @@
       color: #333;
     }
     .banner {
-      width: 100vw;
+      width: 100%;
       height: 250px;
       background: url('imagenes/banner.jpg') no-repeat center center/cover;
       position: relative;
       z-index: 0;
-      margin: 0; /* Sin márgenes para que cubra todo el ancho */
     }
     .contenido-principal {
       position: relative;
       z-index: 2;
-      padding: 0 20px; /* Ajustado para no tener margen lateral por banners */
-      max-width: 1200px;
+      padding: 0 1rem;
+      max-width: 1000px;
       margin: 0 auto;
     }
     .perfil {
@@ -51,31 +50,25 @@
     .redes {
       text-align: center;
       margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      font-weight: bold;
     }
     .redes a {
       color: #333;
       text-decoration: none;
-      font-weight: bold;
-      margin: 0 0.5rem;
-      position: relative;
-      padding-left: 25px;
-      display: inline-block;
-      vertical-align: middle;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 1rem;
     }
-    /* Iconos pequeños al lado de enlaces redes */
-    .redes a.instagram {
-      background: url('imagenes/icon-instagram.svg') no-repeat left center;
-      background-size: 18px 18px;
+    .redes svg {
+      width: 20px;
+      height: 20px;
+      fill: #333;
+      flex-shrink: 0;
     }
-    .redes a.tiktok {
-      background: url('imagenes/icon-tiktok.svg') no-repeat left center;
-      background-size: 18px 18px;
-    }
-    .redes a.correo {
-      background: url('imagenes/icon-mail.svg') no-repeat left center;
-      background-size: 18px 18px;
-    }
-
     .servicios {
       max-width: 1000px;
       margin: 3rem auto;
@@ -83,39 +76,26 @@
       flex-wrap: wrap;
       gap: 1.5rem;
       justify-content: center;
-      text-align: left;
+      text-align: center;
       padding: 0 1rem;
-      position: relative;
     }
     .servicio {
       background: white;
-      padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+      padding: 1.5rem;
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       width: 280px;
       position: relative;
-      user-select: none;
     }
-    /* Icono PNG arriba a la izquierda */
+    /* Iconos PNG posicionados top-left */
     .servicio .icono {
       position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 48px;   /* Tamaño aumentado */
-      height: 48px;
+      top: 12px;
+      left: 12px;
+      width: 50px;
+      height: 50px;
       pointer-events: none;
       user-select: none;
-    }
-    .servicio h3 {
-      margin-top: 60px; /* espacio para icono */
-      font-size: 1.25rem;
-      margin-bottom: 0.8rem;
-      color: #222;
-    }
-    .servicio p {
-      color: #555;
-      font-size: 1rem;
-      line-height: 1.4;
     }
     .carrusel-container {
       max-width: 1000px;
@@ -137,7 +117,6 @@
       cursor: grabbing;
       scroll-behavior: auto;
     }
-    /* Barra de scroll roja visible y custom */
     .carrusel::-webkit-scrollbar {
       height: 8px;
       background: transparent;
@@ -180,7 +159,6 @@
       color: #666;
       border-top: 1px solid #ddd;
       margin-top: 3rem;
-      user-select: none;
     }
     @media (max-width: 768px) {
       .perfil img {
@@ -196,15 +174,10 @@
       .servicio {
         width: 100%;
       }
-      .contenido-principal {
-        padding: 0 1rem;
-        max-width: 100%;
-      }
     }
   </style>
 </head>
 <body>
-
   <div class="banner"></div>
 
   <div class="contenido-principal">
@@ -215,13 +188,28 @@
       <p>Diseñador gráfico apasionado por comunicar con impacto visual.</p>
     </div>
 
-    <div class="redes">
-      <a href="https://www.instagram.com/shilouettt/" target="_blank" class="instagram" aria-label="Instagram de Roberto">Instagram</a>
-      <a href="https://www.tiktok.com/@shilouet_" target="_blank" class="tiktok" aria-label="TikTok de Roberto">TikTok</a>
-      <a href="mailto:robertossjdos6@gmail.com" class="correo" aria-label="Correo de Roberto">Correo</a>
+    <div class="redes" aria-label="Redes sociales de Roberto">
+      <a href="https://www.instagram.com/shilouettt/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Roberto">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm8.75 2.75a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zm-4.25 1.75a4.25 4.25 0 110 8.5 4.25 4.25 0 010-8.5zm0 1.5a2.75 2.75 0 100 5.5 2.75 2.75 0 000-5.5z"/>
+        </svg>
+        Instagram
+      </a>
+      <a href="https://www.tiktok.com/@shilouet_" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Roberto">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M9 3v9.5A4.5 4.5 0 0113.5 17h3.5v3a6.5 6.5 0 01-6.5-6.5V3h-1z"/>
+        </svg>
+        TikTok
+      </a>
+      <a href="mailto:robertossjdos6@gmail.com" aria-label="Correo de Roberto">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M2 6v12h20V6H2zm18 2l-8 5-8-5V8l8 5 8-5v0z"/>
+        </svg>
+        Correo
+      </a>
     </div>
 
-    <section class="servicios">
+    <section class="servicios" aria-label="Servicios de Roberto">
       <div class="servicio">
         <img src="imagenes/icono-miniaturas.png" alt="Icono Diseño Miniaturas" class="icono" />
         <h3>Diseño de Miniaturas</h3>
@@ -239,7 +227,7 @@
       </div>
     </section>
 
-    <div class="carrusel-container">
+    <div class="carrusel-container" aria-label="Carrusel de miniaturas 1">
       <div class="carrusel" id="carrusel1" tabindex="0">
         <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
         <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
@@ -249,7 +237,7 @@
       </div>
     </div>
 
-    <div class="carrusel-container">
+    <div class="carrusel-container" aria-label="Carrusel de miniaturas 2">
       <div class="carrusel" id="carrusel2" tabindex="0">
         <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
         <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
@@ -262,7 +250,6 @@
     <footer>
       Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
     </footer>
-
   </div>
 
   <script>
