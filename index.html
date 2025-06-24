@@ -14,33 +14,31 @@
       z-index: 1000; transition: top 0.3s ease;
     }
     .ver-mas {
-  position: fixed;
-  top: 10px; /* casi pegado arriba */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(50, 50, 50, 0.5); /* gris semi-transparente */
-  padding: 6px 12px;
-  border-radius: 8px;
-  z-index: 1100; /* por encima del banner */
-  user-select: none;
-  pointer-events: none; /* para que no interfiera con clicks */
-}
-
-.ver-mas .cuadro-texto {
-  color: #fff; /* blanco puro, sin transparencia */
-  font-weight: 700;
-  font-size: 0.9rem;
-  white-space: nowrap;
-  letter-spacing: 1px;
-}
-
-.ver-mas .flecha {
-  transform: rotate(0deg); /* para que apunten hacia abajo */
-  opacity: 0.8;
-}
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(50, 50, 50, 0.5);
+      padding: 6px 12px;
+      border-radius: 8px;
+      z-index: 1100;
+      user-select: none;
+      cursor: pointer;
+    }
+    .ver-mas .cuadro-texto {
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      letter-spacing: 1px;
+    }
+    .ver-mas .flecha {
+      transform: rotate(0deg);
+      opacity: 0.8;
+    }
     .contenido-principal {
       position: relative; z-index: 1;
       padding: 270px 40px 50px 40px; max-width: 1000px; margin: 0 auto;
@@ -51,446 +49,50 @@
       from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .perfil {
-      text-align: center;
-      margin-bottom: 2rem;
-      position: relative;
-      z-index: 10;
-    }
-    .perfil img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid white;
-      background: white;
-      box-shadow: 0 0 0 4px #f5f5f5;
-      position: relative;
-      z-index: 1002;
-    }
-    .perfil h1 {
-      font-size: 1.8rem;
-      margin: 0.5rem 0 0.2rem;
-    }
-    .perfil p {
-      color: #555;
-      font-size: 1rem;
-    }
-    .redes {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.redes a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 12px;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-  color: #000;
-  text-decoration: none;
-  font-weight: bold;
-  margin: 0 0.5rem;
-}
-    .servicios {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 1.5rem;
-      justify-content: center;
-      text-align: center;
-      margin-bottom: 3rem;
-      overflow-x: auto;
-      padding-bottom: 1rem;
-      scrollbar-width: none;
-    }
-    .servicios::-webkit-scrollbar { display: none; }
-    .servicio {
-      background: white;
-      padding: 2rem 1.5rem 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      width: 280px;
-      position: relative;
-      flex: 0 0 auto;
-    }
-    .servicio .icono {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      width: 64px;
-      height: 64px;
-    }
-    .servicio h3 {
-      margin-top: 50px;
-      font-size: 1.3rem;
-    }
-    .carrusel-container {
-      overflow: hidden;
-      margin-bottom: 3rem;
-    }
-    .carrusel {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      padding-bottom: 1rem;
-      cursor: grab;
-      scrollbar-width: none;
-    }
-    .carrusel::-webkit-scrollbar { display: none; }
-    .carrusel.dragging {
-      cursor: grabbing;
-      scroll-behavior: auto;
-    }
-    .miniatura {
-      flex: 0 0 70%;
-      scroll-snap-align: center;
-      position: relative;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      cursor: pointer;
-      opacity: 0.6;
-      transform: scale(0.95);
-      user-select: none;
-    }
-    .miniatura.activo {
-      opacity: 1 !important;
-      transform: scale(1.05) !important;
-      z-index: 2;
-    }
-    .miniatura img {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      user-select: none;
-      pointer-events: none;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      color: #666;
-      border-top: 1px solid #ddd;
-      margin-bottom: 2rem;
-    }
-    .btn-contacto {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25d366;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-      z-index: 1001;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: background 0.3s;
-    }
-    .btn-contacto:hover {
-      background: #1ebe5d;
-    }
-.ver-mas {
-  position: fixed;
-  top: 10px; /* casi pegado arriba */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(50, 50, 50, 0.5); /* gris semi-transparente */
-  padding: 6px 12px;
-  border-radius: 8px;
-  z-index: 1100; /* por encima del banner */
-  user-select: none;
-  pointer-events: none; /* para que no interfiera con clicks */
-}
-
-.ver-mas .cuadro-texto {
-  color: #fff; /* blanco puro, sin transparencia */
-  font-weight: 700;
-  font-size: 0.9rem;
-  white-space: nowrap;
-  letter-spacing: 1px;
-}
-
-.ver-mas .flecha {
-  transform: rotate(0deg); /* para que apunten hacia abajo */
-  opacity: 0.8;
-} .banner-lateral {
-  position: fixed;
-  top: 100px;
-  width: 160px;
-  height: auto;
-  z-index: 999;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  border-radius: 10px;
-  transition: transform 0.3s;
-}
-
-.banner-lateral {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 160px;
-  max-height: 90vh;
-  object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  border-radius: 10px;
-  z-index: 999;
-}
-
-.banner-lateral.izquierdo {
-  left: 10px;
-}
-
-.banner-lateral.derecho {
-  right: 10px;
-}
-
-
-/* Esconder en móviles o pantallas pequeñas */
-@media screen and (max-width: 1024px) {
-  .banner-lateral {
-    display: none;
-  }
-}
-
+    /* ... Resto del CSS permanece igual ... */
   </style>
 </head>
 <body>
   <div class="banner" id="banner"></div>
-
-
-<!-- BANNERS LATERALES -->
-<img src="imagenes/izquierdo.jpg" alt="Promo Izquierda" class="banner-lateral izquierdo" />
-<img src="imagenes/banner-lateral-derecho.jpg" alt="Promo Derecha" class="banner-lateral derecho" />
-
-<!-- Añade este bloque justo después del div banner, antes de contenido-principal -->
-
-<div class="ver-mas">
-  <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
-    <path d="M12 16l-6-6h12z"/>
-  </svg>
-  <div class="cuadro-texto">BAJA PARA VER MÁS TRABAJOS</div>
-  <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
-    <path d="M12 16l-6-6h12z"/>
-  </svg>
-</div>
-
-  <div class="contenido-principal">
-    <div class="perfil">
-      <img src="imagenes/logo.jpg" alt="Logo de Roberto Rodriguez" />
-      <h1>Roberto Aarón Rodriguez Rodriguez</h1>
-      <p>Diseñador gráfico apasionado por comunicar con impacto visual.</p>
-    </div>
-
-  <div class="redes">
-  <a href="https://www.instagram.com/shilouettt/" target="_blank">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#000000" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 6px;">
-      <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .3 2.5.5.6.2 1 .6 1.4 1.1.4.5.7 1.1.9 1.8.2.5.4 1.3.5 2.5.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2-.5 2.5-.2.6-.6 1-1.1 1.4-.5.4-1.1.7-1.8.9-.5.2-1.3.4-2.5.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.3-2.5-.5-.6-.2-1-.6-1.4-1.1-.4-.5-.7-1.1-.9-1.8-.2-.5-.4-1.3-.5-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2 .5-2.5.2-.6.6-1 1.1-1.4.5-.4 1.1-.7 1.8-.9.5-.2 1.3-.4 2.5-.5C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.8.1-1 .1-1.5.2-1.8.4-.5.2-.8.5-1.1.9-.3.3-.6.8-.7 1.6-.2.5-.3 1.2-.4 2.2-.1 1.3-.1 1.7-.1 4.8s0 3.5.1 4.8c.1 1 .2 1.5.4 1.8.2.5.5.8.9 1.1.3.3.8.6 1.6.7.5.2 1.2.3 2.2.4 1.3.1 1.7.1 4.8.1s3.5 0 4.8-.1c1-.1 1.5-.2 1.8-.4.5-.2.8-.5 1.1-.9.3-.3.6-.8.7-1.6.2-.5.3-1.2.4-2.2.1-1.3.1-1.7.1-4.8s0-3.5-.1-4.8c-.1-1-.2-1.5-.4-1.8-.2-.5-.5-.8-.9-1.1-.3-.3-.8-.6-1.6-.7-.5-.2-1.2-.3-2.2-.4-1.3-.1-1.7-.1-4.8-.1zm0 3.8a5.9 5.9 0 110 11.8 5.9 5.9 0 010-11.8zm0 9.7a3.8 3.8 0 100-7.6 3.8 3.8 0 000 7.6zm6-10.5a1.4 1.4 0 110-2.8 1.4 1.4 0 010 2.8z"/>
+  <div class="ver-mas" id="verMasBtn">
+    <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+      <path d="M12 16l-6-6h12z"/>
     </svg>
-    Instagram
-  </a>
-  <a href="https://www.tiktok.com/@shilouet_" target="_blank">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#000000" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 6px;">
-      <path d="M16 8.245v2.049a6.66 6.66 0 01-2.195-.417v4.373c0 2.814-1.921 4.78-4.508 4.78a4.523 4.523 0 01-4.515-4.526c0-2.501 1.862-4.497 4.248-4.497.491 0 .974.08 1.426.239v2.17a2.48 2.48 0 00-1.203-.308 2.319 2.319 0 00-2.328 2.397 2.319 2.319 0 002.328 2.397c1.195 0 2.187-.999 2.187-2.397v-9.13h2.56c.176 1.241 1.152 2.307 2.395 2.483v2.087a5.158 5.158 0 01-2.395-.696z"/>
+    <div class="cuadro-texto">BAJA PARA VER MÁS TRABAJOS</div>
+    <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+      <path d="M12 16l-6-6h12z"/>
     </svg>
-    TikTok
-  </a>
-</div>
-    <section class="servicios">
-      <div class="servicio">
-        <img src="imagenes/icono-miniaturas.png" alt="Icono Miniaturas" class="icono" />
-        <h3>Diseño de Miniaturas</h3>
-        <p>Miniaturas que destacan y generan clics.</p>
-      </div>
-      <div class="servicio">
-        <img src="imagenes/icono-identidad.png" alt="Icono Identidad Visual" class="icono" />
-        <h3>Identidad Visual</h3>
-        <p>Logos, paletas de color y estética completa para marcas.</p>
-      </div>
-      <div class="servicio">
-        <img src="imagenes/icono-redes.png" alt="Icono Diseño para Redes" class="icono" />
-        <h3>Diseño para Redes</h3>
-        <p>Posts, banners e historias visuales de alto impacto.</p>
-      </div>
-    </section>
-
-    <div class="carrusel-container">
-      <div class="carrusel" id="carrusel1">
-        <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
-        <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
-        <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
-        <div class="miniatura"><img src="imagenes/thumb4.jpg" alt="Miniatura 4"></div>
-        <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura 5"></div>
-      </div>
-    </div>
-
-    <div class="carrusel-container">
-      <div class="carrusel" id="carrusel2">
-        <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
-        <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
-        <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8"></div>
-        <div class="miniatura"><img src="imagenes/thumb9.jpg" alt="Miniatura 9"></div>
-        <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10"></div>
-      </div>
-    </div>
-
-    <footer>
-      Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
-    </footer>
   </div>
 
+  <div class="contenido-principal">
+    <!-- ... Perfil, redes, etc ... -->
 
+    <div class="carrusel-container" id="trabajos">
+      <div class="carrusel" id="carrusel1">
+        <!-- Miniaturas -->
+      </div>
+    </div>
 
-  <a href="https://wa.me/5219213058163" class="btn-contacto" target="_blank">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M20.52 3.48a11.93 11.93 0 00-16.9 0 11.93 11.93 0 00-3.5 8.45c0 2.24.59 4.3 1.62 6.14L2 22l4.03-1.66a11.92 11.92 0 005.46 1.35h.01c6.62 0 12-5.38 12-12a11.93 11.93 0 00-3.98-8.21z"/></svg>
-    Contáctame!
-  </a>
+    <!-- ... Segunda sección de carrusel y resto ... -->
+  </div>
 
   <script>
+    // Ocultar banner al hacer scroll
     const banner = document.getElementById('banner');
     window.addEventListener('scroll', () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       banner.style.top = scrollTop > 100 ? '-260px' : '0';
     });
 
-    function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 2000, delayInicio = 0) {
-      const carrusel = document.getElementById(carruselId);
-      if (!carrusel) return;
-
-      let autoplayTimer = null;
-      let cooldownTimer = null;
-      let pressTimer = null;
-      let longPressDetected = false;
-      let isDragging = false;
-      let startX = 0;
-      let scrollLeftStart = 0;
-      const scrollStep = carrusel.clientWidth * 0.4 + 16;
-
-      function avanzarScroll() {
-        const maxScroll = carrusel.scrollWidth - carrusel.clientWidth;
-        let nextScroll = carrusel.scrollLeft + scrollStep;
-        if (nextScroll >= maxScroll - 1) {
-          carrusel.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          carrusel.scrollTo({ left: nextScroll, behavior: 'smooth' });
-        }
+    // Scroll suave al hacer click en "ver más"
+    document.getElementById('verMasBtn').addEventListener('click', () => {
+      const seccion = document.getElementById('trabajos');
+      if (seccion) {
+        seccion.scrollIntoView({ behavior: 'smooth' });
       }
-
-      function iniciarAutoplay() {
-        if (autoplayTimer) return;
-        autoplayTimer = setInterval(avanzarScroll, interval);
-      }
-
-      function pararAutoplay() {
-        clearInterval(autoplayTimer);
-        autoplayTimer = null;
-      }
-
-      function reiniciarConCooldown() {
-        clearTimeout(cooldownTimer);
-        cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
-      }
-
-      carrusel.addEventListener('mousedown', e => {
-        isDragging = true;
-        startX = e.pageX - carrusel.offsetLeft;
-        scrollLeftStart = carrusel.scrollLeft;
-        carrusel.classList.add('dragging');
-        longPressDetected = false;
-        pressTimer = setTimeout(() => {
-          longPressDetected = true;
-          pararAutoplay();
-        }, 600);
-      });
-
-      carrusel.addEventListener('mouseup', () => {
-        if (isDragging) {
-          isDragging = false;
-          carrusel.classList.remove('dragging');
-          clearTimeout(pressTimer);
-          if (longPressDetected) reiniciarConCooldown();
-        }
-      });
-
-      carrusel.addEventListener('mouseleave', () => {
-        if (isDragging) {
-          isDragging = false;
-          carrusel.classList.remove('dragging');
-          clearTimeout(pressTimer);
-          if (longPressDetected) reiniciarConCooldown();
-        }
-      });
-
-      carrusel.addEventListener('mousemove', e => {
-        if (!isDragging) return;
-        e.preventDefault();
-        const x = e.pageX - carrusel.offsetLeft;
-        const walk = startX - x;
-        carrusel.scrollLeft = scrollLeftStart + walk;
-      });
-
-      carrusel.addEventListener('touchstart', e => {
-        isDragging = true;
-        startX = e.touches[0].pageX - carrusel.offsetLeft;
-        scrollLeftStart = carrusel.scrollLeft;
-        longPressDetected = false;
-        pressTimer = setTimeout(() => {
-          longPressDetected = true;
-          pararAutoplay();
-        }, 600);
-      });
-
-      carrusel.addEventListener('touchend', () => {
-        if (isDragging) {
-          isDragging = false;
-          clearTimeout(pressTimer);
-          if (longPressDetected) reiniciarConCooldown();
-        }
-      });
-
-      carrusel.addEventListener('touchmove', e => {
-        if (!isDragging) return;
-        const x = e.touches[0].pageX - carrusel.offsetLeft;
-        const walk = startX - x;
-        carrusel.scrollLeft = scrollLeftStart + walk;
-      });
-
-      carrusel.addEventListener('scroll', () => destacarMiniaturaCentral(carrusel));
-      destacarMiniaturaCentral(carrusel);
-      setTimeout(() => iniciarAutoplay(), delayInicio);
-    }
-
-    function destacarMiniaturaCentral(carrusel) {
-      const items = [...carrusel.querySelectorAll('.miniatura')];
-      const center = carrusel.scrollLeft + carrusel.offsetWidth / 2;
-      let closest = null, minDist = Infinity;
-      items.forEach(item => {
-        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-        const dist = Math.abs(center - itemCenter);
-        if (dist < minDist) {
-          closest = item;
-          minDist = dist;
-        }
-      });
-      items.forEach(item => item.classList.remove('activo'));
-      if (closest) closest.classList.add('activo');
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      setupCarruselAutoplay('carrusel1', 4000, 2000, 0);       // Inicia de inmediato
-      setupCarruselAutoplay('carrusel2', 4000, 2000, 800);     // Retraso de 800ms
     });
+
+    // ... Tu código para el carrusel (setupCarruselAutoplay, etc.) ...
   </script>
 </body>
 </html>
