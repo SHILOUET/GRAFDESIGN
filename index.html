@@ -5,45 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portafolio - Roberto Rodriguez</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #f5f5f5;
       color: #333;
+      overflow-x: hidden;
     }
     .banner {
       width: 100%;
-      height: 180px;
+      height: 250px;
       background: url('imagenes/banner.jpg') no-repeat center center/cover;
       position: fixed;
       top: 0;
       left: 0;
+      right: 0;
       z-index: 0;
-      transition: top 0.4s ease;
+      transition: transform 0.6s ease;
+    }
+    .ocultar-banner {
+      transform: translateY(-100%);
     }
     .contenido-principal {
       position: relative;
       z-index: 2;
-      padding: 200px 1rem 0;
+      padding: 260px 1rem 1rem 1rem;
     }
     .perfil {
       text-align: center;
-      margin-top: -60px;
+      padding: 0 1rem;
     }
     .perfil img {
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       border: 4px solid white;
       background: white;
+      position: relative;
+      z-index: 3;
     }
     .perfil h1 {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       margin: 0.5rem 0 0.2rem;
     }
     .perfil p {
       color: #555;
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
     .redes {
       text-align: center;
@@ -59,8 +68,8 @@
       gap: 0.3rem;
     }
     .redes svg {
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
     }
     .servicios {
       max-width: 1000px;
@@ -70,21 +79,19 @@
       gap: 1rem;
       justify-content: center;
       text-align: center;
+      padding: 0 1rem;
     }
     .servicio {
       background: white;
       padding: 1rem;
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      width: 240px;
-      position: relative;
+      width: 260px;
     }
     .servicio img {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 0.5rem;
     }
     .carrusel-container {
       max-width: 1000px;
@@ -106,7 +113,9 @@
       cursor: grabbing;
       scroll-behavior: auto;
     }
-    .carrusel::-webkit-scrollbar { display: none; }
+    .carrusel::-webkit-scrollbar {
+      display: none;
+    }
     .miniatura {
       flex: 0 0 70%;
       scroll-snap-align: center;
@@ -114,18 +123,37 @@
       cursor: pointer;
       opacity: 0.6;
       transform: scale(0.95);
-      user-select: none;
     }
     .miniatura.active {
-      transform: scale(1.05);
       opacity: 1;
-      z-index: 2;
+      transform: scale(1);
     }
     .miniatura img {
       width: 100%;
       height: auto;
       border-radius: 12px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      pointer-events: none;
+    }
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25d366;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      z-index: 999;
+    }
+    .whatsapp-btn svg {
+      width: 20px;
+      height: 20px;
     }
     footer {
       text-align: center;
@@ -133,126 +161,101 @@
       font-size: 0.9rem;
       color: #666;
       border-top: 1px solid #ddd;
-    }
-    .whatsapp {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25D366;
-      color: white;
-      border-radius: 30px;
-      padding: 0.6rem 1rem;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      z-index: 10;
-      font-weight: bold;
-    }
-    .whatsapp svg {
-      width: 20px;
-      height: 20px;
-    }
-    @media (max-width: 768px) {
-      .servicio {
-        width: 100%;
-      }
+      margin-top: 3rem;
     }
   </style>
 </head>
 <body>
-  <div class="banner" id="banner"></div>
+  <div class="banner" id="bannerSuperior"></div>
   <div class="contenido-principal">
     <div class="perfil">
       <img src="imagenes/logo.jpg" alt="Logo de Roberto Rodriguez" />
       <h1>Roberto Aaron Rodriguez Rodriguez</h1>
       <p>Diseñador gráfico apasionado por comunicar con impacto visual.</p>
     </div>
-
     <div class="redes">
-      <a href="https://www.instagram.com/shilouettt/" target="_blank">
-        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .3 2.5.5.6.3 1 .6 1.4 1.1.4.4.8.9 1.1 1.4.2.5.4 1.3.5 2.5.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2-.5 2.5-.3.6-.6 1-1.1 1.4-.4.4-.9.8-1.4 1.1-.5.2-1.3.4-2.5.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.3-2.5-.5-.6-.3-1-.6-1.4-1.1-.4-.4-.8-.9-1.1-1.4-.2-.5-.4-1.3-.5-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2 .5-2.5.3-.6.6-1 1.1-1.4.4-.4.9-.8 1.4-1.1.5-.2 1.3-.4 2.5-.5C8.4 2.2 8.8 2.2 12 2.2zm0 3.2a6.6 6.6 0 100 13.2 6.6 6.6 0 000-13.2zm0 10.8a4.2 4.2 0 110-8.4 4.2 4.2 0 010 8.4zm6.8-10.9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
-        Instagram
-      </a>
-      <a href="https://www.tiktok.com/@shilouet_" target="_blank">
-        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.7 2c.3 3.3 2.5 5.4 5.7 5.7v2.4c-1.6-.1-3-.7-4.1-1.6v7.1c0 2.8-2.3 5.2-5.1 5.2s-5.1-2.3-5.1-5.2 2.3-5.1 5.1-5.1c.4 0 .7 0 1 .1v2.5c-.3-.1-.6-.1-1-.1a2.6 2.6 0 000 5.1c1.4 0 2.5-1.1 2.5-2.5V2h1z"/></svg>
-        TikTok
-      </a>
-      <a href="mailto:robertossjdos6@gmail.com">
-        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm8 8l8-5H4l8 5zm0 2l-8-5v10h16V9l-8 5z"/></svg>
-        Correo
-      </a>
+      <a href="https://www.instagram.com/shilouettt/" target="_blank"><svg>...</svg>Instagram</a>
+      <a href="https://www.tiktok.com/@shilouet_" target="_blank"><svg>...</svg>TikTok</a>
+      <a href="mailto:robertossjdos6@gmail.com"><svg>...</svg>Correo</a>
     </div>
-
     <section class="servicios">
       <div class="servicio">
-        <img src="imagenes/icon-miniaturas.png" alt="Icono Miniaturas">
+        <img src="imagenes/icon-miniaturas.png" alt="Icono Miniaturas" />
         <h3>Diseño de Miniaturas</h3>
         <p>Miniaturas que destacan y generan clics.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icon-identidad.png" alt="Icono Identidad">
+        <img src="imagenes/icon-identidad.png" alt="Icono Identidad Visual" />
         <h3>Identidad Visual</h3>
         <p>Logos, paletas de color y estética completa para marcas.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icon-redes.png" alt="Icono Redes">
+        <img src="imagenes/icon-redes.png" alt="Icono Redes Sociales" />
         <h3>Diseño para Redes</h3>
         <p>Posts, banners e historias visuales de alto impacto.</p>
       </div>
     </section>
-
     <div class="carrusel-container">
       <div class="carrusel" id="carrusel1">
-        <div class="miniatura"><img src="imagenes/thumb1.jpg"></div>
-        <div class="miniatura"><img src="imagenes/thumb2.jpg"></div>
-        <div class="miniatura"><img src="imagenes/thumb3.jpg"></div>
-        <div class="miniatura"><img src="imagenes/thumb4.jpg"></div>
-        <div class="miniatura"><img src="imagenes/thumb5.jpg"></div>
+        <div class="miniatura active"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
+        <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
+        <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
+        <div class="miniatura"><img src="imagenes/thumb4.jpg" alt="Miniatura 4"></div>
+        <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura 5"></div>
       </div>
     </div>
-
     <div class="carrusel-container">
       <div class="carrusel" id="carrusel2">
-        <div class="miniatura"><img src="imagenes/thumb6.jpg"></div>
-        <div class="miniatura"><img src="imagenes/thumb7.jpg"></div>
-        <div class="miniatura"><img src="imagenes/thumb8.jpg"></div>
-        <div class="miniatura"><img src="imagenes/thumb9.jpg"></div>
-        <div class="miniatura"><img src="imagenes/thumb10.jpg"></div>
+        <div class="miniatura active"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
+        <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
+        <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8"></div>
+        <div class="miniatura"><img src="imagenes/thumb9.jpg" alt="Miniatura 9"></div>
+        <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10"></div>
       </div>
     </div>
-
     <footer>
       Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
     </footer>
   </div>
-
-  <a href="https://wa.me/5219211234567" class="whatsapp" target="_blank">
-    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 4a9.9 9.9 0 00-16.6 11L2 22l7-1.9A9.9 9.9 0 0020 4zm-8 15a7 7 0 01-3.5-1l-.3-.2-4.1 1.1 1.1-4.1-.2-.3a7 7 0 1112.2-2.5A7 7 0 0112 19zm3.5-5.1c-.1-.1-.6-.3-1.2-.6-.7-.3-.8-.3-1-.3s-.5.6-.6.8c-.1.1-.2.2-.4.1a6.5 6.5 0 01-3.1-2.7c-.2-.3 0-.4.1-.5.1-.1.3-.4.4-.6.1-.2 0-.4 0-.6 0-.2-.6-1.4-.9-2-.2-.5-.4-.4-.6-.4h-.5c-.1 0-.4 0-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.4a8.8 8.8 0 003.5 3.5c.4.2.8.3 1.1.3.4 0 .6 0 .8-.3.3-.3.6-.7.8-1 0-.2 0-.3-.1-.4z"/></svg>
-    Contáctame
+  <a class="whatsapp-btn" href="https://wa.me/5219241234567" target="_blank">
+    <svg>...</svg> Contáctame
   </a>
-
   <script>
-    function setupCarrusel(id) {
-      const carrusel = document.getElementById(id);
-      let isDragging = false, startX, scrollStart;
+    // Mostrar/Ocultar banner superior al hacer scroll
+    const banner = document.getElementById('bannerSuperior');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+      banner.classList.toggle('ocultar-banner', currentScroll > lastScroll && currentScroll > 100);
+      lastScroll = currentScroll;
+    });
 
-      function updateActive() {
-        const children = carrusel.querySelectorAll('.miniatura');
-        let closest = null, minDist = Infinity;
-        children.forEach(el => {
-          const box = el.getBoundingClientRect();
+    // Carruseles con autoplay + opacidad activa
+    function setupCarrusel(carruselId) {
+      const carrusel = document.getElementById(carruselId);
+      let isDragging = false;
+      let startX;
+      let scrollStart;
+
+      function updateActiveSlide() {
+        const miniaturas = carrusel.querySelectorAll('.miniatura');
+        let closest = null;
+        let closestDistance = Infinity;
+        miniaturas.forEach(min => {
+          const box = min.getBoundingClientRect();
           const dist = Math.abs(box.left + box.width / 2 - window.innerWidth / 2);
-          if (dist < minDist) {
-            closest = el;
-            minDist = dist;
+          if (dist < closestDistance) {
+            closest = min;
+            closestDistance = dist;
           }
         });
-        children.forEach(el => el.classList.remove('active'));
+        miniaturas.forEach(min => min.classList.remove('active'));
         if (closest) closest.classList.add('active');
       }
 
-      carrusel.addEventListener('scroll', updateActive);
+      carrusel.addEventListener('scroll', () => {
+        window.requestAnimationFrame(updateActiveSlide);
+      });
 
       carrusel.addEventListener('mousedown', e => {
         isDragging = true;
@@ -266,36 +269,26 @@
         carrusel.classList.remove('dragging');
       });
 
-      carrusel.addEventListener('mouseleave', () => {
-        isDragging = false;
-        carrusel.classList.remove('dragging');
-      });
-
       carrusel.addEventListener('mousemove', e => {
         if (!isDragging) return;
+        e.preventDefault();
         const x = e.pageX - carrusel.offsetLeft;
         const walk = x - startX;
         carrusel.scrollLeft = scrollStart - walk;
       });
 
-      updateActive();
+      // autoplay cada 5s
+      setInterval(() => {
+        const next = carrusel.scrollLeft + carrusel.clientWidth * 0.7;
+        carrusel.scrollTo({ left: next, behavior: 'smooth' });
+      }, 5000);
+
+      updateActiveSlide();
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       setupCarrusel('carrusel1');
       setupCarrusel('carrusel2');
-
-      let lastScroll = 0;
-      const banner = document.getElementById('banner');
-      window.addEventListener('scroll', () => {
-        const currentScroll = window.scrollY;
-        if (currentScroll > lastScroll) {
-          banner.style.top = '-200px';
-        } else {
-          banner.style.top = '0';
-        }
-        lastScroll = currentScroll;
-      });
     });
   </script>
 </body>
