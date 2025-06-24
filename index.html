@@ -16,6 +16,7 @@
       color: #333;
       opacity: 0;
       transition: opacity 0.5s ease-in-out;
+      user-select: none; /* para evitar selección accidental al arrastrar */
     }
 
     body.loaded {
@@ -116,6 +117,7 @@
       margin: 3rem auto;
       overflow: hidden;
       padding: 0 1rem;
+      user-select: none; /* para que no se seleccione texto al arrastrar */
     }
 
     .carrusel {
@@ -126,6 +128,11 @@
       scroll-behavior: smooth;
       padding-bottom: 1rem;
       scrollbar-width: none; /* Firefox */
+      cursor: grab;
+    }
+
+    .carrusel:active {
+      cursor: grabbing;
     }
 
     .carrusel::-webkit-scrollbar {
@@ -138,6 +145,19 @@
       position: relative;
       transition: transform 0.3s ease, opacity 0.3s ease;
       cursor: pointer;
+      opacity: 0.8;
+      transform: scale(0.95);
+    }
+
+    .miniatura:nth-child(odd) {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .miniatura:hover {
+      transform: scale(1.05) !important;
+      opacity: 1 !important;
+      z-index: 2;
     }
 
     .miniatura img {
@@ -147,17 +167,6 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
       user-select: none;
       pointer-events: none;
-    }
-
-    .miniatura:hover {
-      transform: scale(1.05);
-      opacity: 1 !important;
-      z-index: 2;
-    }
-
-    .miniatura:nth-child(even) {
-      transform: scale(0.95);
-      opacity: 0.8;
     }
 
     footer {
@@ -279,33 +288,105 @@
       document.body.classList.add('loaded');
     });
 
-    // Función para autoplay de carrusel horizontal
-    function autoplayCarrusel(carruselId, interval = 6000, delayStart = 0) {
+    // Control de autoplay con pausa al arrastrar manualmente y reanudación
+
+    function crearAutoplayCarrusel(carruselId, interval = 6000, delayStart = 0) {
       const carrusel = document.getElementById(carruselId);
       if (!carrusel) return;
 
       const maxScrollLeft = carrusel.scrollWidth - carrusel.clientWidth;
       let scrollAmount = 0;
+      let autoplayInterval = null;
+      let autoplayTimeout = null;
+      let isDragging = false;
+      let startX;
+      let scrollStart;
 
-      setTimeout(() => {
-        setInterval(() => {
-          // Avanzar scroll hacia la derecha, distancia menor para deslizamiento más lento
-          scrollAmount += carrusel.clientWidth * 0.4 + 16; // 40% ancho miniatura + gap
+      function avanzarScroll() {
+        scrollAmount += carrusel.clientWidth * 0.4 + 16; // 40% ancho miniatura + gap
+        if (scrollAmount >= maxScrollLeft) scrollAmount = 0;
+        carrusel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+      }
 
-          if (scrollAmount >= maxScrollLeft) {
-            scrollAmount = 0;
-          }
+      function iniciarAutoplay() {
+        if (autoplayInterval) return; // ya corriendo
+        autoplayInterval = setInterval(avanzarScroll, interval);
+      }
 
-          carrusel.scrollTo({
-            left: scrollAmount,
-            behavior: 'smooth'
-          });
-        }, interval);
-      }, delayStart);
+      function pausarAutoplay() {
+        if (autoplayInterval) {
+          clearInterval(autoplayInterval);
+          autoplayInterval = null;
+        }
+        if (autoplayTimeout) {
+          clearTimeout(autoplayTimeout);
+          autoplayTimeout = null;
+        }
+      }
+
+      // Eventos para arrastrar manualmente y pausar autoplay
+
+      carrusel.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.pageX - carrusel.offsetLeft;
+        scrollStart = carrusel.scrollLeft;
+        pausarAutoplay();
+        carrusel.classList.add('dragging');
+      });
+
+      carrusel.addEventListener('mouseleave', () => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          // reanudar autoplay tras 5s
+          autoplayTimeout = setTimeout(iniciarAutoplay, 5000);
+        }
+      });
+
+      carrusel.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          autoplayTimeout = setTimeout(iniciarAutoplay, 5000);
+        }
+      });
+
+      carrusel.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - carrusel.offsetLeft;
+        const walk = (startX - x);
+        carrusel.scrollLeft = scrollStart + walk;
+      });
+
+      // Para pantallas táctiles:
+      carrusel.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        startX = e.touches[0].pageX - carrusel.offsetLeft;
+        scrollStart = carrusel.scrollLeft;
+        pausarAutoplay();
+      });
+
+      carrusel.addEventListener('touchend', () => {
+        if (isDragging) {
+          isDragging = false;
+          autoplayTimeout = setTimeout(iniciarAutoplay, 5000);
+        }
+      });
+
+      carrusel.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const x = e.touches[0].pageX - carrusel.offsetLeft;
+        const walk = (startX - x);
+        carrusel.scrollLeft = scrollStart + walk;
+      });
+
+      // Iniciar autoplay tras el delay inicial
+      setTimeout(iniciarAutoplay, delayStart);
     }
 
-    autoplayCarrusel('carrusel1', 6000, 0);     // arranque inmediato, 6 seg entre slides
-    autoplayCarrusel('carrusel2', 6000, 3000);  // arranque con 3 seg de retraso, 6 seg entre slides
+    crearAutoplayCarrusel('carrusel1', 6000, 0);     // inicio inmediato
+    crearAutoplayCarrusel('carrusel2', 6000, 3000);  // inicio retrasado 3s
   </script>
 </body>
 </html>
