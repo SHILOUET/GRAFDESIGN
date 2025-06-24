@@ -13,6 +13,34 @@
       background: url('imagenes/banner.jpg') no-repeat center center/cover;
       z-index: 1000; transition: top 0.3s ease;
     }
+    .ver-mas {
+  position: fixed;
+  top: 10px; /* casi pegado arriba */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(50, 50, 50, 0.5); /* gris semi-transparente */
+  padding: 6px 12px;
+  border-radius: 8px;
+  z-index: 1100; /* por encima del banner */
+  user-select: none;
+  pointer-events: none; /* para que no interfiera con clicks */
+}
+
+.ver-mas .cuadro-texto {
+  color: #fff; /* blanco puro, sin transparencia */
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+
+.ver-mas .flecha {
+  transform: rotate(180deg); /* para que apunten hacia abajo */
+  opacity: 0.8;
+}
     .contenido-principal {
       position: relative; z-index: 1;
       padding: 270px 40px 50px 40px; max-width: 1000px; margin: 0 auto;
@@ -170,10 +198,50 @@
     .btn-contacto:hover {
       background: #1ebe5d;
     }
+.ver-mas {
+  position: fixed;
+  top: 10px; /* casi pegado arriba */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(50, 50, 50, 0.5); /* gris semi-transparente */
+  padding: 6px 12px;
+  border-radius: 8px;
+  z-index: 1100; /* por encima del banner */
+  user-select: none;
+  pointer-events: none; /* para que no interfiera con clicks */
+}
+
+.ver-mas .cuadro-texto {
+  color: #fff; /* blanco puro, sin transparencia */
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+
+.ver-mas .flecha {
+  transform: rotate(180deg); /* para que apunten hacia abajo */
+  opacity: 0.8;
+}
   </style>
 </head>
 <body>
   <div class="banner" id="banner"></div>
+
+<!-- Añade este bloque justo después del div banner, antes de contenido-principal -->
+
+<div class="ver-mas">
+  <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+    <path d="M12 16l-6-6h12z"/>
+  </svg>
+  <div class="cuadro-texto">BAJA PARA VER MÁS TRABAJOS</div>
+  <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+    <path d="M12 16l-6-6h12z"/>
+  </svg>
+</div>
 
   <div class="contenido-principal">
     <div class="perfil">
@@ -238,6 +306,8 @@
       Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
     </footer>
   </div>
+
+
 
   <a href="https://wa.me/5219213058163" class="btn-contacto" target="_blank">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M20.52 3.48a11.93 11.93 0 00-16.9 0 11.93 11.93 0 00-3.5 8.45c0 2.24.59 4.3 1.62 6.14L2 22l4.03-1.66a11.92 11.92 0 005.46 1.35h.01c6.62 0 12-5.38 12-12a11.93 11.93 0 00-3.98-8.21z"/></svg>
