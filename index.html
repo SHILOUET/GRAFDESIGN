@@ -13,7 +13,6 @@
       background: #f5f5f5;
       color: #333;
     }
-    /* Banner superior visible solo arriba, desaparece al scrollear */
     .banner {
       position: fixed;
       top: 0; left: 0;
@@ -23,17 +22,15 @@
       z-index: 1000;
       transition: top 0.3s ease;
     }
-    /* Banners laterales fijos */
     .banner-lateral {
       position: fixed;
-      top: 250px; /* justo debajo del banner superior */
+      top: 250px;
       width: 120px;
       height: calc(100vh - 250px);
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       z-index: 999;
-      pointer-events: none;
     }
     .banner-lateral.izquierda {
       left: 0;
@@ -43,17 +40,21 @@
       right: 0;
       background-image: url('imagenes/banner-lateral-der.jpg');
     }
-    /* Contenido principal con padding para no chocar con laterales */
     .contenido-principal {
       position: relative;
       z-index: 1;
-      padding: 270px 130px 50px 130px; /* top por banner fijo + laterales */
+      padding: 270px 130px 50px 130px;
       max-width: 1000px;
       margin: 0 auto;
       background: white;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       border-radius: 10px;
       min-height: 100vh;
+      animation: fadeInUp 0.8s ease;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .perfil {
       text-align: center;
@@ -84,7 +85,6 @@
       font-weight: bold;
       margin: 0 0.5rem;
     }
-    /* Servicios */
     .servicios {
       display: flex;
       flex-wrap: wrap;
@@ -95,26 +95,24 @@
     }
     .servicio {
       background: white;
-      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      padding: 2rem 1.5rem 1.5rem;
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       width: 280px;
       position: relative;
     }
-    /* Icono PNG en esquina superior izquierda */
     .servicio .icono {
       position: absolute;
       top: 12px;
       left: 12px;
       width: 64px;
       height: 64px;
-      pointer-events: none;
     }
     .servicio h3 {
       margin-top: 50px;
       font-size: 1.3rem;
     }
-    /* Carrusel */
+
     .carrusel-container {
       overflow: hidden;
       margin-bottom: 3rem;
@@ -126,16 +124,15 @@
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       padding-bottom: 1rem;
-      scrollbar-width: none;
       cursor: grab;
+      scrollbar-width: none;
+    }
+    .carrusel::-webkit-scrollbar {
+      display: none;
     }
     .carrusel.dragging {
       cursor: grabbing;
       scroll-behavior: auto;
-    }
-    /* Ocultar scrollbar */
-    .carrusel::-webkit-scrollbar {
-      display: none;
     }
     .miniatura {
       flex: 0 0 70%;
@@ -143,17 +140,13 @@
       position: relative;
       transition: transform 0.3s ease, opacity 0.3s ease;
       cursor: pointer;
-      opacity: 0.8;
+      opacity: 0.6;
       transform: scale(0.95);
       user-select: none;
     }
-    .miniatura:nth-child(odd) {
-      opacity: 1;
-      transform: scale(1);
-    }
-    .miniatura:hover {
-      transform: scale(1.05) !important;
+    .miniatura.activo {
       opacity: 1 !important;
+      transform: scale(1.05) !important;
       z-index: 2;
     }
     .miniatura img {
@@ -172,7 +165,25 @@
       border-top: 1px solid #ddd;
       margin-bottom: 2rem;
     }
-    /* Responsive */
+
+    .btn-contacto {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #333;
+      color: white;
+      padding: 12px 14px;
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      z-index: 1001;
+      transition: background 0.3s;
+    }
+    .btn-contacto:hover {
+      background: #555;
+    }
+
     @media (max-width: 1024px) {
       .contenido-principal {
         padding-left: 80px;
@@ -180,7 +191,6 @@
       }
       .banner-lateral {
         width: 80px;
-        height: calc(100vh - 250px);
       }
     }
     @media (max-width: 768px) {
@@ -211,16 +221,14 @@
   </style>
 </head>
 <body>
-  <!-- Banner superior -->
   <div class="banner" id="banner"></div>
-  <!-- Banners laterales -->
   <div class="banner-lateral izquierda"></div>
   <div class="banner-lateral derecha"></div>
 
   <div class="contenido-principal">
     <div class="perfil">
       <img src="imagenes/logo.jpg" alt="Logo de Roberto Rodriguez" />
-      <h1>Roberto Aaron Rodriguez Rodriguez</h1>
+      <h1>Roberto Aarón Rodriguez Rodriguez</h1>
       <p>Diseñador gráfico apasionado por comunicar con impacto visual.</p>
     </div>
 
@@ -273,33 +281,24 @@
     </footer>
   </div>
 
+  <!-- Botón flotante -->
+  <a href="mailto:robertossjdos6@gmail.com" class="btn-contacto">✉️</a>
+
   <script>
-    // Banner superior desaparece al bajar scroll y vuelve al subir
     const banner = document.getElementById('banner');
-    let lastScroll = 0;
     window.addEventListener('scroll', () => {
       const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-      if (currentScroll > 100) {
-        // ocultar banner
-        banner.style.top = '-260px';
-      } else {
-        // mostrar banner
-        banner.style.top = '0';
-      }
-      lastScroll = currentScroll;
+      banner.style.top = currentScroll > 100 ? '-260px' : '0';
     });
 
-    // Carrusel con autoplay y cooldown de 4 segundos
     function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 4000) {
       const carrusel = document.getElementById(carruselId);
       if (!carrusel) return;
-
       let autoplayTimer = null;
       let cooldownTimer = null;
       let isDragging = false;
       let startX = 0;
       let scrollLeftStart = 0;
-
       const scrollStep = carrusel.clientWidth * 0.4 + 16;
 
       function avanzarScroll() {
@@ -315,14 +314,10 @@
       }
 
       function pararAutoplay() {
-        if (autoplayTimer) {
-          clearInterval(autoplayTimer);
-          autoplayTimer = null;
-        }
-        if (cooldownTimer) {
-          clearTimeout(cooldownTimer);
-          cooldownTimer = null;
-        }
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+        clearTimeout(cooldownTimer);
+        cooldownTimer = null;
       }
 
       carrusel.addEventListener('mousedown', e => {
@@ -378,12 +373,32 @@
         carrusel.scrollLeft = scrollLeftStart + walk;
       });
 
+      carrusel.addEventListener('scroll', () => destacarMiniaturaCentral(carrusel));
+      destacarMiniaturaCentral(carrusel);
       iniciarAutoplay();
     }
 
+    function destacarMiniaturaCentral(carrusel) {
+      const items = [...carrusel.querySelectorAll('.miniatura')];
+      const center = carrusel.scrollLeft + carrusel.offsetWidth / 2;
+      let closest = null, minDist = Infinity;
+
+      items.forEach(item => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const dist = Math.abs(center - itemCenter);
+        if (dist < minDist) {
+          closest = item;
+          minDist = dist;
+        }
+      });
+
+      items.forEach(item => item.classList.remove('activo'));
+      if (closest) closest.classList.add('activo');
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-      setupCarruselAutoplay('carrusel1', 7000, 4000);
-      setupCarruselAutoplay('carrusel2', 7000, 4000);
+      setupCarruselAutoplay('carrusel1');
+      setupCarruselAutoplay('carrusel2');
     });
   </script>
 </body>
