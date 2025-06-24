@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portafolio - Roberto Rodriguez</title>
+
+  <!-- Importar fuente Outfit negrita -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&display=swap" rel="stylesheet" />
+
   <style>
     * {
       margin: 0; padding: 0; box-sizing: border-box;
@@ -176,18 +180,25 @@
       margin-bottom: 2rem;
     }
 
+    /* Botón WhatsApp corregido */
     .btn-contacto {
       position: fixed;
       bottom: 20px;
       right: 20px;
       background: #25d366;
       color: white;
-      padding: 12px 14px;
-      border-radius: 50%;
+      padding: 10px 16px;
+      border-radius: 12px;
       text-decoration: none;
-      font-size: 1.5rem;
+      font-size: 1.1rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
       box-shadow: 0 2px 10px rgba(0,0,0,0.3);
       z-index: 1001;
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
       transition: background 0.3s;
     }
 
@@ -278,13 +289,14 @@
     </footer>
   </div>
 
-  <!-- Botón flotante de WhatsApp -->
-  <a href="https://wa.me/5211234567890" class="btn-contacto" target="_blank">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20" style="vertical-align: middle; margin-right: 8px; fill: white;">
-    <path d="M380.9 97.1C339-3.6 224.3-27 136.6 29.1 48.8 85.2 17 202.4 73.1 290.1L24 464l174-49.1c85.2 46 195.1-1.9 229.1-97.9 30.7-85.7-8.7-179.9-46.2-219.9zM228.2 338.7c-38.1-1.7-67.2-18.2-94.4-45.4s-43.6-56.3-45.4-94.4c-.5-9.9 6.6-18.7 16.4-20.2 12.3-1.9 26.8-.4 43.3 8.2 4.5 2.3 7.4 6.9 7.4 12v28.7c0 6.6 5.4 12 12 12h28.7c5.1 0 9.7 2.9 12 7.4 8.6 16.5 10.1 31 8.2 43.3-1.5 9.8-10.3 16.9-20.2 16.4z"/>
-  </svg>
-  ¡Contáctame!
-</a>
+  <!-- Botón flotante de WhatsApp con texto y SVG -->
+  <a href="https://wa.me/5211234567890" class="btn-contacto" target="_blank" rel="noopener noreferrer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24" style="vertical-align:middle;">
+      <path d="M20.52 3.48a11.93 11.93 0 00-16.9 0 11.93 11.93 0 00-3.5 8.45c0 2.24.59 4.3 1.62 6.14L2 22l4.03-1.66a11.92 11.92 0 005.46 1.35h.01c6.62 0 12-5.38 12-12a11.93 11.93 0 00-3.98-8.21zm-4.84 14.18c-.28.78-1.56 1.49-2.21 1.58-.59.09-1.16.13-2.13-.28a9.55 9.55 0 01-4.39-4.72c-.39-.85-.4-1.57-.28-2.21.12-.59.85-1.35 1.16-1.61.31-.26.42-.44.62-.74.2-.3.1-.56-.05-.79-.16-.23-1.5-3.6-2.06-4.93-.54-1.28-1.09-1.11-1.5-1.13-.38-.02-.81-.02-1.23-.02-.42 0-1.1.15-1.68.74-.58.58-2.2 2.15-2.2 5.24 0 3.09 2.26 6.08 2.58 6.5.32.42 4.45 6.9 10.7 7.9 6.25 1 6.25-4.14 6.96-4.62z"/>
+    </svg>
+    Contáctame!
+  </a>
+
   <script>
     const banner = document.getElementById('banner');
     window.addEventListener('scroll', () => {
