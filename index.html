@@ -20,9 +20,10 @@
       position: relative;
       z-index: 0;
     }
+    /* Banners laterales fijos que empiezan debajo del banner superior */
     .banner-lateral {
       position: fixed;
-      top: 0;
+      top: 260px; /* Empieza justo debajo del banner principal + margen */
       bottom: 0;
       width: 120px;
       background-size: cover;
@@ -74,6 +75,8 @@
       font-weight: bold;
       margin: 0 0.5rem;
     }
+
+    /* Servicios con iconos PNG en esquina superior izquierda */
     .servicios {
       max-width: 1000px;
       margin: 3rem auto;
@@ -83,6 +86,7 @@
       justify-content: center;
       text-align: center;
       padding: 0 1rem;
+      position: relative;
     }
     .servicio {
       background: white;
@@ -90,7 +94,22 @@
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       width: 280px;
+      position: relative;
     }
+    .servicio img.icono-servicio {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 56px;  /* un poco más grande que antes */
+      height: 56px;
+      pointer-events: none;
+      user-select: none;
+    }
+    .servicio h3 {
+      margin-top: 2.5rem; /* para que no quede debajo del icono */
+      font-weight: 700;
+    }
+    
     .carrusel-container {
       max-width: 1000px;
       margin: 3rem auto;
@@ -174,6 +193,15 @@
       .contenido-principal {
         padding: 0 1rem;
       }
+      .servicio img.icono-servicio {
+        width: 40px;
+        height: 40px;
+        top: 8px;
+        left: 8px;
+      }
+      .servicio h3 {
+        margin-top: 2rem;
+      }
     }
   </style>
 </head>
@@ -191,28 +219,31 @@
     </div>
 
     <div class="redes">
-      <a href="https://www.instagram.com/shilouettt/" target="_blank">Instagram</a>
-      <a href="https://www.tiktok.com/@shilouet_" target="_blank">TikTok</a>
-      <a href="mailto:robertossjdos6@gmail.com">Correo</a>
+      <a href="https://www.instagram.com/shilouettt/" target="_blank" aria-label="Instagram de Roberto">Instagram</a>
+      <a href="https://www.tiktok.com/@shilouet_" target="_blank" aria-label="TikTok de Roberto">TikTok</a>
+      <a href="mailto:robertossjdos6@gmail.com" aria-label="Correo de Roberto">Correo</a>
     </div>
 
     <section class="servicios">
       <div class="servicio">
+        <img src="imagenes/icono-miniaturas.png" alt="Icono Diseño de Miniaturas" class="icono-servicio" />
         <h3>Diseño de Miniaturas</h3>
         <p>Miniaturas que destacan y generan clics.</p>
       </div>
       <div class="servicio">
+        <img src="imagenes/icono-identidad.png" alt="Icono Identidad Visual" class="icono-servicio" />
         <h3>Identidad Visual</h3>
         <p>Logos, paletas de color y estética completa para marcas.</p>
       </div>
       <div class="servicio">
+        <img src="imagenes/icono-redes.png" alt="Icono Diseño para Redes" class="icono-servicio" />
         <h3>Diseño para Redes</h3>
         <p>Posts, banners e historias visuales de alto impacto.</p>
       </div>
     </section>
 
     <div class="carrusel-container">
-      <div class="carrusel" id="carrusel1">
+      <div class="carrusel" id="carrusel1" tabindex="0">
         <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
         <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
         <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
@@ -222,7 +253,7 @@
     </div>
 
     <div class="carrusel-container">
-      <div class="carrusel" id="carrusel2">
+      <div class="carrusel" id="carrusel2" tabindex="0">
         <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
         <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
         <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8"></div>
