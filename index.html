@@ -125,13 +125,19 @@
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       padding-bottom: 1rem;
+      scrollbar-width: none; /* Firefox */
+    }
+
+    .carrusel::-webkit-scrollbar {
+      display: none; /* Chrome, Safari */
     }
 
     .miniatura {
       flex: 0 0 70%;
       scroll-snap-align: center;
       position: relative;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
     }
 
     .miniatura img {
@@ -139,10 +145,13 @@
       height: auto;
       border-radius: 12px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      user-select: none;
+      pointer-events: none;
     }
 
     .miniatura:hover {
       transform: scale(1.05);
+      opacity: 1 !important;
       z-index: 2;
     }
 
@@ -158,6 +167,7 @@
       color: #666;
       border-top: 1px solid #ddd;
       margin-top: 3rem;
+      user-select: none;
     }
 
     .contacto-flotante {
@@ -239,7 +249,7 @@
   </section>
 
   <div class="carrusel-container">
-    <div class="carrusel">
+    <div class="carrusel" id="carrusel1">
       <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura de diseño 1 de video de YouTube"></div>
       <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura de diseño 2 de video de YouTube"></div>
       <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura de diseño 3 de video de YouTube"></div>
@@ -249,7 +259,7 @@
   </div>
 
   <div class="carrusel-container">
-    <div class="carrusel">
+    <div class="carrusel" id="carrusel2">
       <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura de diseño 6 de video de YouTube"></div>
       <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura de diseño 7 de video de YouTube"></div>
       <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura de diseño 8 de video de YouTube"></div>
@@ -259,7 +269,7 @@
   </div>
 
   <footer>
-    &copy; 2025 Roberto Rodriguez. Todos los derechos reservados.
+    Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
   </footer>
 
   <a href="mailto:robertossjdos6@gmail.com" class="contacto-flotante">Contáctame</a>
@@ -268,6 +278,34 @@
     window.addEventListener('load', () => {
       document.body.classList.add('loaded');
     });
+
+    // Función para autoplay de carrusel horizontal
+    function autoplayCarrusel(carruselId, interval = 3000) {
+      const carrusel = document.getElementById(carruselId);
+      let scrollAmount = 0;
+
+      if (!carrusel) return;
+
+      const maxScrollLeft = carrusel.scrollWidth - carrusel.clientWidth;
+
+      setInterval(() => {
+        // Avanzar scroll hacia la derecha
+        scrollAmount += carrusel.clientWidth * 0.7 + 16; // 70% ancho miniatura + gap aprox
+
+        if (scrollAmount >= maxScrollLeft) {
+          // Si llegamos al final, volvemos al inicio
+          scrollAmount = 0;
+        }
+
+        carrusel.scrollTo({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      }, interval);
+    }
+
+    autoplayCarrusel('carrusel1', 3000);
+    autoplayCarrusel('carrusel2', 3000);
   </script>
 </body>
 </html>
