@@ -12,30 +12,52 @@
       font-family: 'Segoe UI', sans-serif;
       background: #f5f5f5;
       color: #333;
-      overflow-x: hidden;
     }
+    /* Banner superior visible solo arriba, desaparece al scrollear */
     .banner {
-      width: 100%;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
       height: 250px;
       background: url('imagenes/banner.jpg') no-repeat center center/cover;
+      z-index: 1000;
+      transition: top 0.3s ease;
+    }
+    /* Banners laterales fijos */
+    .banner-lateral {
       position: fixed;
-      top: 0;
+      top: 250px; /* justo debajo del banner superior */
+      width: 120px;
+      height: calc(100vh - 250px);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 999;
+      pointer-events: none;
+    }
+    .banner-lateral.izquierda {
       left: 0;
+      background-image: url('imagenes/banner-lateral-izq.jpg');
+    }
+    .banner-lateral.derecha {
       right: 0;
-      z-index: 0;
-      transition: transform 0.6s ease;
+      background-image: url('imagenes/banner-lateral-der.jpg');
     }
-    .ocultar-banner {
-      transform: translateY(-100%);
-    }
+    /* Contenido principal con padding para no chocar con laterales */
     .contenido-principal {
       position: relative;
-      z-index: 2;
-      padding: 260px 1rem 1rem 1rem;
+      z-index: 1;
+      padding: 270px 130px 50px 130px; /* top por banner fijo + laterales */
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      min-height: 100vh;
     }
     .perfil {
       text-align: center;
-      padding: 0 1rem;
+      margin-bottom: 2rem;
     }
     .perfil img {
       width: 120px;
@@ -43,8 +65,6 @@
       border-radius: 50%;
       border: 4px solid white;
       background: white;
-      position: relative;
-      z-index: 3;
     }
     .perfil h1 {
       font-size: 1.8rem;
@@ -56,48 +76,48 @@
     }
     .redes {
       text-align: center;
-      margin-top: 1rem;
+      margin-bottom: 3rem;
     }
     .redes a {
       color: #333;
       text-decoration: none;
       font-weight: bold;
       margin: 0 0.5rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
     }
-    .redes svg {
-      width: 18px;
-      height: 18px;
-    }
+    /* Servicios */
     .servicios {
-      max-width: 1000px;
-      margin: 2rem auto 1rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.5rem;
       justify-content: center;
       text-align: center;
-      padding: 0 1rem;
+      margin-bottom: 3rem;
     }
     .servicio {
       background: white;
-      padding: 1rem;
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      width: 260px;
+      width: 280px;
+      position: relative;
     }
-    .servicio img {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 0.5rem;
+    /* Icono PNG en esquina superior izquierda */
+    .servicio .icono {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 64px;
+      height: 64px;
+      pointer-events: none;
     }
+    .servicio h3 {
+      margin-top: 50px;
+      font-size: 1.3rem;
+    }
+    /* Carrusel */
     .carrusel-container {
-      max-width: 1000px;
-      margin: 1rem auto;
       overflow: hidden;
-      padding: 0 1rem;
+      margin-bottom: 3rem;
     }
     .carrusel {
       display: flex;
@@ -113,47 +133,36 @@
       cursor: grabbing;
       scroll-behavior: auto;
     }
+    /* Ocultar scrollbar */
     .carrusel::-webkit-scrollbar {
       display: none;
     }
     .miniatura {
       flex: 0 0 70%;
       scroll-snap-align: center;
+      position: relative;
       transition: transform 0.3s ease, opacity 0.3s ease;
       cursor: pointer;
-      opacity: 0.6;
+      opacity: 0.8;
       transform: scale(0.95);
+      user-select: none;
     }
-    .miniatura.active {
+    .miniatura:nth-child(odd) {
       opacity: 1;
       transform: scale(1);
+    }
+    .miniatura:hover {
+      transform: scale(1.05) !important;
+      opacity: 1 !important;
+      z-index: 2;
     }
     .miniatura img {
       width: 100%;
       height: auto;
       border-radius: 12px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      user-select: none;
       pointer-events: none;
-    }
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25d366;
-      color: white;
-      padding: 0.8rem 1.2rem;
-      border-radius: 50px;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: bold;
-      text-decoration: none;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-      z-index: 999;
-    }
-    .whatsapp-btn svg {
-      width: 20px;
-      height: 20px;
     }
     footer {
       text-align: center;
@@ -161,134 +170,220 @@
       font-size: 0.9rem;
       color: #666;
       border-top: 1px solid #ddd;
-      margin-top: 3rem;
+      margin-bottom: 2rem;
+    }
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .contenido-principal {
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+      .banner-lateral {
+        width: 80px;
+        height: calc(100vh - 250px);
+      }
+    }
+    @media (max-width: 768px) {
+      .banner-lateral {
+        display: none;
+      }
+      .contenido-principal {
+        padding: 270px 20px 50px 20px;
+        max-width: 100%;
+      }
+      .perfil img {
+        width: 90px;
+        height: 90px;
+      }
+      .perfil h1 {
+        font-size: 1.5rem;
+      }
+      .perfil p {
+        font-size: 0.95rem;
+      }
+      .servicio {
+        width: 100%;
+      }
+      .miniatura {
+        flex: 0 0 90%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="banner" id="bannerSuperior"></div>
+  <!-- Banner superior -->
+  <div class="banner" id="banner"></div>
+  <!-- Banners laterales -->
+  <div class="banner-lateral izquierda"></div>
+  <div class="banner-lateral derecha"></div>
+
   <div class="contenido-principal">
     <div class="perfil">
       <img src="imagenes/logo.jpg" alt="Logo de Roberto Rodriguez" />
       <h1>Roberto Aaron Rodriguez Rodriguez</h1>
       <p>Diseñador gráfico apasionado por comunicar con impacto visual.</p>
     </div>
+
     <div class="redes">
-      <a href="https://www.instagram.com/shilouettt/" target="_blank"><svg>...</svg>Instagram</a>
-      <a href="https://www.tiktok.com/@shilouet_" target="_blank"><svg>...</svg>TikTok</a>
-      <a href="mailto:robertossjdos6@gmail.com"><svg>...</svg>Correo</a>
+      <a href="https://www.instagram.com/shilouettt/" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@shilouet_" target="_blank">TikTok</a>
+      <a href="mailto:robertossjdos6@gmail.com">Correo</a>
     </div>
+
     <section class="servicios">
       <div class="servicio">
-        <img src="imagenes/icon-miniaturas.png" alt="Icono Miniaturas" />
+        <img src="imagenes/icono-miniaturas.png" alt="Icono Miniaturas" class="icono" />
         <h3>Diseño de Miniaturas</h3>
         <p>Miniaturas que destacan y generan clics.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icon-identidad.png" alt="Icono Identidad Visual" />
+        <img src="imagenes/icono-identidad.png" alt="Icono Identidad Visual" class="icono" />
         <h3>Identidad Visual</h3>
         <p>Logos, paletas de color y estética completa para marcas.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icon-redes.png" alt="Icono Redes Sociales" />
+        <img src="imagenes/icono-redes.png" alt="Icono Diseño para Redes" class="icono" />
         <h3>Diseño para Redes</h3>
         <p>Posts, banners e historias visuales de alto impacto.</p>
       </div>
     </section>
+
     <div class="carrusel-container">
       <div class="carrusel" id="carrusel1">
-        <div class="miniatura active"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
+        <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
         <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
         <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
         <div class="miniatura"><img src="imagenes/thumb4.jpg" alt="Miniatura 4"></div>
         <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura 5"></div>
       </div>
     </div>
+
     <div class="carrusel-container">
       <div class="carrusel" id="carrusel2">
-        <div class="miniatura active"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
+        <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
         <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
         <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8"></div>
         <div class="miniatura"><img src="imagenes/thumb9.jpg" alt="Miniatura 9"></div>
         <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10"></div>
       </div>
     </div>
+
     <footer>
       Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
     </footer>
   </div>
-  <a class="whatsapp-btn" href="https://wa.me/5219241234567" target="_blank">
-    <svg>...</svg> Contáctame
-  </a>
+
   <script>
-    // Mostrar/Ocultar banner superior al hacer scroll
-    const banner = document.getElementById('bannerSuperior');
+    // Banner superior desaparece al bajar scroll y vuelve al subir
+    const banner = document.getElementById('banner');
     let lastScroll = 0;
     window.addEventListener('scroll', () => {
-      const currentScroll = window.scrollY;
-      banner.classList.toggle('ocultar-banner', currentScroll > lastScroll && currentScroll > 100);
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScroll > 100) {
+        // ocultar banner
+        banner.style.top = '-260px';
+      } else {
+        // mostrar banner
+        banner.style.top = '0';
+      }
       lastScroll = currentScroll;
     });
 
-    // Carruseles con autoplay + opacidad activa
-    function setupCarrusel(carruselId) {
+    // Carrusel con autoplay y cooldown de 4 segundos
+    function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 4000) {
       const carrusel = document.getElementById(carruselId);
-      let isDragging = false;
-      let startX;
-      let scrollStart;
+      if (!carrusel) return;
 
-      function updateActiveSlide() {
-        const miniaturas = carrusel.querySelectorAll('.miniatura');
-        let closest = null;
-        let closestDistance = Infinity;
-        miniaturas.forEach(min => {
-          const box = min.getBoundingClientRect();
-          const dist = Math.abs(box.left + box.width / 2 - window.innerWidth / 2);
-          if (dist < closestDistance) {
-            closest = min;
-            closestDistance = dist;
-          }
-        });
-        miniaturas.forEach(min => min.classList.remove('active'));
-        if (closest) closest.classList.add('active');
+      let autoplayTimer = null;
+      let cooldownTimer = null;
+      let isDragging = false;
+      let startX = 0;
+      let scrollLeftStart = 0;
+
+      const scrollStep = carrusel.clientWidth * 0.4 + 16;
+
+      function avanzarScroll() {
+        const maxScroll = carrusel.scrollWidth - carrusel.clientWidth;
+        let nextScroll = carrusel.scrollLeft + scrollStep;
+        if (nextScroll > maxScroll) nextScroll = 0;
+        carrusel.scrollTo({ left: nextScroll, behavior: 'smooth' });
       }
 
-      carrusel.addEventListener('scroll', () => {
-        window.requestAnimationFrame(updateActiveSlide);
-      });
+      function iniciarAutoplay() {
+        if (autoplayTimer) return;
+        autoplayTimer = setInterval(avanzarScroll, interval);
+      }
+
+      function pararAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+        if (cooldownTimer) {
+          clearTimeout(cooldownTimer);
+          cooldownTimer = null;
+        }
+      }
 
       carrusel.addEventListener('mousedown', e => {
         isDragging = true;
         startX = e.pageX - carrusel.offsetLeft;
-        scrollStart = carrusel.scrollLeft;
+        scrollLeftStart = carrusel.scrollLeft;
+        pararAutoplay();
         carrusel.classList.add('dragging');
       });
 
+      carrusel.addEventListener('mouseleave', () => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
+      });
+
       carrusel.addEventListener('mouseup', () => {
-        isDragging = false;
-        carrusel.classList.remove('dragging');
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
       });
 
       carrusel.addEventListener('mousemove', e => {
         if (!isDragging) return;
         e.preventDefault();
         const x = e.pageX - carrusel.offsetLeft;
-        const walk = x - startX;
-        carrusel.scrollLeft = scrollStart - walk;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
       });
 
-      // autoplay cada 5s
-      setInterval(() => {
-        const next = carrusel.scrollLeft + carrusel.clientWidth * 0.7;
-        carrusel.scrollTo({ left: next, behavior: 'smooth' });
-      }, 5000);
+      carrusel.addEventListener('touchstart', e => {
+        isDragging = true;
+        startX = e.touches[0].pageX - carrusel.offsetLeft;
+        scrollLeftStart = carrusel.scrollLeft;
+        pararAutoplay();
+      });
 
-      updateActiveSlide();
+      carrusel.addEventListener('touchend', () => {
+        if (isDragging) {
+          isDragging = false;
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
+      });
+
+      carrusel.addEventListener('touchmove', e => {
+        if (!isDragging) return;
+        const x = e.touches[0].pageX - carrusel.offsetLeft;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
+      });
+
+      iniciarAutoplay();
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      setupCarrusel('carrusel1');
-      setupCarrusel('carrusel2');
+      setupCarruselAutoplay('carrusel1', 7000, 4000);
+      setupCarruselAutoplay('carrusel2', 7000, 4000);
     });
   </script>
 </body>
