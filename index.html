@@ -13,26 +13,22 @@
       background: #f5f5f5;
       color: #333;
     }
-    /* Banner superior visible solo arriba, desaparece al scrollear */
     .banner {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
+      width: 100%;
       height: 250px;
       background: url('imagenes/banner.jpg') no-repeat center center/cover;
-      z-index: 1000;
-      transition: top 0.3s ease;
+      position: relative;
+      z-index: 0;
     }
-    /* Banners laterales fijos */
     .banner-lateral {
       position: fixed;
-      top: 250px; /* justo debajo del banner superior */
+      top: 0;
       width: 120px;
       height: calc(100vh - 250px);
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      z-index: 999;
+      z-index: 1;
       pointer-events: none;
     }
     .banner-lateral.izquierda {
@@ -43,21 +39,15 @@
       right: 0;
       background-image: url('imagenes/banner-lateral-der.jpg');
     }
-    /* Contenido principal con padding para no chocar con laterales */
     .contenido-principal {
       position: relative;
-      z-index: 1;
-      padding: 270px 130px 50px 130px; /* top por banner fijo + laterales */
-      max-width: 1000px;
-      margin: 0 auto;
-      background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 10px;
-      min-height: 100vh;
+      z-index: 2;
+      padding: 0 130px;
     }
     .perfil {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-top: -60px;
+      padding: 0 1rem;
     }
     .perfil img {
       width: 120px;
@@ -76,48 +66,58 @@
     }
     .redes {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-top: 1rem;
     }
     .redes a {
-      color: #333;
-      text-decoration: none;
-      font-weight: bold;
+      display: inline-block;
       margin: 0 0.5rem;
     }
-    /* Servicios */
+    .redes a img {
+      width: 32px;
+      height: 32px;
+    }
     .servicios {
+      max-width: 1000px;
+      margin: 3rem auto;
       display: flex;
       flex-wrap: wrap;
       gap: 1.5rem;
       justify-content: center;
       text-align: center;
-      margin-bottom: 3rem;
+      padding: 0 1rem;
     }
     .servicio {
       background: white;
-      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      padding: 1.5rem;
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       width: 280px;
       position: relative;
     }
-    /* Icono PNG en esquina superior izquierda */
-    .servicio .icono {
+    .servicio::before {
+      content: '';
       position: absolute;
-      top: 12px;
-      left: 12px;
-      width: 64px;
-      height: 64px;
-      pointer-events: none;
+      top: 10px;
+      left: 10px;
+      width: 48px;
+      height: 48px;
+      background-size: contain;
+      background-repeat: no-repeat;
     }
-    .servicio h3 {
-      margin-top: 50px;
-      font-size: 1.3rem;
+    .servicio:nth-of-type(1)::before {
+      background-image: url('imagenes/icono-miniaturas.png');
     }
-    /* Carrusel */
+    .servicio:nth-of-type(2)::before {
+      background-image: url('imagenes/icono-identidad.png');
+    }
+    .servicio:nth-of-type(3)::before {
+      background-image: url('imagenes/icono-redes.png');
+    }
     .carrusel-container {
+      max-width: 1000px;
+      margin: 3rem auto;
       overflow: hidden;
-      margin-bottom: 3rem;
+      padding: 0 1rem;
     }
     .carrusel {
       display: flex;
@@ -133,7 +133,6 @@
       cursor: grabbing;
       scroll-behavior: auto;
     }
-    /* Ocultar scrollbar */
     .carrusel::-webkit-scrollbar {
       display: none;
     }
@@ -170,27 +169,9 @@
       font-size: 0.9rem;
       color: #666;
       border-top: 1px solid #ddd;
-      margin-bottom: 2rem;
-    }
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .contenido-principal {
-        padding-left: 80px;
-        padding-right: 80px;
-      }
-      .banner-lateral {
-        width: 80px;
-        height: calc(100vh - 250px);
-      }
+      margin-top: 3rem;
     }
     @media (max-width: 768px) {
-      .banner-lateral {
-        display: none;
-      }
-      .contenido-principal {
-        padding: 270px 20px 50px 20px;
-        max-width: 100%;
-      }
       .perfil img {
         width: 90px;
         height: 90px;
@@ -204,20 +185,22 @@
       .servicio {
         width: 100%;
       }
-      .miniatura {
-        flex: 0 0 90%;
+      .banner-lateral {
+        display: none;
+      }
+      .contenido-principal {
+        padding: 0 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Banner superior -->
-  <div class="banner" id="banner"></div>
-  <!-- Banners laterales -->
   <div class="banner-lateral izquierda"></div>
   <div class="banner-lateral derecha"></div>
 
   <div class="contenido-principal">
+    <div class="banner"></div>
+
     <div class="perfil">
       <img src="imagenes/logo.jpg" alt="Logo de Roberto Rodriguez" />
       <h1>Roberto Aaron Rodriguez Rodriguez</h1>
@@ -225,24 +208,21 @@
     </div>
 
     <div class="redes">
-      <a href="https://www.instagram.com/shilouettt/" target="_blank">Instagram</a>
-      <a href="https://www.tiktok.com/@shilouet_" target="_blank">TikTok</a>
-      <a href="mailto:robertossjdos6@gmail.com">Correo</a>
+      <a href="https://www.instagram.com/shilouettt/" target="_blank"><img src="imagenes/instagram.png" alt="Instagram"></a>
+      <a href="https://www.tiktok.com/@shilouet_" target="_blank"><img src="imagenes/tiktok.png" alt="TikTok"></a>
+      <a href="mailto:robertossjdos6@gmail.com"><img src="imagenes/correo.png" alt="Correo"></a>
     </div>
 
     <section class="servicios">
       <div class="servicio">
-        <img src="imagenes/icono-miniaturas.png" alt="Icono Miniaturas" class="icono" />
         <h3>Diseño de Miniaturas</h3>
         <p>Miniaturas que destacan y generan clics.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icono-identidad.png" alt="Icono Identidad Visual" class="icono" />
         <h3>Identidad Visual</h3>
         <p>Logos, paletas de color y estética completa para marcas.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icono-redes.png" alt="Icono Diseño para Redes" class="icono" />
         <h3>Diseño para Redes</h3>
         <p>Posts, banners e historias visuales de alto impacto.</p>
       </div>
@@ -274,32 +254,15 @@
   </div>
 
   <script>
-    // Banner superior desaparece al bajar scroll y vuelve al subir
-    const banner = document.getElementById('banner');
-    let lastScroll = 0;
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-      if (currentScroll > 100) {
-        // ocultar banner
-        banner.style.top = '-260px';
-      } else {
-        // mostrar banner
-        banner.style.top = '0';
-      }
-      lastScroll = currentScroll;
-    });
-
-    // Carrusel con autoplay y cooldown de 4 segundos
+    // Carrusel automático con cooldown
     function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 4000) {
       const carrusel = document.getElementById(carruselId);
       if (!carrusel) return;
-
       let autoplayTimer = null;
       let cooldownTimer = null;
       let isDragging = false;
       let startX = 0;
       let scrollLeftStart = 0;
-
       const scrollStep = carrusel.clientWidth * 0.4 + 16;
 
       function avanzarScroll() {
@@ -383,7 +346,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       setupCarruselAutoplay('carrusel1', 7000, 4000);
-      setupCarruselAutoplay('carrusel2', 7000, 4000);
+      setupCarruselAutoplay('carrusel2', 7000, 6000);
     });
   </script>
 </body>
