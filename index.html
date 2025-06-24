@@ -3,23 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portafolio</title>
+  <title>Portafolio - Roberto Rodriguez</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="https://via.placeholder.com/16" type="image/x-icon" />
   <style>
-    body {
-      margin: 0;
-      font-family: 'Outfit', sans-serif;
-      background: #f5f5f5;
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {font-family: 'Outfit', sans-serif; background: #f5f5f5; color: #333;}
+
+    .banner {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 250px;
+      background: url('imagenes/banner.jpg') no-repeat center center/cover;
+      z-index: 1000; transition: top 0.3s ease;
     }
+
+    .contenido-principal {
+      position: relative; z-index: 1;
+      padding: 270px 40px 50px 40px; max-width: 1000px; margin: 0 auto;
+      background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px; min-height: 100vh; animation: fadeInUp 0.8s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .perfil {
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .perfil img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid white;
+      background: white;
+      box-shadow: 0 0 0 4px #f5f5f5;
+      position: relative;
+      z-index: 1002;
+    }
+
+    .perfil h1 {
+      font-size: 1.8rem;
+      margin: 0.5rem 0 0.2rem;
+    }
+
+    .perfil p {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .redes {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .redes a {
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 0.5rem;
+    }
+
+    .servicios {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1.5rem;
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 3rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scrollbar-width: none;
+    }
+
+    .servicios::-webkit-scrollbar {
+      display: none;
+    }
+
+    .servicio {
+      background: white;
+      padding: 2rem 1.5rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      width: 280px;
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .servicio .icono {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 64px;
+      height: 64px;
+    }
+
+    .servicio h3 {
+      margin-top: 50px;
+      font-size: 1.3rem;
+    }
+
     .carrusel-container {
       overflow: hidden;
-      margin: 2rem auto;
-      max-width: 800px;
-      padding: 1rem;
-      background: white;
-      border-radius: 10px;
+      margin-bottom: 3rem;
     }
+
     .carrusel {
       display: flex;
       gap: 1rem;
@@ -27,168 +118,266 @@
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       padding-bottom: 1rem;
-      scrollbar-width: none;
       cursor: grab;
+      scrollbar-width: none;
     }
+
     .carrusel::-webkit-scrollbar {
       display: none;
     }
+
     .carrusel.dragging {
       cursor: grabbing;
       scroll-behavior: auto;
     }
+
     .miniatura {
       flex: 0 0 70%;
       scroll-snap-align: center;
+      position: relative;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
       opacity: 0.6;
       transform: scale(0.95);
-      transition: transform 0.3s, opacity 0.3s;
+      user-select: none;
     }
+
     .miniatura.activo {
-      opacity: 1;
-      transform: scale(1.05);
+      opacity: 1 !important;
+      transform: scale(1.05) !important;
+      z-index: 2;
     }
+
     .miniatura img {
       width: 100%;
-      border-radius: 10px;
+      height: auto;
+      border-radius: 12px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      user-select: none;
       pointer-events: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: #666;
+      border-top: 1px solid #ddd;
+      margin-bottom: 2rem;
+    }
+
+    .btn-contacto {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25d366;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.3s;
+    }
+
+    .btn-contacto:hover {
+      background: #1ebe5d;
     }
   </style>
 </head>
 <body>
+  <div class="banner" id="banner"></div>
 
-<div class="carrusel-container">
-  <div class="carrusel" id="carrusel1">
-    <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
-    <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
-    <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
-    <div class="miniatura"><img src="imagenes/thumb4.jpg" alt="Miniatura 4"></div>
-    <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura 5"></div>
+  <div class="contenido-principal">
+    <div class="perfil">
+      <img src="imagenes/logo.jpg" alt="Logo de Roberto Rodriguez" />
+      <h1>Roberto Aarón Rodriguez Rodriguez</h1>
+      <p>Diseñador gráfico apasionado por comunicar con impacto visual.</p>
+    </div>
+
+    <div class="redes">
+      <a href="https://www.instagram.com/shilouettt/" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@shilouet_" target="_blank">TikTok</a>
+      <a href="mailto:robertossjdos6@gmail.com">Correo</a>
+    </div>
+
+    <section class="servicios">
+      <div class="servicio">
+        <img src="imagenes/icono-miniaturas.png" alt="Icono Miniaturas" class="icono" />
+        <h3>Diseño de Miniaturas</h3>
+        <p>Miniaturas que destacan y generan clics.</p>
+      </div>
+      <div class="servicio">
+        <img src="imagenes/icono-identidad.png" alt="Icono Identidad Visual" class="icono" />
+        <h3>Identidad Visual</h3>
+        <p>Logos, paletas de color y estética completa para marcas.</p>
+      </div>
+      <div class="servicio">
+        <img src="imagenes/icono-redes.png" alt="Icono Diseño para Redes" class="icono" />
+        <h3>Diseño para Redes</h3>
+        <p>Posts, banners e historias visuales de alto impacto.</p>
+      </div>
+    </section>
+
+    <div class="carrusel-container">
+      <div class="carrusel" id="carrusel1">
+        <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
+        <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
+        <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
+        <div class="miniatura"><img src="imagenes/thumb4.jpg" alt="Miniatura 4"></div>
+        <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura 5"></div>
+      </div>
+    </div>
+
+    <div class="carrusel-container">
+      <div class="carrusel" id="carrusel2">
+        <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
+        <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
+        <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8"></div>
+        <div class="miniatura"><img src="imagenes/thumb9.jpg" alt="Miniatura 9"></div>
+        <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10"></div>
+      </div>
+    </div>
+
+    <footer>
+      Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
+    </footer>
   </div>
-</div>
 
-<div class="carrusel-container">
-  <div class="carrusel" id="carrusel2">
-    <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
-    <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
-    <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8"></div>
-    <div class="miniatura"><img src="imagenes/thumb9.jpg" alt="Miniatura 9"></div>
-    <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10"></div>
-  </div>
-</div>
+  <a href="https://wa.me/5219213058163" class="btn-contacto" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M20.52 3.48a11.93 11.93 0 00-16.9 0 11.93 11.93 0 00-3.5 8.45c0 2.24.59 4.3 1.62 6.14L2 22l4.03-1.66a11.92 11.92 0 005.46 1.35h.01c6.62 0 12-5.38 12-12a11.93 11.93 0 00-3.98-8.21z"/></svg>
+    Contáctame!
+  </a>
 
-<script>
-  function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 3000) {
-    const carrusel = document.getElementById(carruselId);
-    if (!carrusel) return;
+  <script>
+    const banner = document.getElementById('banner');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      banner.style.top = scrollTop > 100 ? '-260px' : '0';
+    });
 
-    let autoplayTimer = null;
-    let cooldownTimer = null;
-    let isDragging = false;
-    let startX = 0;
-    let scrollLeftStart = 0;
-    const scrollStep = carrusel.clientWidth * 0.4 + 16;
+    function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 3000) {
+      const carrusel = document.getElementById(carruselId);
+      if (!carrusel) return;
 
-    function avanzarScroll() {
-      const maxScroll = carrusel.scrollWidth - carrusel.clientWidth;
-      let nextScroll = carrusel.scrollLeft + scrollStep;
-      if (nextScroll > maxScroll - 5) nextScroll = 0;
-      carrusel.scrollTo({ left: nextScroll, behavior: 'smooth' });
-    }
+      let autoplayTimer = null;
+      let cooldownTimer = null;
+      let isDragging = false;
+      let startX = 0;
+      let scrollLeftStart = 0;
+      const scrollStep = carrusel.clientWidth * 0.4 + 16;
 
-    function iniciarAutoplay() {
-      if (!autoplayTimer) {
+      function avanzarScroll() {
+        const maxScroll = carrusel.scrollWidth - carrusel.clientWidth;
+        let nextScroll = carrusel.scrollLeft + scrollStep;
+        if (nextScroll >= maxScroll - 1) {
+          carrusel.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          carrusel.scrollTo({ left: nextScroll, behavior: 'smooth' });
+        }
+      }
+
+      function iniciarAutoplay() {
+        if (autoplayTimer) return;
         autoplayTimer = setInterval(avanzarScroll, interval);
       }
+
+      function pararAutoplay() {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+
+      function reiniciarConCooldown() {
+        clearTimeout(cooldownTimer);
+        cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+      }
+
+      carrusel.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.pageX - carrusel.offsetLeft;
+        scrollLeftStart = carrusel.scrollLeft;
+        pararAutoplay();
+        carrusel.classList.add('dragging');
+      });
+
+      carrusel.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          reiniciarConCooldown();
+        }
+      });
+
+      carrusel.addEventListener('mouseleave', () => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          reiniciarConCooldown();
+        }
+      });
+
+      carrusel.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - carrusel.offsetLeft;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
+      });
+
+      carrusel.addEventListener('touchstart', e => {
+        isDragging = true;
+        startX = e.touches[0].pageX - carrusel.offsetLeft;
+        scrollLeftStart = carrusel.scrollLeft;
+        pararAutoplay();
+      });
+
+      carrusel.addEventListener('touchend', () => {
+        if (isDragging) {
+          isDragging = false;
+          reiniciarConCooldown();
+        }
+      });
+
+      carrusel.addEventListener('touchmove', e => {
+        if (!isDragging) return;
+        const x = e.touches[0].pageX - carrusel.offsetLeft;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
+      });
+
+      carrusel.addEventListener('scroll', () => destacarMiniaturaCentral(carrusel));
+      destacarMiniaturaCentral(carrusel);
+      iniciarAutoplay();
     }
 
-    function pararAutoplay() {
-      clearInterval(autoplayTimer);
-      autoplayTimer = null;
+    function destacarMiniaturaCentral(carrusel) {
+      const items = [...carrusel.querySelectorAll('.miniatura')];
+      const center = carrusel.scrollLeft + carrusel.offsetWidth / 2;
+      let closest = null, minDist = Infinity;
+
+      items.forEach(item => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const dist = Math.abs(center - itemCenter);
+        if (dist < minDist) {
+          closest = item;
+          minDist = dist;
+        }
+      });
+
+      items.forEach(item => item.classList.remove('activo'));
+      if (closest) closest.classList.add('activo');
     }
 
-    carrusel.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      startX = e.pageX - carrusel.offsetLeft;
-      scrollLeftStart = carrusel.scrollLeft;
-      pararAutoplay();
-      carrusel.classList.add('dragging');
+    document.addEventListener('DOMContentLoaded', () => {
+      setupCarruselAutoplay('carrusel1');
+      setupCarruselAutoplay('carrusel2');
     });
-
-    carrusel.addEventListener('mouseup', () => {
-      if (isDragging) {
-        isDragging = false;
-        carrusel.classList.remove('dragging');
-        cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
-      }
-    });
-
-    carrusel.addEventListener('mouseleave', () => {
-      if (isDragging) {
-        isDragging = false;
-        carrusel.classList.remove('dragging');
-        cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
-      }
-    });
-
-    carrusel.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      const x = e.pageX - carrusel.offsetLeft;
-      const walk = startX - x;
-      carrusel.scrollLeft = scrollLeftStart + walk;
-    });
-
-    carrusel.addEventListener('touchstart', (e) => {
-      isDragging = true;
-      startX = e.touches[0].pageX - carrusel.offsetLeft;
-      scrollLeftStart = carrusel.scrollLeft;
-      pararAutoplay();
-    });
-
-    carrusel.addEventListener('touchend', () => {
-      if (isDragging) {
-        isDragging = false;
-        cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
-      }
-    });
-
-    carrusel.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      const x = e.touches[0].pageX - carrusel.offsetLeft;
-      const walk = startX - x;
-      carrusel.scrollLeft = scrollLeftStart + walk;
-    });
-
-    carrusel.addEventListener('scroll', () => destacarMiniaturaCentral(carrusel));
-
-    destacarMiniaturaCentral(carrusel);
-    iniciarAutoplay();
-  }
-
-  function destacarMiniaturaCentral(carrusel) {
-    const items = [...carrusel.querySelectorAll('.miniatura')];
-    const center = carrusel.scrollLeft + carrusel.offsetWidth / 2;
-    let closest = null, minDist = Infinity;
-
-    items.forEach(item => {
-      const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-      const dist = Math.abs(center - itemCenter);
-      if (dist < minDist) {
-        closest = item;
-        minDist = dist;
-      }
-    });
-
-    items.forEach(item => item.classList.remove('activo'));
-    if (closest) closest.classList.add('activo');
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    setupCarruselAutoplay('carrusel1');
-    setupCarruselAutoplay('carrusel2');
-  });
-</script>
+  </script>
 </body>
 </html>
