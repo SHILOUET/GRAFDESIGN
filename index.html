@@ -89,11 +89,11 @@
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       width: 280px;
-      position: relative; /* para posicionar el icono */
+      position: relative;
     }
     .icono-servicio {
-      width: 40px;
-      height: 40px;
+      width: 100px;
+      height: 100px;
       position: absolute;
       top: 1rem;
       left: 1rem;
@@ -205,6 +205,12 @@
       .banner-lateral {
         display: none;
       }
+      .icono-servicio {
+        width: 70px;
+        height: 70px;
+        top: 0.7rem;
+        left: 0.7rem;
+      }
     }
   </style>
 </head>
@@ -313,3 +319,77 @@
         if (autoplayTimer) {
           clearInterval(autoplayTimer);
           autoplayTimer = null;
+        }
+        if (cooldownTimer) {
+          clearTimeout(cooldownTimer);
+          cooldownTimer = null;
+        }
+      }
+
+      // Eventos mouse
+      carrusel.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.pageX - carrusel.offsetLeft;
+        scrollLeftStart = carrusel.scrollLeft;
+        pararAutoplay();
+        carrusel.classList.add('dragging');
+      });
+
+      carrusel.addEventListener('mouseleave', e => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
+      });
+
+      carrusel.addEventListener('mouseup', e => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
+      });
+
+      carrusel.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - carrusel.offsetLeft;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
+      });
+
+      // Eventos táctiles
+      carrusel.addEventListener('touchstart', e => {
+        isDragging = true;
+        startX = e.touches[0].pageX - carrusel.offsetLeft;
+        scrollLeftStart = carrusel.scrollLeft;
+        pararAutoplay();
+      });
+
+      carrusel.addEventListener('touchend', e => {
+        if (isDragging) {
+          isDragging = false;
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
+      });
+
+      carrusel.addEventListener('touchmove', e => {
+        if (!isDragging) return;
+        const x = e.touches[0].pageX - carrusel.offsetLeft;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
+      });
+
+      // Iniciar autoplay al cargar la página
+      iniciarAutoplay();
+    }
+
+    // Inicializar ambos carruseles
+    document.addEventListener('DOMContentLoaded', () => {
+      setupCarruselAutoplay('carrusel1', 9000, 4000);
+      setupCarruselAutoplay('carrusel2', 9000, 6000);
+    });
+  </script>
+</body>
+</html>
