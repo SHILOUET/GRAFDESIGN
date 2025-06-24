@@ -236,6 +236,17 @@
   transition: transform 0.3s;
 }
 
+.banner-lateral {
+  position: fixed;
+  top: 100px;
+  width: 160px;
+  height: auto;
+  z-index: 999;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
 .banner-lateral.izquierdo {
   left: 10px;
 }
@@ -243,6 +254,7 @@
 .banner-lateral.derecho {
   right: 10px;
 }
+
 
 /* Esconder en móviles o pantallas pequeñas */
 @media screen and (max-width: 1024px) {
