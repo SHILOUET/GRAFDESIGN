@@ -26,9 +26,9 @@
       border-radius: 8px;
       z-index: 1100; /* por encima del banner */
       user-select: none;
-      /* pointer-events: none; /* ELIMINAR ESTO para que sea clickeable */
       cursor: pointer; /* Añadir cursor de puntero */
       text-decoration: none; /* Eliminar subrayado si se hace <a> */
+      color: inherit; /* Para que el color del texto no cambie si es un enlace */
     }
 
     .ver-mas .cuadro-texto {
@@ -226,7 +226,6 @@
         display: none;
       }
     }
-
   </style>
 </head>
 <body>
@@ -235,7 +234,7 @@
 <img src="imagenes/izquierdo.jpg" alt="Promo Izquierda" class="banner-lateral izquierdo" />
 <img src="imagenes/banner-lateral-derecho.jpg" alt="Promo Derecha" class="banner-lateral derecho" />
 
-<a href="#seccion-carruseles" class="ver-mas">
+<div class="ver-mas" id="verMasBtn">
   <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
     <path d="M12 16l-6-6h12z"/>
   </svg>
@@ -243,7 +242,7 @@
   <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
     <path d="M12 16l-6-6h12z"/>
   </svg>
-</a>
+</div>
 
   <div class="contenido-principal">
     <div class="perfil">
@@ -447,6 +446,26 @@
     document.addEventListener('DOMContentLoaded', () => {
       setupCarruselAutoplay('carrusel1', 4000, 2000, 0);       // Inicia de inmediato
       setupCarruselAutoplay('carrusel2', 4000, 2000, 800);      // Retraso de 800ms
+
+      // NUEVO CÓDIGO PARA EL BOTÓN "VER MÁS TRABAJOS"
+      const verMasBtn = document.getElementById('verMasBtn');
+      const seccionCarruseles = document.getElementById('seccion-carruseles');
+      const offset = 50; // Ajusta este valor para el espacio deseado (en píxeles)
+
+      if (verMasBtn && seccionCarruseles) {
+        verMasBtn.addEventListener('click', (event) => {
+          event.preventDefault(); // Evita el comportamiento predeterminado del enlace si fuera un <a>
+
+          // Calcula la posición a la que queremos desplazar la página
+          const targetPosition = seccionCarruseles.getBoundingClientRect().top + window.pageYOffset - offset;
+
+          // Desplaza la página suavemente
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        });
+      }
     });
   </script>
 </body>
