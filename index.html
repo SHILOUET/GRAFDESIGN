@@ -12,20 +12,20 @@
       font-family: 'Segoe UI', sans-serif;
       background: #f5f5f5;
       color: #333;
-      overflow-x: hidden;
     }
     .banner {
-      width: 100%;
+      width: 100vw;
       height: 250px;
       background: url('imagenes/banner.jpg') no-repeat center center/cover;
       position: relative;
       z-index: 0;
+      margin: 0; /* Sin márgenes para que cubra todo el ancho */
     }
     .contenido-principal {
       position: relative;
       z-index: 2;
-      padding: 0 1rem;
-      max-width: 1000px;
+      padding: 0 20px; /* Ajustado para no tener margen lateral por banners */
+      max-width: 1200px;
       margin: 0 auto;
     }
     .perfil {
@@ -57,7 +57,25 @@
       text-decoration: none;
       font-weight: bold;
       margin: 0 0.5rem;
+      position: relative;
+      padding-left: 25px;
+      display: inline-block;
+      vertical-align: middle;
     }
+    /* Iconos pequeños al lado de enlaces redes */
+    .redes a.instagram {
+      background: url('imagenes/icon-instagram.svg') no-repeat left center;
+      background-size: 18px 18px;
+    }
+    .redes a.tiktok {
+      background: url('imagenes/icon-tiktok.svg') no-repeat left center;
+      background-size: 18px 18px;
+    }
+    .redes a.correo {
+      background: url('imagenes/icon-mail.svg') no-repeat left center;
+      background-size: 18px 18px;
+    }
+
     .servicios {
       max-width: 1000px;
       margin: 3rem auto;
@@ -65,19 +83,39 @@
       flex-wrap: wrap;
       gap: 1.5rem;
       justify-content: center;
-      text-align: center;
+      text-align: left;
       padding: 0 1rem;
+      position: relative;
     }
     .servicio {
       background: white;
-      padding: 1.5rem;
+      padding: 2.2rem 1.5rem 1.5rem 1.5rem;
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       width: 280px;
       position: relative;
+      user-select: none;
+    }
+    /* Icono PNG arriba a la izquierda */
+    .servicio .icono {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 48px;   /* Tamaño aumentado */
+      height: 48px;
+      pointer-events: none;
+      user-select: none;
     }
     .servicio h3 {
-      margin-bottom: 0.5rem;
+      margin-top: 60px; /* espacio para icono */
+      font-size: 1.25rem;
+      margin-bottom: 0.8rem;
+      color: #222;
+    }
+    .servicio p {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.4;
     }
     .carrusel-container {
       max-width: 1000px;
@@ -99,6 +137,7 @@
       cursor: grabbing;
       scroll-behavior: auto;
     }
+    /* Barra de scroll roja visible y custom */
     .carrusel::-webkit-scrollbar {
       height: 8px;
       background: transparent;
@@ -141,6 +180,7 @@
       color: #666;
       border-top: 1px solid #ddd;
       margin-top: 3rem;
+      user-select: none;
     }
     @media (max-width: 768px) {
       .perfil img {
@@ -155,6 +195,10 @@
       }
       .servicio {
         width: 100%;
+      }
+      .contenido-principal {
+        padding: 0 1rem;
+        max-width: 100%;
       }
     }
   </style>
@@ -172,28 +216,31 @@
     </div>
 
     <div class="redes">
-      <a href="https://www.instagram.com/shilouettt/" target="_blank" aria-label="Instagram">Instagram</a>
-      <a href="https://www.tiktok.com/@shilouet_" target="_blank" aria-label="TikTok">TikTok</a>
-      <a href="mailto:robertossjdos6@gmail.com" aria-label="Correo">Correo</a>
+      <a href="https://www.instagram.com/shilouettt/" target="_blank" class="instagram" aria-label="Instagram de Roberto">Instagram</a>
+      <a href="https://www.tiktok.com/@shilouet_" target="_blank" class="tiktok" aria-label="TikTok de Roberto">TikTok</a>
+      <a href="mailto:robertossjdos6@gmail.com" class="correo" aria-label="Correo de Roberto">Correo</a>
     </div>
 
     <section class="servicios">
       <div class="servicio">
+        <img src="imagenes/icono-miniaturas.png" alt="Icono Diseño Miniaturas" class="icono" />
         <h3>Diseño de Miniaturas</h3>
         <p>Miniaturas que destacan y generan clics.</p>
       </div>
       <div class="servicio">
+        <img src="imagenes/icono-identidad.png" alt="Icono Identidad Visual" class="icono" />
         <h3>Identidad Visual</h3>
         <p>Logos, paletas de color y estética completa para marcas.</p>
       </div>
       <div class="servicio">
+        <img src="imagenes/icono-redes.png" alt="Icono Diseño para Redes" class="icono" />
         <h3>Diseño para Redes</h3>
         <p>Posts, banners e historias visuales de alto impacto.</p>
       </div>
     </section>
 
     <div class="carrusel-container">
-      <div class="carrusel" id="carrusel1">
+      <div class="carrusel" id="carrusel1" tabindex="0">
         <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
         <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
         <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
@@ -203,7 +250,7 @@
     </div>
 
     <div class="carrusel-container">
-      <div class="carrusel" id="carrusel2">
+      <div class="carrusel" id="carrusel2" tabindex="0">
         <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
         <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
         <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8"></div>
@@ -315,6 +362,5 @@
       setupCarruselAutoplay('carrusel2', 7000, 6000);
     });
   </script>
-
 </body>
 </html>
