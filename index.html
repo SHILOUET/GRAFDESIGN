@@ -14,7 +14,7 @@
       color: #333;
     }
     .banner {
-      width: 100%;
+      width: 100vw;
       height: 250px;
       background: url('imagenes/banner.jpg') no-repeat center center/cover;
       position: relative;
@@ -71,7 +71,17 @@
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       width: 280px;
+      position: relative;
     }
+    /* Iconos en esquina superior izquierda de cada servicio */
+    .servicio svg, .servicio img.icono-png {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 48px;
+      height: 48px;
+    }
+
     .carrusel-container {
       max-width: 1000px;
       margin: 3rem auto;
@@ -92,13 +102,9 @@
       cursor: grabbing;
       scroll-behavior: auto;
     }
+    /* Ocultar scrollbar */
     .carrusel::-webkit-scrollbar {
-      height: 8px;
-      background: transparent;
-    }
-    .carrusel::-webkit-scrollbar-thumb {
-      background-color: red;
-      border-radius: 10px;
+      display: none;
     }
     .miniatura {
       flex: 0 0 70%;
@@ -110,6 +116,7 @@
       transform: scale(0.95);
       user-select: none;
     }
+    /* Miniaturas activas */
     .miniatura:nth-child(odd) {
       opacity: 1;
       transform: scale(1);
@@ -173,14 +180,20 @@
 
     <section class="servicios">
       <div class="servicio">
+        <!-- Icono SVG o PNG para Diseño de Miniaturas -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#FF5722" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm0 18a7.992 7.992 0 0 1-5.657-2.343A8.05 8.05 0 0 1 4 12a7.97 7.97 0 0 1 2.343-5.657A7.993 7.993 0 0 1 12 4a7.98 7.98 0 0 1 5.657 2.343A7.985 7.985 0 0 1 20 12a7.98 7.98 0 0 1-2.343 5.657A7.992 7.992 0 0 1 12 20Z"/></svg>
         <h3>Diseño de Miniaturas</h3>
         <p>Miniaturas que destacan y generan clics.</p>
       </div>
       <div class="servicio">
+        <!-- Icono SVG o PNG para Identidad Visual -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#3F51B5" viewBox="0 0 24 24"><path d="M4 6h16v12H4z" opacity=".3"/><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 14H4V6h16Z"/></svg>
         <h3>Identidad Visual</h3>
         <p>Logos, paletas de color y estética completa para marcas.</p>
       </div>
       <div class="servicio">
+        <!-- Icono SVG o PNG para Diseño para Redes -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#009688" viewBox="0 0 24 24"><path d="M3 17h18v2H3zm3-9h12v2H6z"/></svg>
         <h3>Diseño para Redes</h3>
         <p>Posts, banners e historias visuales de alto impacto.</p>
       </div>
