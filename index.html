@@ -24,12 +24,12 @@
       position: fixed;
       top: 0;
       bottom: 0;
-      width: 120px; /* Sangrado gordo */
+      width: 120px;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       z-index: 1;
-      pointer-events: none; /* No bloquea contenido */
+      pointer-events: none;
     }
     .banner-lateral.izquierda {
       left: 0;
@@ -42,7 +42,7 @@
     .contenido-principal {
       position: relative;
       z-index: 2;
-      padding: 0 130px; /* espacio para que no tape los banners laterales */
+      padding: 0 130px;
     }
     .perfil {
       text-align: center;
@@ -90,6 +90,61 @@
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       width: 280px;
+    }
+    .carrusel-container {
+      max-width: 1000px;
+      margin: 3rem auto;
+      overflow: hidden;
+      padding: 0 1rem;
+    }
+    .carrusel {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding-bottom: 1rem;
+      scrollbar-width: none;
+      cursor: grab;
+    }
+    .carrusel.dragging {
+      cursor: grabbing;
+      scroll-behavior: auto;
+    }
+    .carrusel::-webkit-scrollbar {
+      height: 8px;
+      background: transparent;
+    }
+    .carrusel::-webkit-scrollbar-thumb {
+      background-color: red;
+      border-radius: 10px;
+    }
+    .miniatura {
+      flex: 0 0 70%;
+      scroll-snap-align: center;
+      position: relative;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
+      opacity: 0.8;
+      transform: scale(0.95);
+      user-select: none;
+    }
+    .miniatura:nth-child(odd) {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .miniatura:hover {
+      transform: scale(1.05) !important;
+      opacity: 1 !important;
+      z-index: 2;
+    }
+    .miniatura img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      user-select: none;
+      pointer-events: none;
     }
     footer {
       text-align: center;
@@ -156,9 +211,127 @@
       </div>
     </section>
 
+    <div class="carrusel-container">
+      <div class="carrusel" id="carrusel1">
+        <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
+        <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
+        <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
+        <div class="miniatura"><img src="imagenes/thumb4.jpg" alt="Miniatura 4"></div>
+        <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura 5"></div>
+      </div>
+    </div>
+
+    <div class="carrusel-container">
+      <div class="carrusel" id="carrusel2">
+        <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
+        <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
+        <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8"></div>
+        <div class="miniatura"><img src="imagenes/thumb9.jpg" alt="Miniatura 9"></div>
+        <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10"></div>
+      </div>
+    </div>
+
     <footer>
       Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
     </footer>
   </div>
+
+  <script>
+    function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 4000) {
+      const carrusel = document.getElementById(carruselId);
+      if (!carrusel) return;
+
+      let autoplayTimer = null;
+      let cooldownTimer = null;
+      let isDragging = false;
+      let startX = 0;
+      let scrollLeftStart = 0;
+
+      const scrollStep = carrusel.clientWidth * 0.4 + 16;
+
+      function avanzarScroll() {
+        const maxScroll = carrusel.scrollWidth - carrusel.clientWidth;
+        let nextScroll = carrusel.scrollLeft + scrollStep;
+        if (nextScroll > maxScroll) nextScroll = 0;
+        carrusel.scrollTo({ left: nextScroll, behavior: 'smooth' });
+      }
+
+      function iniciarAutoplay() {
+        if (autoplayTimer) return;
+        autoplayTimer = setInterval(avanzarScroll, interval);
+      }
+
+      function pararAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+        if (cooldownTimer) {
+          clearTimeout(cooldownTimer);
+          cooldownTimer = null;
+        }
+      }
+
+      carrusel.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.pageX - carrusel.offsetLeft;
+        scrollLeftStart = carrusel.scrollLeft;
+        pararAutoplay();
+        carrusel.classList.add('dragging');
+      });
+
+      carrusel.addEventListener('mouseleave', () => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
+      });
+
+      carrusel.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
+      });
+
+      carrusel.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - carrusel.offsetLeft;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
+      });
+
+      carrusel.addEventListener('touchstart', e => {
+        isDragging = true;
+        startX = e.touches[0].pageX - carrusel.offsetLeft;
+        scrollLeftStart = carrusel.scrollLeft;
+        pararAutoplay();
+      });
+
+      carrusel.addEventListener('touchend', () => {
+        if (isDragging) {
+          isDragging = false;
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
+      });
+
+      carrusel.addEventListener('touchmove', e => {
+        if (!isDragging) return;
+        const x = e.touches[0].pageX - carrusel.offsetLeft;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
+      });
+
+      iniciarAutoplay();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setupCarruselAutoplay('carrusel1', 7000, 4000);
+      setupCarruselAutoplay('carrusel2', 7000, 6000);
+    });
+  </script>
 </body>
 </html>
