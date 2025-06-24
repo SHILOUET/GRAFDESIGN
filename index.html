@@ -234,7 +234,7 @@
       banner.style.top = scrollTop > 100 ? '-260px' : '0';
     });
 
-    function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 3000) {
+    function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 2000, delayInicio = 0) {
       const carrusel = document.getElementById(carruselId);
       if (!carrusel) return;
 
@@ -338,7 +338,7 @@
 
       carrusel.addEventListener('scroll', () => destacarMiniaturaCentral(carrusel));
       destacarMiniaturaCentral(carrusel);
-      iniciarAutoplay();
+      setTimeout(() => iniciarAutoplay(), delayInicio);
     }
 
     function destacarMiniaturaCentral(carrusel) {
@@ -358,8 +358,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      setupCarruselAutoplay('carrusel1');
-      setupCarruselAutoplay('carrusel2');
+      setupCarruselAutoplay('carrusel1', 7000, 2000, 0);       // Inicia de inmediato
+      setupCarruselAutoplay('carrusel2', 7000, 2000, 800);     // Retraso de 800ms
     });
   </script>
 </body>
