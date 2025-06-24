@@ -18,7 +18,7 @@
       height: 250px;
       background: url('imagenes/banner.jpg') no-repeat center center/cover;
       position: relative;
-      z-index: 0;
+      z-index: 2;
     }
     .banner-lateral {
       position: fixed;
@@ -41,7 +41,7 @@
     }
     .contenido-principal {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       padding: 0 130px;
     }
     .perfil {
@@ -69,12 +69,11 @@
       margin-top: 1rem;
     }
     .redes a {
-      display: inline-block;
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
       margin: 0 0.5rem;
-    }
-    .redes a img {
-      width: 32px;
-      height: 32px;
+      font-family: 'Segoe UI', sans-serif;
     }
     .servicios {
       max-width: 1000px;
@@ -101,16 +100,16 @@
       left: 10px;
       width: 48px;
       height: 48px;
-      background-size: contain;
+      background-size: cover;
       background-repeat: no-repeat;
     }
-    .servicio:nth-of-type(1)::before {
+    .servicio:nth-child(1)::before {
       background-image: url('imagenes/icono-miniaturas.png');
     }
-    .servicio:nth-of-type(2)::before {
+    .servicio:nth-child(2)::before {
       background-image: url('imagenes/icono-identidad.png');
     }
-    .servicio:nth-of-type(3)::before {
+    .servicio:nth-child(3)::before {
       background-image: url('imagenes/icono-redes.png');
     }
     .carrusel-container {
@@ -134,7 +133,7 @@
       scroll-behavior: auto;
     }
     .carrusel::-webkit-scrollbar {
-      display: none;
+      height: 0;
     }
     .miniatura {
       flex: 0 0 70%;
@@ -145,10 +144,6 @@
       opacity: 0.8;
       transform: scale(0.95);
       user-select: none;
-    }
-    .miniatura:nth-child(odd) {
-      opacity: 1;
-      transform: scale(1);
     }
     .miniatura:hover {
       transform: scale(1.05) !important;
@@ -169,7 +164,6 @@
       font-size: 0.9rem;
       color: #666;
       border-top: 1px solid #ddd;
-      margin-top: 3rem;
     }
     @media (max-width: 768px) {
       .perfil img {
@@ -197,22 +191,18 @@
 <body>
   <div class="banner-lateral izquierda"></div>
   <div class="banner-lateral derecha"></div>
-
   <div class="contenido-principal">
     <div class="banner"></div>
-
     <div class="perfil">
       <img src="imagenes/logo.jpg" alt="Logo de Roberto Rodriguez" />
       <h1>Roberto Aaron Rodriguez Rodriguez</h1>
       <p>Diseñador gráfico apasionado por comunicar con impacto visual.</p>
     </div>
-
     <div class="redes">
-      <a href="https://www.instagram.com/shilouettt/" target="_blank"><img src="imagenes/instagram.png" alt="Instagram"></a>
-      <a href="https://www.tiktok.com/@shilouet_" target="_blank"><img src="imagenes/tiktok.png" alt="TikTok"></a>
-      <a href="mailto:robertossjdos6@gmail.com"><img src="imagenes/correo.png" alt="Correo"></a>
+      <a href="https://www.instagram.com/shilouettt/" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@shilouet_" target="_blank">TikTok</a>
+      <a href="mailto:robertossjdos6@gmail.com">Correo</a>
     </div>
-
     <section class="servicios">
       <div class="servicio">
         <h3>Diseño de Miniaturas</h3>
@@ -227,7 +217,6 @@
         <p>Posts, banners e historias visuales de alto impacto.</p>
       </div>
     </section>
-
     <div class="carrusel-container">
       <div class="carrusel" id="carrusel1">
         <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
@@ -237,7 +226,6 @@
         <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura 5"></div>
       </div>
     </div>
-
     <div class="carrusel-container">
       <div class="carrusel" id="carrusel2">
         <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
@@ -247,22 +235,21 @@
         <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10"></div>
       </div>
     </div>
-
     <footer>
       Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
     </footer>
   </div>
-
   <script>
-    // Carrusel automático con cooldown
     function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 4000) {
       const carrusel = document.getElementById(carruselId);
       if (!carrusel) return;
+
       let autoplayTimer = null;
       let cooldownTimer = null;
       let isDragging = false;
       let startX = 0;
       let scrollLeftStart = 0;
+
       const scrollStep = carrusel.clientWidth * 0.4 + 16;
 
       function avanzarScroll() {
@@ -346,7 +333,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       setupCarruselAutoplay('carrusel1', 7000, 4000);
-      setupCarruselAutoplay('carrusel2', 7000, 6000);
+      setupCarruselAutoplay('carrusel2', 7000, 4000);
     });
   </script>
 </body>
