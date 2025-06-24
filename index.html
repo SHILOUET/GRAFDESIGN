@@ -280,32 +280,32 @@
     });
 
     // Función para autoplay de carrusel horizontal
-    function autoplayCarrusel(carruselId, interval = 3000) {
+    function autoplayCarrusel(carruselId, interval = 6000, delayStart = 0) {
       const carrusel = document.getElementById(carruselId);
-      let scrollAmount = 0;
-
       if (!carrusel) return;
 
       const maxScrollLeft = carrusel.scrollWidth - carrusel.clientWidth;
+      let scrollAmount = 0;
 
-      setInterval(() => {
-        // Avanzar scroll hacia la derecha
-        scrollAmount += carrusel.clientWidth * 0.7 + 16; // 70% ancho miniatura + gap aprox
+      setTimeout(() => {
+        setInterval(() => {
+          // Avanzar scroll hacia la derecha, distancia menor para deslizamiento más lento
+          scrollAmount += carrusel.clientWidth * 0.4 + 16; // 40% ancho miniatura + gap
 
-        if (scrollAmount >= maxScrollLeft) {
-          // Si llegamos al final, volvemos al inicio
-          scrollAmount = 0;
-        }
+          if (scrollAmount >= maxScrollLeft) {
+            scrollAmount = 0;
+          }
 
-        carrusel.scrollTo({
-          left: scrollAmount,
-          behavior: 'smooth'
-        });
-      }, interval);
+          carrusel.scrollTo({
+            left: scrollAmount,
+            behavior: 'smooth'
+          });
+        }, interval);
+      }, delayStart);
     }
 
-    autoplayCarrusel('carrusel1', 3000);
-    autoplayCarrusel('carrusel2', 3000);
+    autoplayCarrusel('carrusel1', 6000, 0);     // arranque inmediato, 6 seg entre slides
+    autoplayCarrusel('carrusel2', 6000, 3000);  // arranque con 3 seg de retraso, 6 seg entre slides
   </script>
 </body>
 </html>
