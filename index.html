@@ -2,97 +2,127 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portafolio - Roberto Rodriguez</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    * {margin: 0; padding: 0; box-sizing: border-box;}
-    body {font-family: 'Outfit', sans-serif; background: #f5f5f5; color: #333;}
-    .banner {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 250px;
-      background: url('imagenes/banner.jpg') no-repeat center center/cover;
-      z-index: 1000; transition: top 0.3s ease;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f5f5f5;
+      color: #333;
     }
+
+    /* Banner fijo arriba */
+    .banner {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 250px;
+      background: url('imagenes/banner.jpg') center/cover no-repeat;
+      z-index: 1000;
+      transition: top 0.3s ease;
+    }
+
+    /* Botón ver más */
     .ver-mas {
       position: fixed;
-      top: 10px;
+      top: 15px;
       left: 50%;
       transform: translateX(-50%);
+      background: rgba(50, 50, 50, 0.7);
+      color: white;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1100;
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(50, 50, 50, 0.5);
-      padding: 6px 12px;
-      border-radius: 8px;
-      z-index: 1100;
+      gap: 6px;
       user-select: none;
-      cursor: pointer;
     }
-    .ver-mas .cuadro-texto {
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.9rem;
-      white-space: nowrap;
-      letter-spacing: 1px;
-    }
-    .ver-mas .flecha {
-      transform: rotate(0deg);
+
+    /* Flechas abajo */
+    .flecha {
+      width: 20px;
+      height: 20px;
+      fill: white;
       opacity: 0.8;
+      transform: rotate(0deg);
     }
+
+    /* Contenido principal con padding para que no quede debajo del banner */
     .contenido-principal {
-      position: relative; z-index: 1;
-      padding: 270px 40px 50px 40px; max-width: 1000px; margin: 0 auto;
-      background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 10px; min-height: 100vh; animation: fadeInUp 0.8s ease;
+      padding: 270px 20px 50px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      min-height: 100vh;
     }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    /* Carrusel simplificado */
+    #trabajos {
+      margin-top: 40px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 10px;
     }
-    /* ... Resto del CSS permanece igual ... */
+    #trabajos .miniatura {
+      flex: 0 0 200px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    #trabajos .miniatura img {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
-  <div class="banner" id="banner"></div>
+
+  <div class="banner"></div>
+
   <div class="ver-mas" id="verMasBtn">
-    <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
-      <path d="M12 16l-6-6h12z"/>
-    </svg>
-    <div class="cuadro-texto">BAJA PARA VER MÁS TRABAJOS</div>
-    <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
-      <path d="M12 16l-6-6h12z"/>
-    </svg>
+    <svg class="flecha" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 16l-6-6h12z"/></svg>
+    <span>BAJA PARA VER MÁS TRABAJOS</span>
+    <svg class="flecha" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 16l-6-6h12z"/></svg>
   </div>
 
   <div class="contenido-principal">
-    <!-- ... Perfil, redes, etc ... -->
+    <h1>Roberto Aarón Rodriguez Rodriguez</h1>
+    <p>Diseñador gráfico apasionado por comunicar con impacto visual.</p>
 
-    <div class="carrusel-container" id="trabajos">
-      <div class="carrusel" id="carrusel1">
-        <!-- Miniaturas -->
-      </div>
+    <!-- Sección de carrusel a donde haremos scroll -->
+    <div id="trabajos">
+      <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
+      <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
+      <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
+      <div class="miniatura"><img src="imagenes/thumb4.jpg" alt="Miniatura 4"></div>
+      <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura 5"></div>
     </div>
-
-    <!-- ... Segunda sección de carrusel y resto ... -->
   </div>
 
-  <script>
-    // Ocultar banner al hacer scroll
-    const banner = document.getElementById('banner');
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      banner.style.top = scrollTop > 100 ? '-260px' : '0';
-    });
+<script>
+  document.getElementById('verMasBtn').addEventListener('click', () => {
+    const trabajos = document.getElementById('trabajos');
+    if (trabajos) {
+      trabajos.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
 
-    // Scroll suave al hacer click en "ver más"
-    document.getElementById('verMasBtn').addEventListener('click', () => {
-      const seccion = document.getElementById('trabajos');
-      if (seccion) {
-        seccion.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
+  // Opcional: esconder banner al hacer scroll
+  const banner = document.querySelector('.banner');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    banner.style.top = scrollTop > 100 ? '-260px' : '0';
+  });
+</script>
 
-    // ... Tu código para el carrusel (setupCarruselAutoplay, etc.) ...
-  </script>
 </body>
 </html>
