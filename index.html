@@ -4,25 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portafolio - Roberto Rodriguez</title>
-  <link rel="icon" href="imagenes/favicon.ico" />
   <style>
     * {
       margin: 0; padding: 0; box-sizing: border-box;
     }
-
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #f5f5f5;
       color: #333;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-      /* Eliminado user-select global para evitar bloqueos */
     }
-
-    body.loaded {
-      opacity: 1;
-    }
-
     .banner {
       width: 100%;
       height: 250px;
@@ -30,7 +20,6 @@
       position: relative;
       z-index: 0;
     }
-
     .banner-lateral {
       position: fixed;
       top: 0;
@@ -40,17 +29,14 @@
       background-position: center;
       z-index: 1;
     }
-
     .banner-lateral.izquierda {
       left: 0;
       background-image: url('imagenes/banner-lateral-izq.jpg');
     }
-
     .banner-lateral.derecha {
       right: 0;
       background-image: url('imagenes/banner-lateral-der.jpg');
     }
-
     .perfil {
       text-align: center;
       margin-top: -60px;
@@ -58,7 +44,6 @@
       z-index: 2;
       position: relative;
     }
-
     .perfil img {
       width: 120px;
       height: 120px;
@@ -66,33 +51,24 @@
       border: 4px solid white;
       background: white;
     }
-
     .perfil h1 {
       font-size: 1.8rem;
       margin: 0.5rem 0 0.2rem;
     }
-
     .perfil p {
       color: #555;
       font-size: 1rem;
     }
-
     .redes {
       text-align: center;
       margin-top: 1rem;
     }
-
     .redes a {
       color: #333;
       text-decoration: none;
       font-weight: bold;
       margin: 0 0.5rem;
     }
-
-    .redes a:hover {
-      color: #000;
-    }
-
     .servicios {
       max-width: 1000px;
       margin: 3rem auto;
@@ -103,7 +79,6 @@
       text-align: center;
       padding: 0 1rem;
     }
-
     .servicio {
       background: white;
       padding: 1.5rem;
@@ -111,15 +86,12 @@
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       width: 280px;
     }
-
     .carrusel-container {
       max-width: 1000px;
       margin: 3rem auto;
       overflow: hidden;
       padding: 0 1rem;
-      /* Eliminado user-select aquí también para evitar problemas */
     }
-
     .carrusel {
       display: flex;
       gap: 1rem;
@@ -127,18 +99,16 @@
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       padding-bottom: 1rem;
-      scrollbar-width: none; /* Firefox */
+      scrollbar-width: none;
       cursor: grab;
     }
-
-    .carrusel:active {
+    .carrusel.dragging {
       cursor: grabbing;
+      scroll-behavior: auto;
     }
-
     .carrusel::-webkit-scrollbar {
-      display: none; /* Chrome, Safari */
+      display: none;
     }
-
     .miniatura {
       flex: 0 0 70%;
       scroll-snap-align: center;
@@ -147,19 +117,17 @@
       cursor: pointer;
       opacity: 0.8;
       transform: scale(0.95);
+      user-select: none;
     }
-
     .miniatura:nth-child(odd) {
       opacity: 1;
       transform: scale(1);
     }
-
     .miniatura:hover {
       transform: scale(1.05) !important;
       opacity: 1 !important;
       z-index: 2;
     }
-
     .miniatura img {
       width: 100%;
       height: auto;
@@ -168,7 +136,6 @@
       user-select: none;
       pointer-events: none;
     }
-
     footer {
       text-align: center;
       padding: 2rem 1rem;
@@ -178,12 +145,11 @@
       margin-top: 3rem;
       user-select: none;
     }
-
     .contacto-flotante {
       position: fixed;
       bottom: 1rem;
       right: 1rem;
-      background: #25d366; /* color WhatsApp */
+      background: #25d366;
       color: white;
       padding: 0.6rem 1.4rem;
       border-radius: 25px;
@@ -196,42 +162,34 @@
       gap: 0.6rem;
       font-size: 1rem;
       transition: background-color 0.3s ease;
+      user-select: none;
     }
-
     .contacto-flotante:hover {
       background: #1ebe57;
     }
-
     .contacto-flotante svg {
       width: 20px;
       height: 20px;
       fill: white;
       flex-shrink: 0;
     }
-
-    /* Responsivo */
     @media (max-width: 768px) {
       .perfil img {
         width: 90px;
         height: 90px;
       }
-
       .perfil h1 {
         font-size: 1.5rem;
       }
-
       .perfil p {
         font-size: 0.95rem;
       }
-
       .servicio {
         width: 100%;
       }
-
       .miniatura {
         flex: 0 0 85%;
       }
-
       .banner-lateral {
         display: none;
       }
@@ -239,11 +197,9 @@
   </style>
 </head>
 <body>
-  <!-- Banners laterales -->
   <div class="banner-lateral izquierda"></div>
   <div class="banner-lateral derecha"></div>
 
-  <!-- Banner superior -->
   <div class="banner"></div>
 
   <div class="perfil">
@@ -274,7 +230,7 @@
   </section>
 
   <div class="carrusel-container">
-    <div class="carrusel" id="carrusel1">
+    <div class="carrusel" id="carrusel1" tabindex="0">
       <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura de diseño 1 de video de YouTube"></div>
       <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura de diseño 2 de video de YouTube"></div>
       <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura de diseño 3 de video de YouTube"></div>
@@ -284,7 +240,7 @@
   </div>
 
   <div class="carrusel-container">
-    <div class="carrusel" id="carrusel2">
+    <div class="carrusel" id="carrusel2" tabindex="0">
       <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura de diseño 6 de video de YouTube"></div>
       <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura de diseño 7 de video de YouTube"></div>
       <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura de diseño 8 de video de YouTube"></div>
@@ -297,112 +253,113 @@
     Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
   </footer>
 
-  <!-- Botón contacto flotante WhatsApp -->
   <a href="https://wa.me/529213058163" target="_blank" rel="noopener" class="contacto-flotante" aria-label="Enviar mensaje de WhatsApp a Roberto">
-    <!-- Icono WhatsApp SVG -->
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path d="M20.52 3.48A11.94 11.94 0 0012.02.03C6.13.03 1.25 4.9 1.25 10.8c0 1.91.55 3.68 1.6 5.22L.02 23.3l7.5-2.4a10.89 10.89 0 005.57 1.46h.01c5.9 0 10.78-4.87 10.78-10.78 0-2.9-1.13-5.62-3.36-7.98zM12.02 20.5a8.75 8.75 0 01-4.55-1.3l-.33-.2-4.44 1.42 1.5-4.32-.22-.36a8.67 8.67 0 011.51-11.25 8.9 8.9 0 015.52-1.8 8.75 8.75 0 018.75 8.75c0 4.83-3.92 8.75-8.75 8.75zm5.13-6.33c-.28-.14-1.65-.82-1.9-.91-.25-.1-.43-.14-.61.14s-.7.91-.86 1.1c-.16.18-.32.21-.6.07a7.47 7.47 0 01-2.2-1.36 8.12 8.12 0 01-1.5-1.86c-.15-.26 0-.4.11-.54.11-.13.25-.32.38-.48a1.5 1.5 0 00.22-.37c.07-.12 0-.23-.04-.37-.07-.14-.6-1.44-.82-1.98-.22-.52-.44-.45-.61-.46a1.1 1.1 0 00-.8-.11c-.25.04-.48.23-.73.57-.25.33-1 1-.99 2.43 0 1.44 1.02 2.84 1.16 3.04.14.2 2 3.05 4.85 4.27a6.9 6.9 0 002.68.43c1.03 0 1.68-.42 2.04-.83.36-.41.36-.76.25-.83z"/>
+      <path d="M20.52 3.48A11.94 11.94 0 0012.02.03C6.13.03 1.25 4.9 1.25 10.8c0 1.91.55 3.68 1.6 5.22L.02 23.3l7.5-2.4a10.89 10.89 0 005.57 1.46h.01c5.71 0 10.34-4.63 10.34-10.34 0-2.77-1.12-5.38-3.1-7.29zm-8.5 15.25a8.15 8.15 0 01-4.15-1.17l-.3-.18-4.41 1.42 1.47-4.28-.19-.31a8.13 8.13 0 0114-8.82 8.1 8.1 0 01-9.67 13.14zm4.04-5.54c-.22-.11-1.28-.63-1.48-.7-.2-.07-.34-.11-.48.11-.14.22-.54.7-.66.85-.12.14-.24.16-.45.05-.22-.11-.93-.34-1.77-1.1-.65-.57-1.09-1.27-1.22-1.5-.13-.22-.01-.34.1-.45.11-.11.22-.28.33-.43.11-.14.15-.24.22-.36.07-.11.04-.2-.02-.32-.07-.11-.48-1.16-.66-1.58-.17-.42-.34-.36-.48-.37-.13 0-.28 0-.43 0-.14 0-.36.05-.55.27-.19.22-.73.71-.73 1.73 0 1.02.75 2 0 2.79-.75.8-1.36.89-1.8.99-.44.11-.63.08-.97-.05-.34-.14-1.32-.54-1.92-1.19-.6-.65-1.14-1.44-1.14-3.5 0-2.06 1.05-3.5 1.2-3.75.14-.25 2.08-3.17 5.05-4.43a17.19 17.19 0 015.33-.7c1.62 0 3.14.62 4.28 1.55a10.92 10.92 0 013.68 5.29c.31 1.06.06 1.98-.43 2.7-.48.72-1.12 1.14-1.87 1.43-.76.3-1.5.3-1.97.18z"/>
     </svg>
-    Contáctame
+    Contactame +52 1 921 305 8163
   </a>
 
   <script>
-    window.addEventListener('load', () => {
-      document.body.classList.add('loaded');
-    });
-
-    function crearAutoplayCarrusel(carruselId, interval = 6000, delayStart = 0) {
+    function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 4000) {
       const carrusel = document.getElementById(carruselId);
       if (!carrusel) return;
 
-      const maxScrollLeft = carrusel.scrollWidth - carrusel.clientWidth;
-      let scrollAmount = 0;
-      let autoplayInterval = null;
-      let autoplayTimeout = null;
+      let autoplayTimer = null;
+      let cooldownTimer = null;
       let isDragging = false;
-      let startX;
-      let scrollStart;
+      let startX = 0;
+      let scrollLeftStart = 0;
+
+      const scrollStep = carrusel.clientWidth * 0.4 + 16; // Desplazamiento por paso (40% ancho + gap)
 
       function avanzarScroll() {
-        scrollAmount += carrusel.clientWidth * 0.4 + 16;
-        if (scrollAmount >= maxScrollLeft) scrollAmount = 0;
-        carrusel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+        const maxScroll = carrusel.scrollWidth - carrusel.clientWidth;
+        let nextScroll = carrusel.scrollLeft + scrollStep;
+        if (nextScroll > maxScroll) nextScroll = 0;
+        carrusel.scrollTo({ left: nextScroll, behavior: 'smooth' });
       }
 
       function iniciarAutoplay() {
-        if (autoplayInterval) return;
-        autoplayInterval = setInterval(avanzarScroll, interval);
+        if (autoplayTimer) return; // evitar duplicar timers
+        autoplayTimer = setInterval(avanzarScroll, interval);
       }
 
-      function pausarAutoplay() {
-        if (autoplayInterval) {
-          clearInterval(autoplayInterval);
-          autoplayInterval = null;
+      function pararAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
         }
-        if (autoplayTimeout) {
-          clearTimeout(autoplayTimeout);
-          autoplayTimeout = null;
+        if (cooldownTimer) {
+          clearTimeout(cooldownTimer);
+          cooldownTimer = null;
         }
       }
 
-      carrusel.addEventListener('mousedown', (e) => {
+      // Eventos mouse
+      carrusel.addEventListener('mousedown', e => {
         isDragging = true;
         startX = e.pageX - carrusel.offsetLeft;
-        scrollStart = carrusel.scrollLeft;
-        pausarAutoplay();
+        scrollLeftStart = carrusel.scrollLeft;
+        pararAutoplay();
         carrusel.classList.add('dragging');
       });
 
-      carrusel.addEventListener('mouseleave', () => {
+      carrusel.addEventListener('mouseleave', e => {
         if (isDragging) {
           isDragging = false;
           carrusel.classList.remove('dragging');
-          autoplayTimeout = setTimeout(iniciarAutoplay, 5000);
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
         }
       });
 
-      carrusel.addEventListener('mouseup', () => {
+      carrusel.addEventListener('mouseup', e => {
         if (isDragging) {
           isDragging = false;
           carrusel.classList.remove('dragging');
-          autoplayTimeout = setTimeout(iniciarAutoplay, 5000);
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
         }
       });
 
-      carrusel.addEventListener('mousemove', (e) => {
+      carrusel.addEventListener('mousemove', e => {
         if (!isDragging) return;
         e.preventDefault();
         const x = e.pageX - carrusel.offsetLeft;
-        const walk = (startX - x);
-        carrusel.scrollLeft = scrollStart + walk;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
       });
 
-      carrusel.addEventListener('touchstart', (e) => {
+      // Eventos táctiles
+      carrusel.addEventListener('touchstart', e => {
         isDragging = true;
         startX = e.touches[0].pageX - carrusel.offsetLeft;
-        scrollStart = carrusel.scrollLeft;
-        pausarAutoplay();
+        scrollLeftStart = carrusel.scrollLeft;
+        pararAutoplay();
       });
 
-      carrusel.addEventListener('touchend', () => {
+      carrusel.addEventListener('touchend', e => {
         if (isDragging) {
           isDragging = false;
-          autoplayTimeout = setTimeout(iniciarAutoplay, 5000);
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
         }
       });
 
-      carrusel.addEventListener('touchmove', (e) => {
+      carrusel.addEventListener('touchmove', e => {
         if (!isDragging) return;
         const x = e.touches[0].pageX - carrusel.offsetLeft;
-        const walk = (startX - x);
-        carrusel.scrollLeft = scrollStart + walk;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
       });
 
-      setTimeout(iniciarAutoplay, delayStart);
+      // Iniciar autoplay al cargar la página
+      iniciarAutoplay();
     }
 
-    crearAutoplayCarrusel('carrusel1', 6000, 0);
-    crearAutoplayCarrusel('carrusel2', 6000, 3000);
+    // Inicializar ambos carruseles
+    document.addEventListener('DOMContentLoaded', () => {
+      setupCarruselAutoplay('carrusel1', 7000, 4000);
+      setupCarruselAutoplay('carrusel2', 7000, 6000);
+    });
   </script>
 </body>
 </html>
