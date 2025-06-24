@@ -26,7 +26,9 @@
       border-radius: 8px;
       z-index: 1100; /* por encima del banner */
       user-select: none;
-      cursor: pointer; /* para que se vea que es clickable */
+      /* pointer-events: none; /* ELIMINAR ESTO para que sea clickeable */
+      cursor: pointer; /* Añadir cursor de puntero */
+      text-decoration: none; /* Eliminar subrayado si se hace <a> */
     }
 
     .ver-mas .cuadro-texto {
@@ -209,9 +211,11 @@
       border-radius: 10px;
       z-index: 999;
     }
+
     .banner-lateral.izquierdo {
       left: 10px;
     }
+
     .banner-lateral.derecho {
       right: 10px;
     }
@@ -222,25 +226,24 @@
         display: none;
       }
     }
+
   </style>
 </head>
 <body>
   <div class="banner" id="banner"></div>
 
-  <!-- BANNERS LATERALES -->
-  <img src="imagenes/izquierdo.jpg" alt="Promo Izquierda" class="banner-lateral izquierdo" />
-  <img src="imagenes/banner-lateral-derecho.jpg" alt="Promo Derecha" class="banner-lateral derecho" />
+<img src="imagenes/izquierdo.jpg" alt="Promo Izquierda" class="banner-lateral izquierdo" />
+<img src="imagenes/banner-lateral-derecho.jpg" alt="Promo Derecha" class="banner-lateral derecho" />
 
-  <!-- Botón Ver Más -->
-  <div class="ver-mas" id="verMasBtn">
-    <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
-      <path d="M12 16l-6-6h12z"/>
-    </svg>
-    <div class="cuadro-texto">BAJA PARA VER MÁS TRABAJOS</div>
-    <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
-      <path d="M12 16l-6-6h12z"/>
-    </svg>
-  </div>
+<a href="#seccion-carruseles" class="ver-mas">
+  <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+    <path d="M12 16l-6-6h12z"/>
+  </svg>
+  <div class="cuadro-texto">BAJA PARA VER MÁS TRABAJOS</div>
+  <svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+    <path d="M12 16l-6-6h12z"/>
+  </svg>
+</a>
 
   <div class="contenido-principal">
     <div class="perfil">
@@ -263,7 +266,6 @@
         TikTok
       </a>
     </div>
-
     <section class="servicios">
       <div class="servicio">
         <img src="imagenes/icono-miniaturas.png" alt="Icono Miniaturas" class="icono" />
@@ -282,106 +284,170 @@
       </div>
     </section>
 
-    <div class="carrusel-container" id="carruseles-seccion">
-      <div class="carrusel" id="carrusel1">
-        <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
-        <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
-        <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
-        <div class="miniatura"><img src="imagenes/thumb4.jpg" alt="Miniatura 4"></div>
-        <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura 5"></div>
+    <div id="seccion-carruseles">
+      <div class="carrusel-container">
+        <div class="carrusel" id="carrusel1">
+          <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1"></div>
+          <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2"></div>
+          <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3"></div>
+          <div class="miniatura"><img src="imagenes/thumb4.jpg" alt="Miniatura 4"></div>
+          <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura 5"></div>
+        </div>
       </div>
-    </div>
 
-    <div class="carrusel-container">
-      <div class="carrusel" id="carrusel2">
-        <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
-        <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
-        <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8"></div>
-        <div class="miniatura"><img src="imagenes/thumb9.jpg" alt="Miniatura 9"></div>
-        <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10"></div>
+      <div class="carrusel-container">
+        <div class="carrusel" id="carrusel2">
+          <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6"></div>
+          <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7"></div>
+          <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8"></div>
+          <div class="miniatura"><img src="imagenes/thumb9.jpg" alt="Miniatura 9"></div>
+          <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10"></div>
+        </div>
       </div>
-    </div>
-
+    </div> <footer>
+      Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
+    </footer>
   </div>
 
-  <footer>
-    &copy; 2025 Roberto Rodriguez. Todos los derechos reservados.
-  </footer>
-
-  <a class="btn-contacto" href="https://wa.me/5211234567890" target="_blank" rel="noopener noreferrer">
-    WhatsApp
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#fff" viewBox="0 0 24 24" style="vertical-align: middle; margin-left: 6px;">
-      <path d="M20.52 3.48a10.22 10.22 0 00-14.41 0 10.26 10.26 0 00-2.88 7.25c0 1.79.48 3.54 1.39 5.07L2 22l6.17-2.18a9.88 9.88 0 007.22 2.17 10.23 10.23 0 007.42-17.94zm-6.67 12.04c-.45 0-1.23-.44-2.4-1.35l-.15-.11c-1.5-1.11-2.5-2.24-2.9-3.1-.44-.94-.44-1.71-.44-1.71 0-.2.14-.33.3-.33h.27c.19 0 .46.02.7.34.14.18.43.58.53.8.1.2.2.44.33.66a.3.3 0 00.45.11c.37-.28 1.15-1.01 1.3-1.2a.4.4 0 01.3-.12c.15 0 .32.04.5.13.33.19.8.62 1.03 1 .26.48.2.87.11 1.03-.08.14-.24.23-.53.41-.4.27-.54.4-.7.54-.24.23-.38.39-.45.52-.07.15-.07.26 0 .4.15.36 1.07 1.74 2.3 2.33.64.33 1.18.5 1.61.58.57.12 1.1.03 1.5-.08a.84.84 0 00.6-.58c.13-.45.1-.88-.06-1.27-.15-.34-.55-1.05-.78-1.37-.23-.3-.4-.3-.66-.23a3.2 3.2 0 01-.7.3c-.1 0-.18.04-.3.1z"/>
-    </svg>
+  <a href="https://wa.me/5219213058163" class="btn-contacto" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M20.52 3.48a11.93 11.93 0 00-16.9 0 11.93 11.93 0 00-3.5 8.45c0 2.24.59 4.3 1.62 6.14L2 22l4.03-1.66a11.92 11.92 0 005.46 1.35h.01c6.62 0 12-5.38 12-12a11.93 11.93 0 00-3.98-8.21z"/></svg>
+    Contáctame!
   </a>
 
   <script>
-    // Scroll suave al hacer click en "ver más trabajos"
-    document.getElementById('verMasBtn').addEventListener('click', () => {
-      const seccion = document.getElementById('carruseles-seccion');
-      if (seccion) {
-        seccion.scrollIntoView({ behavior: 'smooth' });
+    const banner = document.getElementById('banner');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      banner.style.top = scrollTop > 100 ? '-260px' : '0';
+    });
+
+    function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 2000, delayInicio = 0) {
+      const carrusel = document.getElementById(carruselId);
+      if (!carrusel) return;
+
+      let autoplayTimer = null;
+      let cooldownTimer = null;
+      let pressTimer = null;
+      let longPressDetected = false;
+      let isDragging = false;
+      let startX = 0;
+      let scrollLeftStart = 0;
+      const scrollStep = carrusel.clientWidth * 0.4 + 16;
+
+      function avanzarScroll() {
+        const maxScroll = carrusel.scrollWidth - carrusel.clientWidth;
+        let nextScroll = carrusel.scrollLeft + scrollStep;
+        if (nextScroll >= maxScroll - 1) {
+          carrusel.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          carrusel.scrollTo({ left: nextScroll, behavior: 'smooth' });
+        }
       }
-    });
 
-    // Carrusel simple con cambio de clase activo al hacer click
-    document.querySelectorAll('.carrusel').forEach(carrusel => {
-      const miniaturas = carrusel.querySelectorAll('.miniatura');
-      miniaturas.forEach((miniatura, idx) => {
-        miniatura.addEventListener('click', () => {
-          miniaturas.forEach(m => m.classList.remove('activo'));
-          miniatura.classList.add('activo');
-          // Opcional: centrar el scroll en la miniatura clickeada
-          miniatura.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-        });
-      });
-      // Marcar la primera miniatura como activa por defecto
-      if (miniaturas[0]) miniaturas[0].classList.add('activo');
-    });
+      function iniciarAutoplay() {
+        if (autoplayTimer) return;
+        autoplayTimer = setInterval(avanzarScroll, interval);
+      }
 
-    // Opcional: arrastrar carrusel con mouse
-    document.querySelectorAll('.carrusel').forEach(carrusel => {
-      let isDown = false;
-      let startX;
-      let scrollLeft;
+      function pararAutoplay() {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+
+      function reiniciarConCooldown() {
+        clearTimeout(cooldownTimer);
+        cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+      }
 
       carrusel.addEventListener('mousedown', e => {
-        isDown = true;
-        carrusel.classList.add('dragging');
+        isDragging = true;
         startX = e.pageX - carrusel.offsetLeft;
-        scrollLeft = carrusel.scrollLeft;
+        scrollLeftStart = carrusel.scrollLeft;
+        carrusel.classList.add('dragging');
+        longPressDetected = false;
+        pressTimer = setTimeout(() => {
+          longPressDetected = true;
+          pararAutoplay();
+        }, 600);
       });
-      carrusel.addEventListener('mouseleave', () => {
-        isDown = false;
-        carrusel.classList.remove('dragging');
-      });
+
       carrusel.addEventListener('mouseup', () => {
-        isDown = false;
-        carrusel.classList.remove('dragging');
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          clearTimeout(pressTimer);
+          if (longPressDetected) reiniciarConCooldown();
+        }
       });
+
+      carrusel.addEventListener('mouseleave', () => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          clearTimeout(pressTimer);
+          if (longPressDetected) reiniciarConCooldown();
+        }
+      });
+
       carrusel.addEventListener('mousemove', e => {
-        if(!isDown) return;
+        if (!isDragging) return;
         e.preventDefault();
         const x = e.pageX - carrusel.offsetLeft;
-        const walk = (x - startX) * 2; //scroll-fast
-        carrusel.scrollLeft = scrollLeft - walk;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
       });
-    });
 
-    // Banner deslizable arriba y abajo (opcional)
-    let lastScrollTop = 0;
-    window.addEventListener('scroll', () => {
-      const banner = document.getElementById('banner');
-      let st = window.pageYOffset || document.documentElement.scrollTop;
-      if (st > lastScrollTop) {
-        // scroll down -> esconder banner
-        banner.style.top = '-250px';
-      } else {
-        // scroll up -> mostrar banner
-        banner.style.top = '0';
-      }
-      lastScrollTop = st <= 0 ? 0 : st;
-    }, false);
+      carrusel.addEventListener('touchstart', e => {
+        isDragging = true;
+        startX = e.touches[0].pageX - carrusel.offsetLeft;
+        scrollLeftStart = carrusel.scrollLeft;
+        longPressDetected = false;
+        pressTimer = setTimeout(() => {
+          longPressDetected = true;
+          pararAutoplay();
+        }, 600);
+      });
+
+      carrusel.addEventListener('touchend', () => {
+        if (isDragging) {
+          isDragging = false;
+          clearTimeout(pressTimer);
+          if (longPressDetected) reiniciarConCooldown();
+        }
+      });
+
+      carrusel.addEventListener('touchmove', e => {
+        if (!isDragging) return;
+        const x = e.touches[0].pageX - carrusel.offsetLeft;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
+      });
+
+      carrusel.addEventListener('scroll', () => destacarMiniaturaCentral(carrusel));
+      destacarMiniaturaCentral(carrusel);
+      setTimeout(() => iniciarAutoplay(), delayInicio);
+    }
+
+    function destacarMiniaturaCentral(carrusel) {
+      const items = [...carrusel.querySelectorAll('.miniatura')];
+      const center = carrusel.scrollLeft + carrusel.offsetWidth / 2;
+      let closest = null, minDist = Infinity;
+      items.forEach(item => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const dist = Math.abs(center - itemCenter);
+        if (dist < minDist) {
+          closest = item;
+          minDist = dist;
+        }
+      });
+      items.forEach(item => item.classList.remove('activo'));
+      if (closest) closest.classList.add('activo');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setupCarruselAutoplay('carrusel1', 4000, 2000, 0);       // Inicia de inmediato
+      setupCarruselAutoplay('carrusel2', 4000, 2000, 800);      // Retraso de 800ms
+    });
   </script>
 </body>
 </html>
