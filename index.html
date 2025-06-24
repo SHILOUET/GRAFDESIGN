@@ -1,437 +1,323 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Portafolio - Roberto Rodriguez</title>
-<style>
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f5f5f5;
-    color: #333;
-  }
-  /* Banner superior fijo con deslizamiento hacia arriba sin fade */
-  .banner {
-    width: 100%;
-    height: 200px;
-    background: url('imagenes/banner.jpg') no-repeat center center/cover;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    transition: transform 0.3s ease;
-    will-change: transform;
-  }
-  .banner--hidden {
-    transform: translateY(-100%);
-  }
-  /* Contenido principal con padding para dejar espacio al banner fijo */
-  .contenido-principal {
-    padding: 210px 130px 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 10;
-  }
-  /* Perfil */
-  .perfil {
-    text-align: center;
-    margin-bottom: 1rem;
-    padding: 0 1rem;
-  }
-  .perfil img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 4px solid white;
-    background: white;
-  }
-  .perfil h1 {
-    font-size: 1.8rem;
-    margin: 0.5rem 0 0.2rem;
-  }
-  .perfil p {
-    color: #555;
-    font-size: 1rem;
-  }
-  /* Redes sociales con iconos SVG */
-  .redes {
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-  .redes a {
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-    margin: 0 0.8rem;
-    font-size: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .redes svg {
-    width: 20px;
-    height: 20px;
-    fill: #333;
-  }
-  /* Servicios con iconos PNG */
-  .servicios {
-    margin: 0 auto 1.5rem;
-    max-width: 1000px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    text-align: center;
-    padding: 0 1rem;
-  }
-  .servicio {
-    background: white;
-    width: 260px;
-    min-height: 110px;
-    padding: 1rem 1rem 1rem 3rem;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    position: relative;
-    user-select: none;
-  }
-  .servicio h3 {
-    margin-bottom: 0.5rem;
-    font-size: 1.2rem;
-  }
-  .servicio p {
-    font-size: 0.9rem;
-    color: #666;
-  }
-  /* Icono PNG en esquina superior izquierda de servicio */
-  .servicio-icono {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 40px;
-    height: 40px;
-    pointer-events: none;
-  }
-  /* Carruseles */
-  .carrusel-container {
-    max-width: 1000px;
-    margin: 0 auto 2rem;
-    overflow: hidden;
-    padding: 0 1rem;
-    height: 220px;
-  }
-  .carrusel {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    padding-bottom: 1rem;
-    scrollbar-width: none;
-    cursor: grab;
-    user-select: none;
-  }
-  .carrusel.dragging {
-    cursor: grabbing;
-    scroll-behavior: auto;
-  }
-  .carrusel::-webkit-scrollbar {
-    height: 8px;
-    background: transparent;
-  }
-  .carrusel::-webkit-scrollbar-thumb {
-    background-color: red;
-    border-radius: 10px;
-  }
-  .miniatura {
-    flex: 0 0 70%;
-    scroll-snap-align: center;
-    position: relative;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    cursor: pointer;
-    opacity: 0.8;
-    transform: scale(0.95);
-    user-select: none;
-  }
-  .miniatura:nth-child(odd) {
-    opacity: 1;
-    transform: scale(1);
-  }
-  .miniatura:hover {
-    transform: scale(1.05) !important;
-    opacity: 1 !important;
-    z-index: 2;
-  }
-  .miniatura img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    user-select: none;
-    pointer-events: none;
-  }
-  /* Botón flotante WhatsApp */
-  .whatsapp-flotante {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #25D366;
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    cursor: pointer;
-    z-index: 1500;
-    transition: background-color 0.3s ease;
-  }
-  .whatsapp-flotante:hover {
-    background-color: #1ebe57;
-  }
-  .whatsapp-flotante svg {
-    width: 30px;
-    height: 30px;
-    fill: white;
-  }
-  footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    font-size: 0.9rem;
-    color: #666;
-    border-top: 1px solid #ddd;
-    margin-top: 3rem;
-  }
-  @media (max-width: 768px) {
-    .perfil img {
-      width: 90px;
-      height: 90px;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portafolio - Roberto Rodriguez</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .perfil h1 {
-      font-size: 1.5rem;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      color: #333;
     }
-    .perfil p {
-      font-size: 0.95rem;
-    }
-    .servicio {
+    .banner {
       width: 100%;
+      height: 200px;
+      background: url('imagenes/banner.jpg') no-repeat center center/cover;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: transform 0.3s ease;
+      will-change: transform;
+    }
+    .banner--hidden {
+      transform: translateY(-100%);
     }
     .contenido-principal {
-      padding: 210px 1rem 2rem;
+      padding: 210px 130px 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
     }
-  }
-</style>
+    .perfil {
+      text-align: center;
+      margin-bottom: 1rem;
+      padding: 0 1rem;
+    }
+    .perfil img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid white;
+      background: white;
+    }
+    .perfil h1 {
+      font-size: 1.8rem;
+      margin: 0.5rem 0 0.2rem;
+    }
+    .perfil p {
+      color: #555;
+      font-size: 1rem;
+    }
+    .redes {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .redes a {
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 0.8rem;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .servicios {
+      margin: 0 auto 1rem;
+      max-width: 1000px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .servicio {
+      background: white;
+      width: 180px;
+      min-height: 90px;
+      padding: 0.7rem 0.7rem 0.7rem 2.8rem;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .servicio-icono {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 30px;
+      height: 30px;
+    }
+    .carrusel-container {
+      max-width: 1000px;
+      margin: 0 auto 2rem;
+      overflow: hidden;
+      padding: 0 1rem;
+      height: 220px;
+    }
+    .carrusel {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding-bottom: 1rem;
+      scrollbar-width: none;
+      cursor: grab;
+    }
+    .carrusel.dragging {
+      cursor: grabbing;
+      scroll-behavior: auto;
+    }
+    .carrusel::-webkit-scrollbar {
+      height: 8px;
+      background: transparent;
+    }
+    .carrusel::-webkit-scrollbar-thumb {
+      background-color: red;
+      border-radius: 10px;
+    }
+    .miniatura {
+      flex: 0 0 80%;
+      scroll-snap-align: center;
+      position: relative;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
+      opacity: 0.85;
+      transform: scale(0.95);
+      user-select: none;
+    }
+    .miniatura:nth-child(odd) {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .miniatura:hover {
+      transform: scale(1.05) !important;
+      opacity: 1 !important;
+      z-index: 2;
+    }
+    .miniatura img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      user-select: none;
+      pointer-events: none;
+    }
+    .whatsapp-flotante {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #25D366;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 1500;
+      font-weight: bold;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+    .footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: #666;
+      border-top: 1px solid #ddd;
+      margin-top: 3rem;
+    }
+  </style>
 </head>
 <body>
-
-  <!-- Banner superior fijo -->
   <div class="banner" id="banner"></div>
-
-  <!-- Contenido principal -->
   <div class="contenido-principal">
-
-    <!-- Perfil -->
     <div class="perfil">
       <img src="imagenes/logo.jpg" alt="Logo de Roberto Rodriguez" />
       <h1>Roberto Aaron Rodriguez Rodriguez</h1>
       <p>Diseñador gráfico apasionado por comunicar con impacto visual.</p>
     </div>
 
-    <!-- Redes sociales con SVG e texto -->
     <div class="redes">
-      <a href="https://www.instagram.com/shilouettt/" target="_blank" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm4.75-.75a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5z"/>
-        </svg>
-        Instagram
-      </a>
-      <a href="https://www.tiktok.com/@shilouet_" target="_blank" aria-label="TikTok">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path d="M9 2v12.75a3.25 3.25 0 11-3.25-3.25v6.5A6.75 6.75 0 109 2z"/>
-        </svg>
-        TikTok
-      </a>
-      <a href="mailto:robertossjdos6@gmail.com" aria-label="Correo">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path d="M2.01 6.839A2 2 0 014 6h16a2 2 0 011.995 1.85L22 7v10a2 2 0 01-1.85 1.995L20 19H4a2 2 0 01-1.995-1.85L2 17V7a2 2 0 01.01-.161zm18 1.2-8 4.5-8-4.5V17h16V8.039z"/>
-        </svg>
-        Correo
-      </a>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+      <a href="mailto:robertossjdos6@gmail.com">Correo</a>
     </div>
 
-    <!-- Servicios con iconos PNG -->
     <section class="servicios">
       <div class="servicio">
-        <img src="imagenes/icono-miniaturas.png" alt="Icono Miniaturas" class="servicio-icono" />
+        <img src="imagenes/icono-miniaturas.png" class="servicio-icono" />
         <h3>Diseño de Miniaturas</h3>
         <p>Miniaturas que destacan y generan clics.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icono-identidad.png" alt="Icono Identidad Visual" class="servicio-icono" />
+        <img src="imagenes/icono-identidad.png" class="servicio-icono" />
         <h3>Identidad Visual</h3>
         <p>Logos, paletas de color y estética completa para marcas.</p>
       </div>
       <div class="servicio">
-        <img src="imagenes/icono-redes.png" alt="Icono Diseño Redes" class="servicio-icono" />
+        <img src="imagenes/icono-redes.png" class="servicio-icono" />
         <h3>Diseño para Redes</h3>
         <p>Posts, banners e historias visuales de alto impacto.</p>
       </div>
     </section>
 
-    <!-- Carrusel 1 -->
     <div class="carrusel-container">
       <div class="carrusel" id="carrusel1">
-        <div class="miniatura"><img src="imagenes/thumb1.jpg" alt="Miniatura 1" /></div>
-        <div class="miniatura"><img src="imagenes/thumb2.jpg" alt="Miniatura 2" /></div>
-        <div class="miniatura"><img src="imagenes/thumb3.jpg" alt="Miniatura 3" /></div>
-        <div class="miniatura"><img src="imagenes/thumb4.jpg" alt="Miniatura 4" /></div>
-        <div class="miniatura"><img src="imagenes/thumb5.jpg" alt="Miniatura 5" /></div>
+        <div class="miniatura"><img src="imagenes/thumb1.jpg"></div>
+        <div class="miniatura"><img src="imagenes/thumb2.jpg"></div>
+        <div class="miniatura"><img src="imagenes/thumb3.jpg"></div>
       </div>
     </div>
 
-    <!-- Carrusel 2 -->
     <div class="carrusel-container">
       <div class="carrusel" id="carrusel2">
-        <div class="miniatura"><img src="imagenes/thumb6.jpg" alt="Miniatura 6" /></div>
-        <div class="miniatura"><img src="imagenes/thumb7.jpg" alt="Miniatura 7" /></div>
-        <div class="miniatura"><img src="imagenes/thumb8.jpg" alt="Miniatura 8" /></div>
-        <div class="miniatura"><img src="imagenes/thumb9.jpg" alt="Miniatura 9" /></div>
-        <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10" /></div>
+        <div class="miniatura"><img src="imagenes/thumb4.jpg"></div>
+        <div class="miniatura"><img src="imagenes/thumb5.jpg"></div>
+        <div class="miniatura"><img src="imagenes/thumb6.jpg"></div>
       </div>
     </div>
 
-    <footer>
+    <footer class="footer">
       Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
     </footer>
-
   </div>
 
-  <!-- Botón flotante WhatsApp -->
-  <a href="https://wa.me/5211234567890" target="_blank" class="whatsapp-flotante" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path d="M20.52 3.48a11.71 11.71 0 00-16.56 0 11.7 11.7 0 00-3.46 8.31 11.73 11.73 0 001.89 6.07L2 22l4.34-1.13a11.7 11.7 0 006.18 1.8h.01a11.7 11.7 0 008.31-3.47 11.7 11.7 0 000-16.52zM12 20a7.94 7.94 0 01-4.21-1.17l-.3-.18-2.58.67.68-2.52-.2-.32A7.95 7.95 0 014 12a8 8 0 1114.23 5.45A7.92 7.92 0 0112 20zm4.33-5.78c-.23-.12-1.35-.67-1.56-.74-.2-.07-.35-.11-.5.11-.15.23-.6.74-.74.9-.14.17-.28.19-.51.06a6.28 6.28 0 01-1.85-1.14 7.06 7.06 0 01-1.3-1.6c-.14-.23-.02-.35.14-.47.15-.12.33-.3.5-.45a1.87 1.87 0 00.33-.55c.03-.12 0-.22-.02-.31-.07-.23-.5-1.2-.68-1.64-.18-.43-.36-.37-.5-.38-.14 0-.3-.01-.46-.01a1.77 1.77 0 00-1.29.6 1.67 1.67 0 00-.57 1.27c0 .27.07.53.32.76a6.04 6.04 0 001.62 2.08 9.31 9.31 0 003.95 2.59 1.98 1.98 0 002.27-.5 1.67 1.67 0 00.44-1.17c0-.22-.18-.35-.4-.46z"/>
-    </svg>
+  <a class="whatsapp-flotante" href="https://wa.me/521234567890" target="_blank">
+    <span>Contáctame: +52 123 456 7890</span>
   </a>
 
-<script>
-  // Banner deslizable hacia arriba sin fade
-  const banner = document.getElementById('banner');
-  let lastScrollY = window.scrollY;
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
-    if(currentScroll > lastScrollY && currentScroll > 100) {
-      banner.classList.add('banner--hidden');
-    } else {
-      banner.classList.remove('banner--hidden');
-    }
-    lastScrollY = currentScroll;
-  });
+  <script>
+    // Mostrar/Ocultar banner al hacer scroll
+    let lastScrollTop = 0;
+    const banner = document.getElementById('banner');
+    window.addEventListener('scroll', function() {
+      let st = window.scrollY;
+      banner.classList.toggle('banner--hidden', st > lastScrollTop && st > 100);
+      lastScrollTop = st <= 0 ? 0 : st;
+    }, false);
 
-  // Setup autoplay y arrastre carruseles
-  function setupCarruselAutoplay(carruselId, interval = 7000, cooldown = 4000) {
-    const carrusel = document.getElementById(carruselId);
-    if (!carrusel) return;
+    // Carrusel autoplay y drag
+    function setupCarruselAutoplay(id, interval = 7000, cooldown = 4000) {
+      const carrusel = document.getElementById(id);
+      let autoplayTimer = null;
+      let cooldownTimer = null;
+      let isDragging = false;
+      let startX = 0;
+      let scrollLeftStart = 0;
 
-    let autoplayTimer = null;
-    let cooldownTimer = null;
-    let isDragging = false;
-    let startX = 0;
-    let scrollLeftStart = 0;
+      const scrollStep = carrusel.clientWidth * 0.4 + 16;
 
-    const scrollStep = carrusel.clientWidth * 0.4 + 16;
+      function avanzarScroll() {
+        const maxScroll = carrusel.scrollWidth - carrusel.clientWidth;
+        let nextScroll = carrusel.scrollLeft + scrollStep;
+        if (nextScroll > maxScroll) nextScroll = 0;
+        carrusel.scrollTo({ left: nextScroll, behavior: 'smooth' });
+      }
 
-    function avanzarScroll() {
-      const maxScroll = carrusel.scrollWidth - carrusel.clientWidth;
-      let nextScroll = carrusel.scrollLeft + scrollStep;
-      if (nextScroll > maxScroll) nextScroll = 0;
-      carrusel.scrollTo({ left: nextScroll, behavior: 'smooth' });
-    }
+      function iniciarAutoplay() {
+        if (autoplayTimer) return;
+        autoplayTimer = setInterval(avanzarScroll, interval);
+      }
 
-    function iniciarAutoplay() {
-      if (autoplayTimer) return;
-      autoplayTimer = setInterval(avanzarScroll, interval);
-    }
-
-    function pararAutoplay() {
-      if (autoplayTimer) {
+      function pararAutoplay() {
         clearInterval(autoplayTimer);
         autoplayTimer = null;
-      }
-      if (cooldownTimer) {
         clearTimeout(cooldownTimer);
         cooldownTimer = null;
       }
+
+      carrusel.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.pageX - carrusel.offsetLeft;
+        scrollLeftStart = carrusel.scrollLeft;
+        pararAutoplay();
+        carrusel.classList.add('dragging');
+      });
+
+      carrusel.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
+      });
+
+      carrusel.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        const x = e.pageX - carrusel.offsetLeft;
+        const walk = startX - x;
+        carrusel.scrollLeft = scrollLeftStart + walk;
+      });
+
+      carrusel.addEventListener('mouseleave', () => {
+        if (isDragging) {
+          isDragging = false;
+          carrusel.classList.remove('dragging');
+          cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
+        }
+      });
+
+      iniciarAutoplay();
     }
 
-    carrusel.addEventListener('mousedown', e => {
-      isDragging = true;
-      startX = e.pageX - carrusel.offsetLeft;
-      scrollLeftStart = carrusel.scrollLeft;
-      pararAutoplay();
-      carrusel.classList.add('dragging');
+    document.addEventListener('DOMContentLoaded', () => {
+      setupCarruselAutoplay('carrusel1', 7000, 4000);
+      setupCarruselAutoplay('carrusel2', 7000, 4000);
     });
-
-    carrusel.addEventListener('mouseleave', () => {
-      if (isDragging) {
-        isDragging = false;
-        carrusel.classList.remove('dragging');
-        cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
-      }
-    });
-
-    carrusel.addEventListener('mouseup', () => {
-      if (isDragging) {
-        isDragging = false;
-        carrusel.classList.remove('dragging');
-        cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
-      }
-    });
-
-    carrusel.addEventListener('mousemove', e => {
-      if (!isDragging) return;
-      e.preventDefault();
-      const x = e.pageX - carrusel.offsetLeft;
-      const walk = startX - x;
-      carrusel.scrollLeft = scrollLeftStart + walk;
-    });
-
-    carrusel.addEventListener('touchstart', e => {
-      isDragging = true;
-      startX = e.touches[0].pageX - carrusel.offsetLeft;
-      scrollLeftStart = carrusel.scrollLeft;
-      pararAutoplay();
-    });
-
-    carrusel.addEventListener('touchend', () => {
-      if (isDragging) {
-        isDragging = false;
-        cooldownTimer = setTimeout(iniciarAutoplay, cooldown);
-      }
-    });
-
-    carrusel.addEventListener('touchmove', e => {
-      if (!isDragging) return;
-      const x = e.touches[0].pageX - carrusel.offsetLeft;
-      const walk = startX - x;
-      carrusel.scrollLeft = scrollLeftStart + walk;
-    });
-
-    // Mostrar siempre la primera miniatura al cargar
-    carrusel.scrollTo({ left: 0, behavior: 'auto' });
-
-    iniciarAutoplay();
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    setupCarruselAutoplay('carrusel1', 4000, 3000);
-    setupCarruselAutoplay('carrusel2', 4000, 3000);
-  });
-</script>
-
+  </script>
 </body>
 </html>
