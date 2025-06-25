@@ -225,15 +225,27 @@
       .banner-lateral {
         display: none;
       }
-    }
-/* Estilos específicos para carrusel vertical */
-.carrusel.vertical {
-  height: 320px; /* Altura fija para que el carrusel tenga sentido en vertical */
+    }.carrusel.vertical {
+  height: 320px; /* más alto que los otros */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  display: flex; /* fila horizontal igual que los otros */
+  gap: 1rem;
+  scroll-behavior: smooth;
+  cursor: grab;
+  scrollbar-width: none;
+  user-select: none;
+}
+
+.carrusel.vertical::-webkit-scrollbar {
+  display: none;
 }
 
 .carrusel.vertical .miniatura {
-  flex: 0 0 40%;  /* Ocupa menos ancho para que se vean varias verticales */
-  aspect-ratio: 9 / 16; /* Proporción 9:16 */
+  flex: 0 0 auto;
+  width: 180px; /* Ancho fijo para las miniaturas verticales */
+  aspect-ratio: 9 / 16; /* altura proporcional al ancho para formato vertical */
   scroll-snap-align: center;
   position: relative;
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -251,7 +263,7 @@
 
 .carrusel.vertical .miniatura img {
   width: 100%;
-  height: 100%; /* para que la imagen llene la miniatura vertical */
+  height: 100%;
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
