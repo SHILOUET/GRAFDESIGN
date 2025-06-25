@@ -226,12 +226,12 @@
         display: none;
       }
     }.carrusel.vertical {
-  height: 320px; /* más alto que los otros */
+  /* Remueve overflow-x auto si quieres que sea horizontal */
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  display: flex; /* fila horizontal igual que los otros */
+  display: flex; /* fila horizontal */
   gap: 1rem;
+  scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   cursor: grab;
   scrollbar-width: none;
