@@ -225,51 +225,7 @@
       .banner-lateral {
         display: none;
       }
-    }.carrusel.vertical {
-  /* Remueve overflow-x auto si quieres que sea horizontal */
-  overflow-x: auto;
-  overflow-y: hidden;
-  display: flex; /* fila horizontal */
-  gap: 1rem;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  cursor: grab;
-  scrollbar-width: none;
-  user-select: none;
-}
-
-.carrusel.vertical::-webkit-scrollbar {
-  display: none;
-}
-
-.carrusel.vertical .miniatura {
-  flex: 0 0 auto;
-  width: 180px; /* Ancho fijo para las miniaturas verticales */
-  aspect-ratio: 9 / 16; /* altura proporcional al ancho para formato vertical */
-  scroll-snap-align: center;
-  position: relative;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  cursor: pointer;
-  opacity: 0.6;
-  transform: scale(0.95);
-  user-select: none;
-}
-
-.carrusel.vertical .miniatura.activo {
-  opacity: 1 !important;
-  transform: scale(1.05) !important;
-  z-index: 2;
-}
-
-.carrusel.vertical .miniatura img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  user-select: none;
-  pointer-events: none;
-}
+    }
   </style>
 </head>
 <body>
@@ -347,16 +303,6 @@
           <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10"></div>
         </div>
       </div>
-
-<div class="carrusel-container">
-  <div class="carrusel vertical" id="carrusel3">
-    <div class="miniatura"><img src="imagenes/reel1.jpg" alt="Miniatura Vertical 1"></div>
-    <div class="miniatura"><img src="imagenes/reel2.jpg" alt="Miniatura Vertical 2"></div>
-    <div class="miniatura"><img src="imagenes/reel3.jpg" alt="Miniatura Vertical 3"></div>
-    <div class="miniatura"><img src="imagenes/reel4.jpg" alt="Miniatura Vertical 4"></div>
-    <div class="miniatura"><img src="imagenes/reel5.jpg" alt="Miniatura Vertical 5"></div>
-  </div>
-</div>
     </div> <footer>
       Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
     </footer>
@@ -500,8 +446,6 @@
     document.addEventListener('DOMContentLoaded', () => {
       setupCarruselAutoplay('carrusel1', 4000, 2000, 0);       // Inicia de inmediato
       setupCarruselAutoplay('carrusel2', 4000, 2000, 800);      // Retraso de 800ms
-setupCarruselAutoplay('carrusel3', 4000, 2000, 1600); // Inicia con retraso para que no coincida exactamente con los otros
-
 
       // NUEVO CÓDIGO PARA EL BOTÓN "VER MÁS TRABAJOS"
       const verMasBtn = document.getElementById('verMasBtn');
