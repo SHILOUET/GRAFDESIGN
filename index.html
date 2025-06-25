@@ -164,11 +164,22 @@
     }
     .miniatura img {
       width: 100%;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      user-select: none;
-      pointer-events: none;
+      height: auto;.carrusel-container.carrusel-vertical {
+  max-height: 500px;
+  height: 500px;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scrollbar-width: none;
+  margin: 2rem auto;
+  border-radius: 12px;
+  padding-right: 10px;
+}
+.carrusel-container.carrusel-vertical::-webkit-scrollbar {
+  display: none;
+
     }
     footer {
       text-align: center;
@@ -219,22 +230,57 @@
     .banner-lateral.derecho {
       right: 10px;
     }
- .carrusel-vertical .miniatura {
-  flex: 0 0 auto;
-  aspect-ratio: 9 / 16;
-  height: 300px; /* Máximo alto visible */
-  max-width: 170px;
+.carrusel-container.carrusel-vertical {
+  max-height: 500px;
+  height: 500px;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scrollbar-width: none;
+  margin: 2rem auto;
+  border-radius: 12px;
+  padding-right: 10px;
+}
+.carrusel-container.carrusel-vertical::-webkit-scrollbar {
+  display: none;
+}
+
+.carrusel-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+  scroll-behavior: smooth;
+}
+
+.carrusel-vertical .miniatura {
   scroll-snap-align: center;
+  width: 180px;
+  height: auto;
+  max-height: 320px;
   opacity: 0.6;
   transform: scale(0.95);
   transition: transform 0.3s ease, opacity 0.3s ease;
   border-radius: 12px;
   overflow: hidden;
+  user-select: none;
+  pointer-events: none;
 }
 
+.carrusel-vertical .miniatura img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 
-
-
+.carrusel-vertical .miniatura.activo {
+  opacity: 1 !important;
+  transform: scale(1.05) !important;
+  z-index: 2;
+}
 
 
     /* Esconder en móviles o pantallas pequeñas */
