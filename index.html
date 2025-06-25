@@ -166,23 +166,6 @@
       width: 100%;
       height: auto; }
 
-.carrusel-container.carrusel-vertical {
-  max-height: 500px;
-  height: 500px;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  scrollbar-width: none;
-  margin: 2rem auto;
-  border-radius: 12px;
-  padding-right: 10px;
-}
-.carrusel-container.carrusel-vertical::-webkit-scrollbar {
-  display: none;
-
-    }
     footer {
       text-align: center;
       padding: 2rem 1rem;
@@ -232,57 +215,7 @@
     .banner-lateral.derecho {
       right: 10px;
     }
-.carrusel-container.carrusel-vertical {
-  max-height: 500px;
-  height: 500px;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  scrollbar-width: none;
-  margin: 2rem auto;
-  border-radius: 12px;
-  padding-right: 10px;
-}
-.carrusel-container.carrusel-vertical::-webkit-scrollbar {
-  display: none;
-}
 
-.carrusel-vertical {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  align-items: center;
-  scroll-behavior: smooth;
-}
-
-.carrusel-vertical .miniatura {
-  scroll-snap-align: center;
-  width: 180px;
-  height: auto;
-  max-height: 320px;
-  opacity: 0.6;
-  transform: scale(0.95);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  border-radius: 12px;
-  overflow: hidden;
-  user-select: none;
-  pointer-events: none;
-}
-
-.carrusel-vertical .miniatura img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.carrusel-vertical .miniatura.activo {
-  opacity: 1 !important;
-  transform: scale(1.05) !important;
-  z-index: 2;
-}
 
 
     /* Esconder en móviles o pantallas pequeñas */
@@ -291,7 +224,23 @@
         display: none;
       } 
     }
-
+.miniatura.vertical {
+  aspect-ratio: 9 / 16;
+  height: 300px;  /* o lo que quieras */
+  width: auto;
+  max-width: 170px; /* opcional, para que no sean gigantes */
+  object-fit: cover;
+  flex: 0 0 auto;
+  opacity: 0.6;
+  transform: scale(0.95);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  user-select: none;
+}
+.miniatura.vertical img {
+  height: 100%;
+  width: auto;
+  border-radius: 12px;
+}
 
   </style>
 </head>
@@ -370,19 +319,21 @@
           <div class="miniatura"><img src="imagenes/thumb10.jpg" alt="Miniatura 10"></div>
         </div>
       </div>
-    </div> <footer>
-      Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
-    </footer>
-  </div>
 
-<div class="carrusel-container carrusel-vertical">
-  <div class="carrusel-vertical" id="carruselVertical">
+<div class="carrusel-container">
+  <div class="carrusel" id="carruselVertical">
     <div class="miniatura vertical"><img src="imagenes/reel1.jpg" alt="Reel 1"></div>
     <div class="miniatura vertical"><img src="imagenes/reel2.jpg" alt="Reel 2"></div>
     <div class="miniatura vertical"><img src="imagenes/reel3.jpg" alt="Reel 3"></div>
     <div class="miniatura vertical"><img src="imagenes/reel4.jpg" alt="Reel 4"></div>
   </div>
 </div>
+
+    </div> <footer>
+      Roberto Aarón Rodríguez Rodríguez ~ Shilouet | Todos los derechos reservados © 2025
+    </footer>
+  </div>
+
 
   <a href="https://wa.me/5219213058163" class="btn-contacto" target="_blank">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M20.52 3.48a11.93 11.93 0 00-16.9 0 11.93 11.93 0 00-3.5 8.45c0 2.24.59 4.3 1.62 6.14L2 22l4.03-1.66a11.92 11.92 0 005.46 1.35h.01c6.62 0 12-5.38 12-12a11.93 11.93 0 00-3.98-8.21z"/></svg>
@@ -522,7 +473,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       setupCarruselAutoplay('carrusel1', 4000, 2000, 0);       // Inicia de inmediato
       setupCarruselAutoplay('carrusel2', 4000, 2000, 800);      // Retraso de 800ms
-      setupCarruselAutoplay('carruselVertical', 5000, 2000, 1600);
+      setupCarruselAutoplay('carruselVertical', 4000, 2000, 1600);
 
       // NUEVO CÓDIGO PARA EL BOTÓN "VER MÁS TRABAJOS"
       const verMasBtn = document.getElementById('verMasBtn');
